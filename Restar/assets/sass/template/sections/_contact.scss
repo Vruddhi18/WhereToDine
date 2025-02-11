@@ -1,0 +1,294 @@
+
+/* Reservation 1 */
+.reservation-form1 {
+    text-align: center;
+    .form-control {
+        background-color: transparent;
+        border: 1px solid $body-color;
+        color: $light-color;
+        @include inputPlaceholder {
+            color: $light-color;
+        }
+        &:focus {
+            border-color: $theme-color;
+        }
+    }
+    .form-group {
+        > i {
+            color: $theme-color;
+        }
+    }
+}
+
+/* Reservation 2 */
+.reservation-form2 {
+    margin-bottom: -30px;
+}
+/* Reservation 3 */
+.reservation-form3 {
+    .row {
+        --bs-gutter-x: 20px;
+    }
+    .form-control,
+    .form-select {
+        background-color: $smoke-color2;
+        border: none;
+    }
+}
+.reserve-img1 {
+    margin-right: 30px;
+    margin-left: -310px;
+    img {
+        width: 100%;
+    }
+    @include lg {
+        margin: 0;
+    }
+}
+.input-white {
+    .form-control,
+    .form-select {
+        border-color: $white-color;
+        background-color: $white-color;
+    }
+}
+
+.reservation-form {
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 60px;
+    background-color: $smoke-color2;
+    text-align: center;
+    .form-title {
+        margin-top: -0.3em;
+        margin-bottom: 32px;
+    }
+    .row {
+        --bs-gutter-x: 20px;
+    }
+    @include xs {
+        padding: 40px;
+        .form-title {
+            margin-bottom: 24px;
+            font-size: 30px;
+        }
+    }
+    @include vxs {
+            padding: 20px;
+    }
+}
+
+/* Contact Page ---------------------------------- */ 
+.contact-feature {
+    &-area {
+        background-color: $smoke-color2;
+        padding: 60px;
+        .th-social {
+            a:not(:hover) {
+                color: $title-color;
+            }
+        }
+        @include ml {
+            padding: 50px;
+        }
+        @include xs {
+            padding: 30px;
+        }
+        @include vxs {
+            padding: 20px;
+            .th-social {
+                a {
+                    margin-right: 1px;
+                }
+            }
+        }
+    }
+    &-wrap {
+        margin-bottom: 40px;
+    }
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    .box-icon {
+        @include equal-size-lineHeight(56px);
+        font-size: 24px;
+        color: $white-color;
+        background-color: $theme-color;
+        border-radius: 96px;
+        text-align: center;
+    }
+    .box-title {
+        font-size: 20px;
+        margin-bottom: 0px;
+    }
+    .box-text {
+        a {
+            display: block;
+            max-width: fit-content;
+            color: inherit;
+            &:hover {
+                color: $theme-color;
+            }
+        }
+    }
+    &:last-child {
+        margin-bottom: 0;
+        .box-icon {
+            --theme-color: #DD5903;
+        }
+    }
+    &:nth-child(2) {
+        .box-icon {
+            --theme-color: #C59D5F;
+        }
+    }
+}
+
+.contact-form {
+    margin-left: 80px;
+    @include lg {
+        margin-left: 0;
+    }
+    .sec-title {
+        margin-bottom: 45px;
+        @include md {
+            margin-bottom: 25px;
+        }
+    }
+}
+
+.location-card {
+    display: flex;
+    flex-direction: row-reverse;
+    border: 1px solid $border-color;
+    .box-title {
+        font-size: 30px;
+    }
+    .box-content {
+        padding: 30px;
+    }
+    .box-img {
+        margin: -1px;
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .box-text {
+        margin-bottom: 20px;
+    }
+    .box-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        i {
+            font-size: 22px;
+            color: $theme-color;
+        }
+        a {
+            color: inherit;
+            &:hover {
+                color: $theme-color;
+            }
+        }
+    }
+    @include md {
+        max-width: 630px;
+        margin: 0 auto;
+    }
+    @include xs {
+        flex-direction: column;
+        .box-img {
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.rounded-20 {
+    border-radius: 20px;
+    overflow: hidden;
+}
+.form-text {
+    font-size: 16px;
+}
+.contact-map {
+    line-height: 0px;
+    iframe {
+        width: 100%;
+        height: 660px;
+        filter: invert(1) grayscale(1) brightness(1) invert(1);
+        @include lg {
+            height: 450px;
+        }
+        @include md {
+            height: 350px;
+        }
+    }
+}
+
+
+.contact-info {
+    &-wrap {
+        display: flex;
+        justify-content: space-between;
+        padding: 60px 0;
+        .divider {
+            height: 80px;
+            width: 1px;
+            background-color: $body-color;
+            @include lg {
+                display: none;
+            }
+        }
+        @include md {
+            flex-wrap: wrap;
+            gap: 30px 10px;
+        }
+    }
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    .box {
+        &-icon {
+            @include equal-size-lineHeight(80px);
+            text-align: center;
+            background-color: $theme-color;
+            color: $white-color;
+            border-radius: 99px;
+            font-size: 36px;
+        }
+        &-title {
+            margin-bottom: 5px;
+            font-size: 30px;
+        }
+        &-text {
+            a {
+                color: inherit;
+                &:hover {
+                    color: $theme-color;
+                }
+            }
+        }
+    }
+    @include lg {
+        flex: 33.33%;
+    }
+    @include md {
+        flex: calc(50% - 10px);
+    }
+    @include xs {
+        flex: 100%;
+        flex-direction: column;
+        text-align: center !important;
+        * {
+            text-align: center !important;
+        }
+    }
+}

@@ -1,0 +1,84 @@
+/* Tab Menu 1 ------------------------------------*/
+.tab-menu1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-bottom: 60px;
+    margin-top: -20px;
+    .th-btn {
+        min-width: 122px;
+        &.active {
+            background-color: $theme-color;
+            color: $white-color;
+            &:before {
+                border: none;
+            }
+        }
+    }
+    @include md {
+        gap: 16px;
+        margin-bottom: 45px;
+        margin-top: -10px;
+        .th-btn {
+            min-width: auto;
+        }
+    }
+}
+
+/* Tab Menu 2 ------------------------------------*/
+.tab-menu2 {
+    gap: 10px;
+    justify-content: center;
+    @include lg {
+        margin-top: -15px;
+    }
+    .tab-btn {
+        font-family: $title-font;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: $smoke-color;
+        border-radius: 99px;
+        border: none;
+        padding: 6px 35px;
+        color: $title-color;
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+        &:before {
+            content: '';
+            @include equal-size(20px);
+            background-image: $gr-bg1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 0.3s ease-in-out;
+            border-radius: 99px;
+            z-index: -1;
+        }
+        @include sm {
+            padding: 6px 30px;
+        }
+        @media (max-width: 350px) {
+            padding: 6px 20px;
+        }
+        .date {
+            display: block;
+            font-size: 13px;
+            font-weight: 400;
+            margin-top: -4px;
+            color: $body-color;
+            transition: 0.4s ease-in-out;
+        }
+        &.active {
+            border-color: transparent;
+            color: $white-color;
+            &:before {
+                @include equal-size(100%);
+            }
+            .date {
+                color: $white-color;
+            }
+        }
+    }
+}

@@ -1,0 +1,728 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Restar - Fast Food & Restaurant HTML Template - Shop Details</title>
+    <meta name="author" content="Restar">
+    <meta name="description" content="Restar - Fast Food & Restaurant HTML Template">
+    <meta name="keywords" content="Restar - Fast Food & Restaurant HTML Template">
+    <meta name="robots" content="INDEX,FOLLOW">
+    <style>
+        /* Full stars (orange) */
+        .menu-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .menu-card .box-img {
+            width: 100%;
+            height: 200px; /* Fixed height for all images */
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .menu-card .box-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures images fill the box without distortion */
+            border-radius: 8px;
+        }
+        
+        .menu-card .box-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .menu-card .box-price {
+            font-size: 1rem;
+            font-weight: bold;
+            background: black;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .fas.fa-star {
+            color: orange;
+        }
+
+        /* Half stars (orange) */
+        .fas.fa-star-half-alt {
+            color: orange;
+        }
+
+        /* Empty stars (grey) */
+        .far.fa-star {
+            color: orange;
+        }
+        /* Ensure all images in the carousel are the same size */
+        /* Remove any extra white space */
+        /* Force all carousel images to be the same size */
+        .carousel-item img {
+            width: 100%; /* Ensures images take up full width */
+            height: 400px; /* Set a fixed height for all images */
+            object-fit: cover; /* Crops the images without distortion */
+            border-radius: 10px;
+        }
+
+        /* Ensure the carousel container remains properly sized */
+        .product-big-img {
+            max-width: 500px; /* Adjust width as needed */
+            height: 400px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        /* Make sure the carousel container doesn't add extra space */
+        .carousel {
+            max-width: 600px;
+            height: 300px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        /* Remove extra padding/margins from the carousel controls */
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: auto;
+            background: none;
+            opacity: 0.8;
+        }
+
+        /* Ensure the buttons are clean */
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            filter: invert(1);
+            width: 40px;
+            height: 40px;
+        }
+
+    </style>
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicons - Place favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/img/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/img/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/img/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/img/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/img/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/img/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/img/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!--==============================
+	  Google Fonts
+	============================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+
+    <!--==============================
+	    All CSS File
+	============================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="assets/css/magnific-popup.min.css">
+    <!-- Date Time -->
+    <link rel="stylesheet" href="assets/css/jquery.datetimepicker.min.css">
+    <!-- Swiper Js -->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css"><!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    
+
+</head>
+
+<body>
+    <!--********************************
+   		Code Start From Here 
+	******************************** -->
+
+    <!-- Scroll Smoother -->
+    <div class="has-smooth" id="has_smooth"></div>
+
+    <!--==============================
+     Preloader
+  ==============================-->
+    <div class="preloader ">
+        <button class="th-btn preloaderCls">Cancel Preloader </button>
+        <div class="preloader-inner">
+            <div class="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!--==============================
+	Header Area
+==============================-->
+    <header class="th-header header-layout1 ">
+        <div class="header-top">
+            <div class="container">
+                <div class="row justify-content-center justify-content-lg-between align-items-center gy-2">
+                    <div class="col-auto d-none d-lg-block">
+                        <div class="header-links">
+                            <ul>
+                                <li class="d-none d-xxl-inline-block"><i class="fas fa-location-dot"></i> <a href="https://www.google.com/maps/">9402 Main St, Plymouth, CA 95669, United States</a></li>
+                                <li><i class="fas fa-phone"></i> <a href="tel:+98782818015">+987-828-18015</a></li>
+                                <li><i class="fas fa-envelope"></i> <a href="mailto:info@restar.com">info@restar.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="header-links">
+                            <div class="shape1"></div>
+                            <ul>
+                                <li><i class="fas fa-clock"></i> <b>Mondat to Friday:</b> 9:00am - 22:00pm</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-wrapper">
+            <!-- Main Menu Area -->
+            <div class="menu-area">
+                <div class="container">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <div class="header-logo">
+                                <a href="index.html"><img src="assets/img/logo.svg" alt="Restar"></a>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <nav class="main-menu d-none d-lg-inline-block">
+                                <ul>
+                                    <li class="menu-item-has-children">
+                                        <a href="index.html">Home</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="index.html">Restaurant Shop</a></li>
+                                            <li><a href="home-fast-food.html">Home Fast Food</a></li>
+                                            <li><a href="home-restaurant.html">Home Restaurant</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#">Pages</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="about.html">About Us</a></li>
+                                            <li><a href="service.html">Service</a></li>
+                                            <li><a href="service-details.html">Service Details</a></li>
+                                            <li><a href="team.html">Chef</a></li>
+                                            <li><a href="team-details.html">Chef Details</a></li>
+                                            <li><a href="reservation.html">Reservation</a></li>
+                                            <li><a href="gallery.html">Gallery</a></li>
+                                            <li><a href="error.html">Error Page</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#">Menus</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="menu-one.html">Food Menu 1</a></li>
+                                            <li><a href="menu-two.html">Food Menu 2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#">Shop</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="shop.html">Shop</a></li>
+                                            <li><a href="shop-details.html">Shop Details</a></li>
+                                            <li><a href="cart.html">Cart Page</a></li>
+                                            <li><a href="checkout.html">Checkout</a></li>
+                                            <li><a href="wishlist.html">Wishlist</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#">Blog</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="blog.html">Blog</a></li>
+                                            <li><a href="blog-details.html">Blog Details</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="contact.html">Contact</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-auto">
+                            <div class="header-button">
+                                <button type="button" class="simple-icon searchBoxToggler d-none d-xl-block"><i class="fal fa-search"></i></button>
+                                <button type="button" class="simple-icon sideMenuToggler">
+                                    <span class="badge">5</span>
+                                    <i class="fal fa-cart-shopping"></i>
+                                </button>
+                                <a href="contact.html" class="th-btn style4 d-none d-xl-block">Book A Table</a>
+                                <button type="button" class="th-menu-toggle d-block d-lg-none"><i class="far fa-bars"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="smooth-wrapper">
+        <div id="smooth-content"><!--==============================
+    Breadcumb
+============================== -->
+            <!--==============================
+    Product Details
+    ==============================-->
+            <section class="product-details space-top space-extra-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            
+                                <div id="cafe-carousel" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner" id="carousel-images"></div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#cafe-carousel" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#cafe-carousel" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                           
+                            <br><br>
+                            <div class="actions"> 
+                                <button class="th-btn" id="visit-later-btn">Visit Later</button>
+                                <a href="#" class="icon-btn" id="favorite-btn"  >
+                                    <i class="far fa-heart" id="favorite-icon"></i>
+                                </a>
+                            </div> 
+                        </div>
+                        <div class="col-lg-6 align-self-center">
+                            <div class="product-about">
+                                <p id="cafe-price" class="price"></p>
+                                <h2 id="cafe-title" class="product-title"></h2>
+                                <div class="product-rating">
+                                        <!-- Star Icons (filled dynamically) -->
+                                        <div id="stars-container"></div>
+                                </div>
+                                
+                                <div class="mt-2 link-inherit">
+                                    <p>
+                                        <strong class="text-title me-3">Location:</strong>
+                                        <span id="cafe-location"></span>
+                                    </p>
+                                </div>
+                    
+                                <!-- New information -->
+                                <p><strong>Establishment: </strong><span id="cafe-establishment"></span></p>
+                                <p><strong>Cuisines: </strong><span id="cafe-cuisines"></span></p>
+                                <p><strong>More Info: </strong><span id="cafe-more-info"></span></p>
+                                <p><strong>Timings: </strong><span id="cafe-timings"></span></p>
+                    
+                    
+                                <!-- Location link -->
+                                <a id="cafe-location-link" href="" target="_blank">View on Google Maps</a>
+                                
+                            </div>
+                        </div>
+                    
+                    </div><br><br><br>
+                    
+                        
+                    <div class="title-area text-center">
+                        <span class="sub-title3" style="font-size: 44px; ">
+                            <img src="assets/img/theme-img/title_icon2.svg" alt="Icon">Food Gallery
+                        </span>
+                        
+                    </div>
+                    <div class="slider-area">
+                        <div class="swiper th-slider has-shadow" id="teamSlider1">
+                            <div class="swiper-wrapper" id="food-slider">
+                                <!-- Dynamic slides will be inserted here -->
+                            </div>
+                        </div>
+                        <button class="slider-arrow slider-prev"><span class="icon"></span></button>
+                        <button class="slider-arrow slider-next"><span class="icon"></span></button>
+                    </div>
+                    
+                        
+                    
+                    
+                    <ul class="nav product-tab-style1" id="productTab" role="tablist">
+                        
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link th-btn active" id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="true">Customer Reviews</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="productTabContent">
+                        <div class="tab-pane fade show active" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                            <div class="woocommerce-Reviews">
+                                <div class="th-comments-wrap">
+                                    <ul class="comment-list" id="review-list">
+                                        <!-- Reviews will be dynamically inserted here -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <!--==============================
+		Related Product  
+		==============================-->
+                    
+                </div>
+            </section>
+            
+            <!--==============================
+	Footer Area
+==============================-->
+            
+
+            <!--********************************
+			Code End  Here 
+	******************************** -->
+
+            <!-- Smooth scroller -->
+        </div>
+    </div>
+    <!-- Scroll To Top -->
+    <div class="scroll-top">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;"></path>
+        </svg>
+    </div>
+    <script>
+        // Fetch cafe Index from the URL query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const cafeIndex = urlParams.get('index');
+        
+        // Fetch cafe data from the JSON file and find the specific cafe using the Index
+        fetch('final.json')
+            .then(response => response.json())
+            .then(cafes => {
+                const cafe = cafes.find(c => c.Index == cafeIndex); // Find the cafe by Index
+    
+                // Populate the details page with the cafe data
+                if (cafe) {
+                    let images = JSON.parse(cafe.image_urls.replace(/'/g, '"')); 
+
+                    // Select carousel container
+                    const carouselInner = document.getElementById("carousel-images");
+                    carouselInner.innerHTML = ""; 
+
+                    images.forEach((image, index) => {
+                        const carouselItem = document.createElement("div");
+                        carouselItem.classList.add("carousel-item");
+                        if (index === 0) carouselItem.classList.add("active"); // Set first image as active
+
+                        carouselItem.innerHTML = `<img src="${image}" class="d-block w-100" alt="Cafe Image">`;
+                        carouselInner.appendChild(carouselItem);
+                    });
+                    // Parse food images
+                let images_food = JSON.parse(cafe.food_image_urls.replace(/'/g, '"'));
+
+                // Select the Swiper slider container
+                const foodSlider = document.getElementById("food-slider");
+                foodSlider.innerHTML = ""; // Clear existing content
+
+                // Loop through images and insert them into the slider
+                images_food.forEach((image, index) => {
+                    let slide = document.createElement("div");
+                    slide.classList.add("swiper-slide");
+                    slide.innerHTML = `
+                        <div class="th-team team-card">
+                            <div class="box-img">
+                                <img src="${image}" alt="Food Image ${index + 1}">
+                            </div>
+                            <h3 class="box-title"><a href="#">Dish ${index + 1}</a></h3>
+                            <p class="box-desig">Delicious Cuisine</p>
+                        </div>
+                    `;
+                    foodSlider.appendChild(slide);
+                });
+
+                // Initialize Swiper after dynamically adding slides
+                new Swiper("#teamSlider1", {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                    loop: true,
+                    navigation: {
+                        nextEl: ".slider-next",
+                        prevEl: ".slider-prev",
+                    },
+                    breakpoints: {
+                        576: { slidesPerView: 2 },
+                        768: { slidesPerView: 2 },
+                        992: { slidesPerView: 3 },
+                        1200: { slidesPerView: 4 }
+                    }
+                });
+            
+                    // Set the values of all attributes
+                   // document.getElementById('cafe-image').src = cafe.Image_URLs;
+                    document.getElementById('cafe-title').textContent = cafe.name;
+                    document.getElementById('cafe-price').textContent = `Average Cost for Two: ${cafe.average_cost_for_two}`;
+                    document.getElementById('cafe-location').textContent = cafe.address;
+                    document.getElementById('cafe-establishment').textContent = cafe.establishment.replace(/[\[\]']+/g, ''); // Remove the list format
+                    document.getElementById('cafe-cuisines').textContent = cafe.cuisines;
+                    document.getElementById('cafe-more-info').textContent = cafe.more_info;
+                    document.getElementById('cafe-timings').textContent = cafe.timings || 'N/A'; // Handle null value
+    
+                    // Set the Google Maps and Cafe URL links
+                    document.getElementById('cafe-location-link').href = cafe.location_url;
+                    
+                    
+                    // Set the star rating based on the aggregate_rating
+                    const rating = cafe.aggregate_rating;
+                    const starsContainer = document.getElementById('stars-container');
+                    starsContainer.innerHTML = ''; // Clear any existing stars
+    
+                    // Calculate number of full and half stars
+                    const fullStars = Math.floor(rating); // Full stars (integer part)
+                    const halfStars = (rating % 1 >= 0.5) ? 1 : 0; // Half star if the decimal part is 0.5 or more
+                    const emptyStars = 5 - fullStars - halfStars; // Remaining empty stars
+    
+                    // Create full stars
+                    for (let i = 0; i < fullStars; i++) {
+                        const star = document.createElement('i');
+                        star.classList.add('fas', 'fa-star');
+                        starsContainer.appendChild(star);
+                    }
+    
+                    // Create half star if needed
+                    if (halfStars) {
+                        const halfStar = document.createElement('i');
+                        halfStar.classList.add('fas', 'fa-star-half-alt');
+                        starsContainer.appendChild(halfStar);
+                    }
+    
+                    // Create empty stars
+                    for (let i = 0; i < emptyStars; i++) {
+                        const emptyStar = document.createElement('i');
+                        emptyStar.classList.add('far', 'fa-star');
+                        starsContainer.appendChild(emptyStar);
+                    }
+                    if (cafe && cafe.Reviews) {
+                        let reviews = JSON.parse(cafe.Reviews.replace(/'/g, '"')); // Convert string to JSON
+                        const reviewList = document.getElementById("review-list");
+            
+                        // Check if a carousel is needed
+                        const useCarousel = reviews.length > 3;
+            
+                        if (useCarousel) {
+                            reviewList.classList.add("carousel", "slide");
+                            reviewList.setAttribute("data-ride", "carousel");
+                            reviewList.innerHTML = `
+                                <div class="carousel-inner">
+                                    ${reviews.map((review, index) => `
+                                        <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                            <li class="review th-comment-item">
+                                                <div class="th-post-comment">
+                                                    <div class="comment-avater">
+                                                        <img src="assets/img/blog/comment-author-${index % 3 + 1}.jpg" alt="Reviewer Image">
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <h4 class="name">${review.author}</h4>
+                                                        <div class="star-rating" role="img">
+                                                            ${'<i class="fas fa-star"></i>'.repeat(review.rating)}
+                                                            ${'<i class="far fa-star"></i>'.repeat(5 - review.rating)}
+                                                        </div>
+                                                        <p class="text">${review.description}</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </div>
+                                    `).join("")}
+                                </div>
+                                <a class="carousel-control-prev" href="#review-list" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#review-list" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            `;
+                        } else {
+                            // If no carousel is needed, just insert reviews normally
+                            reviewList.innerHTML = reviews.map(review => `
+                                <li class="review th-comment-item">
+                                    <div class="th-post-comment">
+                                        <div class="comment-avater">
+                                            <img src="assets/img/blog/comment-author-1.jpg" alt="Reviewer Image">
+                                        </div>
+                                        <div class="comment-content">
+                                            <h4 class="name">${review.author}</h4>
+                                            <div class="star-rating" role="img">
+                                                ${'<i class="fas fa-star"></i>'.repeat(review.rating)}
+                                                ${'<i class="far fa-star"></i>'.repeat(5 - review.rating)}
+                                            </div>
+                                            <p class="text">${review.description}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            `).join("");
+                        }
+                    }
+                    
+                }
+            });
+            document.addEventListener("DOMContentLoaded", function () {
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    alert("Please log in to add favorites.");
+                    return;
+                }
+            
+                const urlParams = new URLSearchParams(window.location.search);
+                const cafeIndex = urlParams.get("index");
+                const favoriteBtn = document.getElementById("favorite-btn");
+                const favoriteIcon = document.getElementById("favorite-icon");
+            
+                // Corrected URL to use port 8001
+                fetch("http://localhost:8001/get-favorites", {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.favorites.includes(cafeIndex)) {
+                        favoriteIcon.classList.remove("far");
+                        favoriteIcon.classList.add("fas", "text-danger");
+                    }
+                });
+            
+                favoriteBtn.addEventListener("click", function (event) {
+                    event.preventDefault();
+            
+                    fetch("http://localhost:8001/update-favorites", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+                        body: JSON.stringify({ cafeIndex })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message); // Show success message
+                        if (data.status === "added") {
+                            favoriteIcon.classList.remove("far");
+                            favoriteIcon.classList.add("fas", "text-danger");
+                        } else {
+                            favoriteIcon.classList.remove("fas", "text-danger");
+                            favoriteIcon.classList.add("far");
+                        }
+                    })
+                    .catch(error => console.error("Error:", error));
+                });
+            });
+            document.addEventListener("DOMContentLoaded", function () {
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    alert("Please log in to add Visit Later.");
+                    return;
+                }
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const cafeIndex = urlParams.get("index");
+                const visitLaterBtn = document.getElementById("visit-later-btn");
+
+                // Check if cafe is already in Visit Later
+                fetch("http://localhost:8001/get-visit-later", {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.visit_later.includes(cafeIndex)) {
+                        visitLaterBtn.classList.add("active"); // Change button color
+                        visitLaterBtn.textContent = "Remove from Visit Later";
+                    }
+                });
+
+                // Handle add/remove visit later
+                visitLaterBtn.addEventListener("click", function () {
+                    fetch("http://localhost:8001/update-visit-later", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+                        body: JSON.stringify({ cafeIndex })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message); // Show success message
+                        if (data.status === "added") {
+                            visitLaterBtn.classList.add("active");
+                            visitLaterBtn.textContent = "Remove from Visit Later";
+                        } else {
+                            visitLaterBtn.classList.remove("active");
+                            visitLaterBtn.textContent = "Visit Later";
+                        }
+                    })
+                    .catch(error => console.error("Error:", error));
+                });
+            });
+  
+            
+    </script>
+    <!--==============================
+    All Js File
+============================== -->
+    <!-- Jquery -->
+    <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <!-- Swiper Js -->
+    <script src="assets/js/swiper-bundle.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Magnific Popup -->
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <!-- Counter Up -->
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <!-- Date Time -->
+    <script src="assets/js/jquery.datetimepicker.min.js"></script>
+    <!-- Isotope Filter -->
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+
+    <!-- Gsap Animation -->
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script src="assets/js/ScrollToPlugin.min.js"></script>
+    <script src="assets/js/ScrollSmoother.min.js"></script>
+    <script src="assets/js/SplitText.min.js"></script>
+
+    <!-- Main Js File -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+@each $bgcolorMap, $value in $bgcolorMap {
+    .bg-#{$bgcolorMap} {
+        background-color: #{$value} !important;
+    }
+}
+
+.gr-bg1 {
+	background-image: $gr-bg1;
+}
+.gr-bg2 {
+	background-image: $gr-bg2;
+}
+
+.background-image,
+[data-bg-src] {
+    @include background-content(no-repeat, cover, center center);
+}
+
+.bg-fixed {
+    background-attachment: fixed;
+    scroll-behavior: smooth !important;
+}
+
+.bg-fluid {
+    @include background-content(no-repeat, 100% 100%, center center);
+}
+
+.bg-auto {
+    background-size: auto auto;
+}
+
+.bg-top-center {
+    background-size: auto;
+    background-position: top center;
+}
+
+.bg-repeat {
+    background-size: auto;
+    background-repeat: repeat;
+}
+
+.bg-bottom-right {
+    background-size: auto;
+    background-position: bottom right;
+}
+.bg-top-right {
+    background-size: auto;
+    background-position: top right;
+}
+.bg-top-left {
+    background-size: auto;
+    background-position: top left;
+}

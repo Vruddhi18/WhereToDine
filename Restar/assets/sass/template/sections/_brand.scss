@@ -1,0 +1,17 @@
+/* Brand 1 ---------------------------------- */
+.brand-box {
+    display: grid;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    min-height: 104px;
+    width: auto;
+    filter: grayscale(1) invert(0.1) brightness(1.2);
+    transition: 0.4s ease-in-out;
+    &.style2 {
+        filter: opacity(0.5);
+    }
+    &:hover {
+        filter: none;
+    }
+}

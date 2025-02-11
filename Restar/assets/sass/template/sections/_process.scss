@@ -1,0 +1,129 @@
+/* Process Card ---------------------------------- */
+.process-card {
+    position: relative;
+    z-index: 2;
+    padding: 80px 0 0 0;
+    text-align: center;
+    .box-content {
+        background-color: $white-color;
+        box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.08);
+        border-radius: 30px;
+        padding: 30px 30px 40px 30px;
+    }
+    .box-top {
+        padding: 75px 0 0 0;
+    }
+    .box-number {
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        margin-top: -0.45em;
+    }
+    .box-title {
+        margin-bottom: 12px;
+    }
+    .box-icon {
+        position: absolute;
+        top: 0;
+        left: calc(50% - 69px);
+        height: 160px;
+        width: 138px;
+        text-align: center;
+        line-height: 150px;
+        filter: drop-shadow(0px 10px 50px rgba(0, 0, 0, 0.08));
+        z-index: 2;
+        &:before {
+            content: '';
+            background-color: $white-color;
+            position: absolute;
+            inset: 0;
+            clip-path: path("M14.9541 124.669L53.9541 147.278C63.2594 152.672 74.7406 152.672 84.0459 147.278L123.046 124.669C132.302 119.303 138 109.414 138 98.7148V53.2852C138 42.5861 132.302 32.6968 123.046 27.331L84.0459 4.72227C74.7406 -0.672132 63.2594 -0.67213 53.9541 4.72227L14.9541 27.331C5.69794 32.6968 0 42.5861 0 53.2852V98.7148C0 109.414 5.69794 119.303 14.9541 124.669Z");
+            z-index: -1;
+        }
+    }
+    &:hover {
+        .box-icon {
+            img {
+                transform: rotateY(180deg);
+            }
+        }
+    }
+}
+
+@include lg {
+    .process-card {
+        .box-content {
+            padding: 30px 10px;
+        }
+    }
+}
+
+@include sm {
+    .process-card {
+        .box-content {
+            padding: 30px;
+        }
+    }
+}
+
+/* Process box ---------------------------------- */
+.process-box {
+    &-wrap {
+        &:nth-child(even) {
+            margin-top: 70px;
+        }
+        @include lg {
+            margin-top: 40px !important;
+        }
+    }
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    .box-number {
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        margin-top: -0.45em;
+    }
+    .box-title {
+        font-weight: 500;
+        margin-bottom: 12px;
+    }
+    .box-img {
+        margin: 0 auto 30px auto;
+        max-width: 257px;
+        aspect-ratio: 16 / 16;
+    }
+    .box-icon {
+        position: absolute;
+        top: 0;
+        left: 10px;
+        height: 118px;
+        width: 100px;
+        text-align: center;
+        line-height: 115px;
+        clip-path: path("M9.83703 91.3038L39.837 109.004C46.1073 112.703 53.8927 112.703 60.163 109.004L90.163 91.3038C96.259 87.7072 100 81.1564 100 74.0785V37.9215C100 30.8436 96.259 24.2928 90.163 20.6962L60.163 2.99616C53.8927 -0.70333 46.1073 -0.703327 39.837 2.99616L9.83702 20.6962C3.74101 24.2928 0 30.8436 0 37.9215V74.0785C0 81.1564 3.74102 87.7072 9.83703 91.3038Z");
+        z-index: 2;
+        background-color: $smoke-color2;
+        &:before {
+            content: '';
+            background-color: $white-color;
+            position: absolute;
+            inset: 9px 7px 9px 7px;
+            clip-path: path("M9.94758 77.7837L32.9476 91.1558C39.1622 94.769 46.8378 94.769 53.0524 91.1558L76.0524 77.7837C82.2109 74.2032 86 67.6173 86 60.4936V33.5069C86 26.3832 82.2109 19.7973 76.0524 16.2168L53.0524 2.84467C46.8378 -0.768474 39.1622 -0.76848 32.9476 2.84466L9.94759 16.2168C3.78912 19.7973 0 26.3832 0 33.5069V60.4936C0 67.6173 3.78911 74.2032 9.94758 77.7837Z");
+            filter: drop-shadow(0px 10px 50px rgba(0, 0, 0, 0.08));
+            z-index: -1;
+        }
+        &.bg-white:before {
+            background-color: $smoke-color2;
+        }
+        @include lg {
+            left: 22%;
+        }
+    }
+    &:hover {
+        .box-icon {
+            img { 
+                transform: rotateY(180deg);
+            }
+        }
+    }
+}

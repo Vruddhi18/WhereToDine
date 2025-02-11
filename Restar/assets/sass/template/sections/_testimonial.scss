@@ -1,0 +1,323 @@
+/* Testimonial Card ---------------------------------- */
+.testi-card {
+    &-area {
+        position: relative;
+        z-index: 2;
+        padding-bottom: 76px;
+        @include md {
+            padding-bottom: 0;
+        }
+        .icon-box {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: $theme-color;
+            padding: 8px;
+        }
+        .slider-arrow {
+            --title-color: #fff;
+        }
+        .text-shape {
+            position: absolute;
+            top: 0;
+            right: 18%;
+            animation: spin 18s linear infinite;
+        }
+    }
+    &-img {
+        max-width: 740px;
+        position: relative;
+        &:after {
+            content: '';
+            position: absolute;
+            top: calc(50% - 241px);
+            right: calc(100% - 134px);
+            @include equal-size(482px);
+            background-color: $body-bg;
+            border-radius: 999px;
+            @include md {
+                top: calc(100% - 100px);
+                right: calc(50% - 241px);
+                display: none;
+            }
+        }
+        @include md {
+            z-index: 3;
+        }
+        .th-slider {
+            max-height: 370px;
+            @include md {
+                max-height: auto;
+                max-width: 320px;
+            }
+        }
+        .img-slider {
+            position: absolute;
+            top: calc(50% - 185px);
+            left: -58px;
+            z-index: 3;
+            @include ml {
+                left: -35px;
+            }
+            @include md {
+                top: unset;
+                left: calc(50% - 160px);
+                bottom: -50px;
+            }
+        }
+        .swiper-slide {
+            border: 3px solid $border-color;
+            border-radius: 999px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            transform: scale(0.85);
+            transition: 0.4s ease-in-out;
+            cursor: url("../img/theme-img/pointer.png"), auto;
+        }
+        .swiper-slide-active {
+            border-color: $theme-color;
+            transform: scale(1) !important;
+        }
+    }
+    &-slider {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        max-width: 740px;
+        width: 100%;
+        background-color: rgba($color: #1F1F1F, $alpha: 0.9);
+        padding: 100px;
+        @include md {
+            position: relative;
+            padding: 80px;
+        }
+        @include sm {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        @include sm {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    }
+    &-quote {
+        position: absolute;
+        bottom: 75px;
+        right: 80px;
+        opacity: 0.25;
+        @include xs {
+            opacity: 0.1;
+            right: 20px;
+            bottom: 50px;
+        }
+    }
+    padding-bottom: 60px;
+    @include vxs {
+        padding-bottom: 40px;
+    }
+    .box-text {
+        font-style: italic;
+        color: $white-color;
+        font-weight: 600;
+        margin-bottom: 40px;
+    }
+    .box-title {
+        font-size: 36px;
+        color: $theme-color;
+        margin-bottom: 3px;
+        @include vxs {
+            font-size: 26px;
+        }
+    }
+    .box-desig {
+        font-family: $title-font;
+        font-size: 18px;
+        color: $white-color;
+        margin-bottom: -0.45em;
+    }
+}
+
+/* Testimonial Box ---------------------------------- */
+.box-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.testi-box {
+    padding: 40px;
+    background-color: $body-bg;
+    .box {
+        &-img {
+            position: relative;
+            @include xl {
+                max-width: 100px;
+            }
+            img {
+                border-radius: 99px;
+            }
+        }
+        &-quote {
+            @include equal-size(30px);
+            line-height: 24px;
+            border-radius: 99px;
+            background-color: $theme-color;
+            border: 2px solid $white-color;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        &-title {
+            font-size: 30px;
+            margin-bottom: 8px;
+            @include xl {
+                font-size: 26px;
+            }
+        }
+        &-desig {
+            margin-bottom: -0.5em;
+        }
+        &-profile {
+            padding-bottom: 30px;
+            margin-bottom: 23px;
+            border-bottom: 1px solid $border-color;
+        }
+    }
+    @include md {
+        padding: 30px;
+    }
+    @include sm {
+        padding: 40px;
+    }
+    @include vxs {
+        padding: 25px;
+        .box-profile {
+            gap: 15px;
+        }
+        .box-img {
+            max-width: 80px;
+        }
+        .box-title {
+            font-size: 24px;
+        }
+    }
+}
+
+
+/* Testimonial Grid ---------------------------------- */
+.thumb-slider2 {
+    max-width: 660px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 2;
+    @include sm {
+        margin-bottom: 35px;
+    }
+    &:before {
+        content: '';
+        height: 2px;
+        width: calc(100% - 30px);
+        background-color: $theme-color;
+        position: absolute;
+        top: calc(50% - 1px);
+        left: 15px;
+    }
+    .tab-btn {
+        padding-bottom: 20px;
+    }
+    .box-quote {
+        display: inline-block;
+        @include equal-size-lineHeight(56px);
+        text-align: center;
+        border-radius: 99px;
+        background-color: $theme-color;
+        border: 2px solid $white-color;
+        position: absolute;
+        bottom: 0;
+        left: calc(50% - 28px);
+        transition: 0.4s ease-in-out;
+        transform: scale(0);
+        &:after {
+            content: '';
+            position: absolute;
+            top: calc(50% - 12px);
+            left: calc(50% - 16px);
+            width: 33px;
+            height: 24px;
+            background-color: $white-color;
+            clip-path: path("M5.28169 22.4421C6.94366 21.7403 8.39436 20.6737 9.6338 19.2421C10.8732 17.8105 11.6197 16.3509 11.8732 14.8632C12.0141 14.0772 12.0845 13.4035 12.0845 12.8421C12.0845 12.1965 12.0141 11.6632 11.8732 11.2421C10.5493 12.6175 8.87324 13.3053 6.84507 13.3053C4.8169 13.3053 3.16901 12.7158 1.90141 11.5368C0.633801 10.3579 -3.23375e-06 8.72982 -3.23311e-06 6.65263C-3.2325e-06 4.68772 0.676053 3.08772 2.02817 1.85263C3.35211 0.617546 5.04225 2.265e-06 7.09859 2.26437e-06C9.91549 2.26351e-06 11.9718 1.01053 13.2676 3.03158C13.8592 3.90176 14.3239 4.96842 14.662 6.23158C15 7.52281 15.169 8.84211 15.169 10.1895C15.169 13.1368 14.4084 15.8316 12.8873 18.2737C11.3662 20.7158 9.09859 22.6246 6.08451 24L5.28169 22.4421ZM23.1127 22.4421C24.7746 21.7403 26.2254 20.6737 27.4648 19.2421C28.7042 17.8105 29.4507 16.3509 29.7042 14.8632C29.8451 14.0772 29.9155 13.4035 29.9155 12.8421C29.9155 12.1965 29.8451 11.6632 29.7042 11.2421C28.3803 12.6175 26.7042 13.3053 24.6761 13.3053C22.6479 13.3053 21 12.7158 19.7324 11.5368C18.4648 10.3579 17.831 8.72982 17.831 6.65263C17.831 4.68772 18.507 3.08772 19.8592 1.85263C21.1831 0.617546 22.8732 2.25953e-06 24.9296 2.2589e-06C27.7465 2.25804e-06 29.8028 1.01053 31.0986 3.03158C31.6901 3.90176 32.1549 4.96842 32.493 6.23158C32.831 7.52281 33 8.84211 33 10.1895C33 13.1368 32.2394 15.8316 30.7183 18.2737C29.1972 20.7158 26.9296 22.6246 23.9155 24L23.1127 22.4421Z");
+        }
+    }
+    .swiper-slide {
+        cursor: url("../img/theme-img/pointer.png"), auto;
+        img {
+            transform: scale(0.9);
+            transition: 0.4s ease-in-out;
+            border-radius: 99px;
+        }
+    }
+    .swiper-slide-active {
+        img {
+            transform: scale(1);
+            border: 2px solid $theme-color;
+        }
+        .box-quote {
+            transform: scale(1);
+            @media (max-width: 350px) {
+                transform: scale(0.7);
+            }
+        }
+    }
+}
+
+.testi-grid {
+    &-area {
+        --pos-x: 0;
+        .slider-arrow {
+            top: 68%;
+            visibility: visible;
+            opacity: 1;
+            transform: scale(1);
+            display: block;
+            @include sm {
+                display: none;
+            }
+            &.slider-prev {
+                transform: scale(1) rotateY(180deg);
+            }
+        }
+    }
+    &-slider {
+        text-align: center;
+        max-width: 990px;
+        margin-left: auto;
+        margin-right: auto;
+        @include xl {
+            max-width: 800px;
+        }
+        @include md {
+            max-width: calc(100% - 100px);
+        }
+        @include sm {
+            max-width: 100%;
+        }
+    }
+    .box {
+        &-text {
+            font-size: 18px;
+            color: $title-color;
+            font-style: italic;
+            @include md {
+                font-size: 16px;
+            }
+        }
+        &-title {
+            font-size: 30px;
+            margin-top: 23px;
+            margin-bottom: 0;
+        }
+        &-desig {
+            margin-bottom: -2px;
+        }
+    }
+}

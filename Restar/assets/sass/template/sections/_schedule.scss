@@ -1,0 +1,230 @@
+
+.schedule-card {
+    background-color: #111;
+    padding: 60px;
+    margin-left: -250px;
+    text-align: center;
+    background-size: auto;
+    background-position: bottom right;
+    position: relative;
+    z-index: 3;
+    @include lg {
+        margin-left: 0;
+    }
+    @include sm {
+        padding: 40px;
+    }
+    @include xs {
+        padding: 40px 20px;
+    }
+}
+
+.img-box3 {
+    position: relative;
+    .img1 {
+        overflow: hidden;
+        position: relative;
+        max-width: 100%;
+        width: 740px;
+        aspect-ratio: .93 / 1;
+        img {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            height: 110%;
+            object-fit: cover;
+        }
+        @include lg {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+        }
+        @include xs {
+            aspect-ratio: 0.9 / 1;
+        }
+    }
+    .box-title {
+        position: absolute;
+        top: 0;
+        left: -82px;
+        z-index: 3;
+        font-size: 54px;
+        font-weight: 400;
+        text-transform: uppercase;
+        writing-mode: vertical-rl;
+        color: transparent;
+        -webkit-text-stroke: 1px $title-color;
+        margin: 0;
+        letter-spacing: 0.16em;
+        @include ml {
+            letter-spacing: 0.13em;
+            left: -60px;
+        }
+        @include xl {
+            font-size: 50px;
+            letter-spacing: 0.08em;
+        }
+        > span {
+            margin: 10px 0;
+            > span{
+                display: inline-block;
+                transform: rotate(-90deg);
+            }
+        }
+        &:before,
+        &:after {
+            content: '';
+            display: inline-block;
+            height: 100px;
+            width: 5px;
+            background-color: $theme-color;
+            border-radius: 5px;
+        }
+        @include lg {
+            left: 0;
+            background-color: $white-color;
+            padding-bottom: 10px;
+            &:before,
+            &:after {
+                display: none;
+            }
+        }
+        @include xs {
+            font-size: 36px;
+            letter-spacing: 0;
+        }
+    }
+}
+
+.schedule-list {
+    &-wrap {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid $body-color;
+        position: relative;
+        margin: 0 auto 50px auto;
+        max-width: 550px;
+        .box-shape {
+            margin-bottom: -10px;
+            position: relative;
+            z-index: 2;
+        }
+        &:after {
+            content: '';
+            height: 1px;
+            width: 60px;
+            position: absolute;
+            bottom: -1px;
+            left: calc(50% - 30px);
+            background-color: #111;
+        }
+    }
+    width: 155px;
+    .box {
+        &-title {
+            font-size: 18px;
+            color: $white-color;
+            margin-bottom: 25px;
+        }
+        &-time {
+            color: $white-color;
+            font-size: 30px;
+            margin-bottom: 0;
+        }
+    }
+}
+
+/* Schedule 2 */
+.schedule-sec2 {
+    background-size: auto;
+    background-position: bottom center;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding-top: 250px;
+    @include lg {
+        padding-top: 144px;
+    }
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 516px;
+        background-color: $smoke-color;
+        z-index: -1;
+    }
+    .sec-title {
+        font-size: 94px;
+        display: inline-flex;
+        gap: 0 240px;    
+    }
+    .schedule-img {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        @include lg {
+            max-width: 380px;
+        }
+    }
+    .schedule-list {
+        width: auto;
+        &-wrap {
+            max-width: 100%;
+            border: none;
+            margin: 0;
+            &:after {
+                display: none;
+            }
+            @include sm {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 35px;
+            }
+        }
+        .box-title,
+        .box-time {
+            color: $title-color;
+        }
+        .box-title {
+            font-size: 24px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid $theme-color;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .th-btn {
+            margin-top: 23px;
+        }
+    }
+}
+
+.schedule-box {
+    padding: 0 80px 80px 80px;
+    @include lg {
+        padding: 0 40px 40px 40px;
+    }
+    @include vxs {
+        padding: 0 20px 34px 20px;
+    }
+}
+
+@include md {
+    .schedule-sec2 {
+        padding-top: 40px;
+        &:before {
+            height: 100%;
+        }
+        .sec-title {
+            font-size: 60px;
+            gap: 0 20px;
+            @include xs {
+                font-size: 40px;
+            }
+        }
+        .schedule-img {
+            display: none;
+        }
+    }
+}

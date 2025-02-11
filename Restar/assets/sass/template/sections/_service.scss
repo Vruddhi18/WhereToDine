@@ -1,0 +1,30 @@
+
+/* Service Details --------------------------------*/
+.page-title {
+    margin-bottom: 20px;
+}
+
+.page-img {
+    margin-bottom: 40px;
+    overflow: hidden;
+    img {
+        width: 100%;
+    }
+}
+.page-single {
+    margin-bottom: 30px;
+}
+.widget-banner {
+    text-align: center;
+    padding: 35px 0;
+    .box-title {
+        font-size: 36px;
+        color: $theme-color;
+    }
+    .box-text {
+        color: $white-color;
+    }
+    .th-btn {
+        margin-top: 60px;
+    }
+}

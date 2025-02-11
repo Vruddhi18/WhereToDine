@@ -1,0 +1,87 @@
+/* Faq 1 ---------------------------------- */ 
+.accordion-card {
+    transition: 0.4s ease-in-out;
+    border-radius: 0;
+    border: 1px solid $border-color;
+    overflow: hidden;
+    background-color: transparent;
+    text-align: left;
+    position: relative;
+    z-index: 3;
+    // box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.08);
+    &:not(:last-child) {
+        margin-bottom: 30px;
+    }
+    .accordion-button {
+        font-size: 22px;
+        font-family: $title-font;
+        border: none;
+        border-color: $border-color;
+        color: $title-color;
+        background-color: transparent;
+        // box-shadow: 0px 2px 14px rgba(4, 6, 66, 0.1);
+        border-radius: 0;
+        padding: 22px 45px 22px 30px;
+        min-height: 56px;
+        gap: 10px;
+        margin-bottom: 0;
+        text-align: left;
+        transition: 0.3s;
+        position: relative;
+        &:after {
+            content: "\f324";
+            height: 100%;
+            width: auto;
+            line-height: 1;
+            background-color: transparent;
+            background-image: none;
+            font-family: $icon-font;
+            color: $theme-color;
+            font-weight: 500;
+            font-size: 20px;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            right: 30px;
+            transition: 0.3s ease-in-out;
+        }
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        &:not(.collapsed) {
+            box-shadow: none;
+            border-radius: 0;
+            border-bottom: 1px solid $border-color;
+            &:after {
+                // content: '\f324';
+                transform: rotate(90deg);
+            }
+        }
+    }
+    .accordion-collapse {
+        border: none;
+    }
+    .accordion-body {
+        border-radius: 0;
+        border: none;
+        padding: 30px;
+        margin-top: -7px;
+    }
+    .faq-text {
+        margin-bottom: -0.48em;
+    }
+    // &:has(.show) {
+    //     border-radius: 20px;
+    // }
+}
+
+
+@include xs {
+    .accordion-card .accordion-button {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,132 @@
+//---------------------------------------
+.cta-card {
+    padding: 80px 40px;
+    background-position: bottom left;
+    position: relative;
+    @include lg {
+        padding: 65px 40px;
+    }
+    .box {
+        &-title {
+            color: $theme-color;
+            font-size: 30px;
+            margin-bottom: 0;
+        }
+        &-heading {
+            font-size: 36px;
+            color: $white-color;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        &-text {
+            color: $theme-color;
+            font-size: 20px;
+            margin-bottom: -0.25em;
+        }
+        &-price {
+            position: absolute;
+            top: 21px;
+            right: 34px;
+            text-align: center;
+            .text {
+                color: $white-color;
+                font-weight: 700;
+                text-transform: uppercase;
+                margin-bottom: -4px;
+            }
+            .price {
+                font-size: 24px;
+                color: $theme-color;
+                margin-bottom: 0;
+            }
+            .content {
+                position: absolute;
+                top: 26px;
+                left: 5px;
+                width: 100%;
+            }
+        }
+    }
+    .th-btn {
+        margin-top: 40px;
+    }
+    @include xs {
+        padding: 45px 20px;
+        .box-price {
+            top: 10px;
+            right: 10px;
+        }
+    }
+    @media (max-width: 360px) {
+        .box-price {
+            top: 2px;
+            right: 2px;
+            transform: scale(0.8);
+        }
+    }
+}
+
+/* Cta 3 */
+.cta-img1 {
+    margin: 34px 34px 20px -80px;
+    position: relative;
+    .price {
+        font-size: 64px;
+        color: $white-color;
+        position: absolute;
+        bottom: 10%;
+        right: -10%;
+        background-size: contain;
+        padding: 85px 50px 44px 50px;
+        margin: 0;
+    }
+    @include md {
+        margin: 20px 0 0 0;
+        text-align: center;
+        .price {
+            right: 0;
+        }
+    }
+    @include sm {
+        .price {
+            font-size: 44px;
+            padding: 40px 25px 20px 25px;
+        }
+    }
+}
+
+/* Cta 4 */
+.offer-box {
+    &-row {
+        justify-content: center;
+        > div {
+            margin-bottom: 24px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+    padding: 40px;
+    .box {
+        &-title {
+            color: $white-color;
+            font-size: 30px;
+            margin-bottom: 4px;
+        }
+        &-text {
+            color: $white-color;
+            font-weight: 500;
+            max-width: 155px;
+        }
+    }
+    .line-btn {
+        color: $white-color;
+        margin-top: 28px;
+        &:before {
+            background-color: $white-color;
+        }
+    }
+    @include vxs {
+        padding: 40px 20px;
+    }
+}

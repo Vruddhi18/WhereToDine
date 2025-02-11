@@ -1,0 +1,94 @@
+.breadcumb-menu {
+    max-width: 100%;
+    padding: 0;
+    margin: 32px 0 -0.5em 0;
+    list-style-type: none;
+    position: relative;
+    li {
+        display: inline-block;
+        margin-right: 3px;
+        padding-right: 3px;
+        list-style: none;
+        position: relative;
+
+        &:after {
+            content: "\f054";
+            position: relative;
+            margin-left: 6px;
+            font-weight: 500;
+            font-size: 15px;
+            color: inherit;
+            font-family: $icon-font;
+        }
+
+        &:last-child {
+            padding-right: 0;
+            margin-right: 0;
+            color: $white-color;
+
+            &:after {
+                display: none;
+            }
+        }
+
+        // &:last-child {
+        //   &,
+        //   a,
+        //   span {
+        //     color: $theme-color;
+        //   }
+        // }
+    }
+
+    li,
+    a,
+    span {
+        white-space: normal;
+        color: inherit;
+        word-break: break-word;
+        font-weight: 600;
+        font-size: 18px;
+        text-transform: uppercase;
+        color: $white-color;
+    }
+}
+
+.breadcumb-title {
+    margin: -0.24em 0 -0.18em 0;
+	line-height: 1.1;
+    color: $white-color;
+    text-transform: uppercase;
+}
+
+.breadcumb-wrapper {
+    background-color: $title-color;
+    padding: 174px 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+@include lg {
+    .breadcumb-wrapper {
+        padding: 130px 0 130px 0;
+    }
+	.breadcumb-menu {
+        margin: 25px 0 -0.5em 0;
+        li,
+        a,
+        span {
+            font-size: 16px;
+        }
+    }
+}
+
+@include md {
+    .breadcumb-wrapper {
+        padding: 100px 0 100px 0;
+    }
+}
+
+@include xs {
+	.breadcumb-title {
+		font-size: 34px;
+	}
+}
