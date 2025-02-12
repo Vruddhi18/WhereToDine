@@ -85,13 +85,7 @@
     Sidemenu
 ============================== -->
     
-    <div class="popup-search-box d-none d-lg-block">
-        <button class="searchClose"><i class="fal fa-times"></i></button>
-        <form action="#">
-            <input type="text" placeholder="What are you looking for?">
-            <button type="submit"><i class="fal fa-search"></i></button>
-        </form>
-    </div><!--==============================
+    <!--==============================
     Mobile Menu
   ============================== -->
     <!--==============================
@@ -134,66 +128,34 @@
                         <div class="col-auto">
                             <nav class="main-menu d-none d-lg-inline-block">
                                 <ul>
-                                    <li class="menu-item-has-children">
+                                    <li>
                                         <a href="index.html">Home</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="index.html">Restaurant Shop</a></li>
-                                            <li><a href="home-fast-food.html">Home Fast Food</a></li>
-                                            <li><a href="home-restaurant.html">Home Restaurant</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Pages</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="service.html">Service</a></li>
-                                            <li><a href="service-details.html">Service Details</a></li>
-                                            <li><a href="team.html">Chef</a></li>
-                                            <li><a href="team-details.html">Chef Details</a></li>
-                                            <li><a href="reservation.html">Reservation</a></li>
-                                            <li><a href="gallery.html">Gallery</a></li>
-                                            <li><a href="error.html">Error Page</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Menus</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="menu-one.html">Food Menu 1</a></li>
-                                            <li><a href="menu-two.html">Food Menu 2</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Shop</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="shop.html">Shop</a></li>
-                                            <li><a href="shop-details.html">Shop Details</a></li>
-                                            <li><a href="cart.html">Cart Page</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Blog</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
-                                        </ul>
+                                        
                                     </li>
                                     <li>
-                                        <a href="contact.html">Contact</a>
+                                        <a href="shop.html">Cafes</a>
+                                    </li>
+                                    <li>
+                                        <a href="profile.html">Profile</a>
                                     </li>
                                 </ul>
                             </nav>
                         </div>
                         <div class="col-auto">
                             <div class="header-button">
-                                <button type="button" class="simple-icon searchBoxToggler d-none d-xl-block"><i class="fal fa-search"></i></button>
-                                <button type="button" class="simple-icon sideMenuToggler">
-                                    <span class="badge">5</span>
-                                    <i class="fal fa-cart-shopping"></i>
-                                </button>
-                                <a href="contact.html" class="th-btn style4 d-none d-xl-block">Book A Table</a>
-                                <button type="button" class="th-menu-toggle d-block d-lg-none"><i class="far fa-bars"></i></button>
+                                <form class="header-search">
+                                    <input type="text" placeholder="Search cafe" id="search-bar" onkeyup="searchCafes()" style="background-color: white !important; ">
+                                    <button type="submit"><i class="far fa-search"></i></button>
+                                </form>
+                               
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="col-auto">
+                            <div class="header-button">
+                                
+                                
                             </div>
                         </div>
                     </div>
@@ -210,22 +172,9 @@
             ==============================-->
             <section class="space-top space-extra-bottom">
                 <div class="container">
-                    <div class="th-sort-bar">
-                        <div class="row justify-content-between align-items-center">
-                            <div class="col-md">
-                                <input type="text" id="search-bar" class="search-input woocommerce-result-count" placeholder="Search for cafes..." onkeyup="searchCafes()">
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="row gy-40" id="cafe-list"></div>
-                    <div class="th-pagination text-center pt-50">
-                        <ul>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#"><i class="far fa-arrow-right"></i></a></li>
-                        </ul>
-                    </div>
+                    
                 </div>
             </section>
             <script>

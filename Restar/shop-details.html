@@ -8,9 +8,73 @@
     <meta name="author" content="Restar">
     <meta name="description" content="Restar - Fast Food & Restaurant HTML Template">
     <meta name="keywords" content="Restar - Fast Food & Restaurant HTML Template">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
     <meta name="robots" content="INDEX,FOLLOW">
     <style>
-        /* Full stars (orange) */
+        /* Root Variables */
+        :root {
+            --main-container: 1250px;
+            --bs-blue: #0d6efd;
+            --bs-indigo: #6610f2;
+            --bs-purple: #6f42c1;
+            --bs-pink: #d63384;
+            --bs-red: #dc3545;
+            --bs-orange: #fd7e14;
+            --bs-yellow: #ffc107;
+            --bs-green: #198754;
+            --bs-teal: #20c997;
+            --bs-cyan: #0dcaf0;
+            --bs-white: #fff;
+            --bs-gray: #6c757d;
+            --bs-gray-dark: #343a40;
+            --container-gutters: 30px;
+        }
+
+        /* Grid System */
+        .row {
+            --bs-gutter-x: 30px;
+        }
+
+        .gy-30 {
+            --bs-gutter-y: 30px;
+        }
+
+        .gy-40 {
+            --bs-gutter-y: 40px;
+        }
+
+        .gy-50 {
+            --bs-gutter-y: 50px;
+        }
+
+        .gx-10 {
+            --bs-gutter-x: 10px;
+        }
+
+        .gy-10 {
+            --bs-gutter-y: 10px;
+        }
+
+        /* Container Styles */
+        @media only screen and (min-width: 1300px) {
+            .container-xxl,
+            .container-xl,
+            .container-lg,
+            .container-md,
+            .container-sm,
+            .container {
+                max-width: calc(var(--main-container) + var(--container-gutters));
+                padding-left: calc(var(--container-gutters) / 2);
+                padding-right: calc(var(--container-gutters) / 2);
+            }
+            
+            .container.px-0 {
+                max-width: var(--main-container);
+            }
+        }
+
+        /* Existing styles */
         .menu-card {
             display: flex;
             flex-direction: column;
@@ -29,7 +93,7 @@
         
         .menu-card .box-img {
             width: 100%;
-            height: 200px; /* Fixed height for all images */
+            height: 200px;
             overflow: hidden;
             border-radius: 8px;
         }
@@ -37,7 +101,7 @@
         .menu-card .box-img img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensures images fill the box without distortion */
+            object-fit: cover;
             border-radius: 8px;
         }
         
@@ -57,39 +121,29 @@
             display: inline-block;
             margin-top: 10px;
         }
-        
-        .fas.fa-star {
-            color: orange;
-        }
 
-        /* Half stars (orange) */
-        .fas.fa-star-half-alt {
-            color: orange;
-        }
-
-        /* Empty stars (grey) */
+        /* Star Rating Styles */
+        .fas.fa-star,
+        .fas.fa-star-half-alt,
         .far.fa-star {
-            color: orange;
+            color: var(--bs-yellow);
         }
-        /* Ensure all images in the carousel are the same size */
-        /* Remove any extra white space */
-        /* Force all carousel images to be the same size */
+
+        /* Carousel Styles */
         .carousel-item img {
-            width: 100%; /* Ensures images take up full width */
-            height: 400px; /* Set a fixed height for all images */
-            object-fit: cover; /* Crops the images without distortion */
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
             border-radius: 10px;
         }
 
-        /* Ensure the carousel container remains properly sized */
         .product-big-img {
-            max-width: 500px; /* Adjust width as needed */
+            max-width: 500px;
             height: 400px;
             margin: auto;
             overflow: hidden;
         }
 
-        /* Make sure the carousel container doesn't add extra space */
         .carousel {
             max-width: 600px;
             height: 300px;
@@ -97,22 +151,350 @@
             overflow: hidden;
         }
 
-        /* Remove extra padding/margins from the carousel controls */
-        .carousel-control-prev,
-        .carousel-control-next {
-            width: auto;
-            background: none;
-            opacity: 0.8;
+        /* Action Buttons */
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        /* Ensure the buttons are clean */
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            filter: invert(1);
+        .actions .th-btn {
+            padding: 10px 20px;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .actions .icon-btn {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        /* Media Queries */
+        @media (min-width: 1560px) {
+            .th-container2 {
+                width: 100%;
+                max-width: 1560px;
+                margin-left: auto;
+                margin-right: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            
+            .th-container3 {
+                width: 100%;
+                max-width: 1560px;
+                margin-left: 0;
+                margin-right: auto;
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gy-50 {
+                --bs-gutter-y: 40px;
+            }
+            
+            .carousel-item img {
+                height: 300px;
+            }
+            
+            .product-big-img {
+                height: 300px;
+            }
+        }
+
+        /* Product Information Styles */
+        .cafe-info-section {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            margin: 20px 0;
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .info-item {
+            padding: 15px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .info-label i {
+            font-size: 1.2em;
+            color: #fd7e14;
+        }
+
+        .info-label strong {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .info-content {
+            padding-left: 30px;
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .cafe-info-section {
+                padding: 15px;
+            }
+
+            .info-item {
+                padding: 12px;
+            }
+        }
+
+        /* Add these styles to your existing style section */
+        .th-team .box-img {
+            width: 100%;
+            height: 250px; /* Fixed height for all food gallery images */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .th-team .box-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This ensures images cover the area without distortion */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Optional: Add hover effect */
+        .th-team:hover .box-img img {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        /* Enhanced Carousel Styles */
+        .product-gallery {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .carousel {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-item {
+            position: relative;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Carousel Controls */
+        .carousel-control-prev,
+        .carousel-control-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
             width: 40px;
             height: 40px;
         }
 
+        .carousel-control-prev {
+            left: 0;
+        }
+
+        .carousel-control-next {
+            right: 0;
+        }
+
+        .carousel:hover .carousel-control-prev,
+        .carousel:hover .carousel-control-next {
+            opacity: 1;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 20px;
+            height: 20px;
+            background-color: #000;
+            border-radius: 50%;
+            filter: none;
+        }
+
+        /* Thumbnails Navigation */
+        .thumbnail-gallery {
+            margin-top: 20px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .thumbnail-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .thumbnail {
+            width: 100px;
+            height: 70px;
+            border-radius: 8px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            border-color: #fd7e14;
+        }
+
+        /* Action Buttons */
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .actions .th-btn {
+            flex: 1;
+            padding: 12px 25px;
+            background: #fd7e14;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .actions .th-btn:hover {
+            background: #e86b0c;
+            transform: translateY(-2px);
+        }
+
+        .actions .icon-btn {
+            width: 45px;
+            height: 45px;
+            border: 2px solid #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .actions .icon-btn:hover {
+            border-color: #fd7e14;
+            transform: translateY(-2px);
+        }
+
+        .actions .icon-btn i {
+            font-size: 1.2rem;
+            color: #fd7e14;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .carousel-item img {
+                height: 350px;
+            }
+
+            .thumbnail {
+                width: 80px;
+                height: 60px;
+            }
+
+            .actions {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Basic Carousel Styling */
+        .carousel {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .carousel-item {
+            height: 500px;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .carousel-item {
+                height: 350px;
+            }
+        }
     </style>
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -166,7 +548,7 @@
 
 </head>
 
-<body>
+<body class="theme-golden">
     <!--********************************
    		Code Start From Here 
 	******************************** -->
@@ -310,25 +692,39 @@
                     <div class="row">
                         <div class="col-lg-6">
                             
-                                <div id="cafe-carousel" class="carousel slide" data-bs-ride="carousel">
-                                    <div class="carousel-inner" id="carousel-images"></div>
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#cafe-carousel" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#cafe-carousel" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
+                            <div class="product-gallery">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                                    <div class="carousel-indicators">
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                    </div>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="..." class="d-block w-100" alt="...">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="..." class="d-block w-100" alt="...">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="..." class="d-block w-100" alt="...">
+                                        </div>
+                                    </div>
                                 </div>
-                           
-                            <br><br>
-                            <div class="actions"> 
-                                <button class="th-btn" id="visit-later-btn">Visit Later</button>
-                                <a href="#" class="icon-btn" id="favorite-btn"  >
-                                    <i class="far fa-heart" id="favorite-icon"></i>
-                                </a>
-                            </div> 
+
+                                <div class="thumbnail-gallery">
+                                    <div class="thumbnail-container" id="thumbnail-container">
+                                        <!-- Thumbnails will be inserted here -->
+                                    </div>
+                                </div>
+
+                                <div class="actions">
+                                    <button class="th-btn" id="visit-later-btn">Visit Later</button>
+                                    <a href="#" class="icon-btn" id="favorite-btn">
+                                        <i class="far fa-heart" id="favorite-icon"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-6 align-self-center">
                             <div class="product-about">
@@ -346,11 +742,46 @@
                                     </p>
                                 </div>
                     
-                                <!-- New information -->
-                                <p><strong>Establishment: </strong><span id="cafe-establishment"></span></p>
-                                <p><strong>Cuisines: </strong><span id="cafe-cuisines"></span></p>
-                                <p><strong>More Info: </strong><span id="cafe-more-info"></span></p>
-                                <p><strong>Timings: </strong><span id="cafe-timings"></span></p>
+                                <!-- Product Information Section -->
+                                <div class="cafe-info-section">
+                                    <div class="info-grid">
+                                        <!-- Establishment Info -->
+                                        <div class="info-item">
+                                            <div class="info-label">
+                                                <i class="fas fa-building"></i>
+                                                <strong>Establishment</strong>
+                                            </div>
+                                            <div class="info-content" id="cafe-establishment"></div>
+                                        </div>
+
+                                        <!-- Cuisines Info -->
+                                        <div class="info-item">
+                                            <div class="info-label">
+                                                <i class="fas fa-utensils"></i>
+                                                <strong>Cuisines</strong>
+                                            </div>
+                                            <div class="info-content" id="cafe-cuisines"></div>
+                                        </div>
+
+                                        <!-- Additional Info -->
+                                        <div class="info-item">
+                                            <div class="info-label">
+                                                <i class="fas fa-info-circle"></i>
+                                                <strong>More Info</strong>
+                                            </div>
+                                            <div class="info-content" id="cafe-more-info"></div>
+                                        </div>
+
+                                        <!-- Timings Info -->
+                                        <div class="info-item">
+                                            <div class="info-label">
+                                                <i class="fas fa-clock"></i>
+                                                <strong>Timings</strong>
+                                            </div>
+                                            <div class="info-content" id="cafe-timings"></div>
+                                        </div>
+                                    </div>
+                                </div>
                     
                     
                                 <!-- Location link -->
@@ -399,6 +830,33 @@
                         </div>
                     </div>
                     
+                    <section class="space">
+                        <div class="container">
+                            <div class="title-area text-center">
+                                <span class="sub-title3" style="font-size: 44px;">
+                                    <img src="assets/img/theme-img/title_icon2.svg" alt="Icon">Our Menu
+                                </span>
+                            </div>
+                            <div class="row gy-30" id="menu-container"></div>
+                    
+                            <!-- Styled Pagination Buttons -->
+                            <div class="slider-area">
+                                <button class="slider-arrow slider-prev" id="prev-btn"><span class="icon"></span></button>
+                                <button class="slider-arrow slider-next" id="next-btn"><span class="icon"></span></button>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    
+                    
+                    
+                    
+                    <div id="review-container"></div>
+                    
+                    
+                    
+                    
+                    
                     
                     
                     <!--==============================
@@ -407,6 +865,7 @@
                     
                 </div>
             </section>
+            
             
             <!--==============================
 	Footer Area
@@ -427,181 +886,340 @@
         </svg>
     </div>
     <script>
-        // Fetch cafe Index from the URL query parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        const cafeIndex = urlParams.get('index');
+        let menuItems = []; // Store all menu items
+        let currentIndex = 0; // Track current index
+        const itemsPerPage = 10; // Show 10 items at a time (5 per side)
         
-        // Fetch cafe data from the JSON file and find the specific cafe using the Index
-        fetch('final.json')
+        // Function to render menu items
+        function renderMenu() {
+            const menuContainer = document.getElementById("menu-container");
+            const prevButton = document.getElementById("prev-btn");
+            const nextButton = document.getElementById("next-btn");
+        
+            menuContainer.innerHTML = ""; // Clear previous items
+        
+            // Get the next 10 items (5 per side)
+            const visibleItems = menuItems.slice(currentIndex, currentIndex + itemsPerPage);
+        
+            visibleItems.forEach((item) => {
+                const menuItem = document.createElement("div");
+                menuItem.classList.add("col-xl-6");
+        
+                menuItem.innerHTML = `
+                    <div class="menu-list-block">
+                        <div class="menu-list">
+                            <div class="media-body">
+                                <h3 class="box-title"><a href="shop-details.html">${item.dishName}</a></h3>
+                                <div class="box-content">
+                                    <p class="box-text">Category: <strong>${item.foodType.toUpperCase()}</strong></p>
+                                    <div class="box-line"></div>
+                                    <h4 class="box-price">${item.price}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                menuContainer.appendChild(menuItem);
+            });
+        
+            // Enable/Disable buttons based on position
+            prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1"; // Dim button if disabled
+            prevButton.style.pointerEvents = currentIndex === 0 ? "none" : "auto"; // Disable click
+        
+            nextButton.style.opacity = currentIndex + itemsPerPage >= menuItems.length ? "0.5" : "1";
+            nextButton.style.pointerEvents = currentIndex + itemsPerPage >= menuItems.length ? "none" : "auto";
+        }
+        
+        // Function to handle Next button
+        document.getElementById("next-btn").addEventListener("click", () => {
+            if (currentIndex + itemsPerPage < menuItems.length) {
+                currentIndex += itemsPerPage;
+                renderMenu();
+            }
+        });
+        
+        // Function to handle Previous button
+        document.getElementById("prev-btn").addEventListener("click", () => {
+            if (currentIndex - itemsPerPage >= 0) {
+                currentIndex -= itemsPerPage;
+                renderMenu();
+            }
+        });
+        
+        // Fetch and process menu data
+        fetch('final_cleaned.json')
             .then(response => response.json())
             .then(cafes => {
-                const cafe = cafes.find(c => c.Index == cafeIndex); // Find the cafe by Index
-    
-                // Populate the details page with the cafe data
-                if (cafe) {
-                    let images = JSON.parse(cafe.image_urls.replace(/'/g, '"')); 
-
-                    // Select carousel container
-                    const carouselInner = document.getElementById("carousel-images");
-                    carouselInner.innerHTML = ""; 
-
-                    images.forEach((image, index) => {
-                        const carouselItem = document.createElement("div");
-                        carouselItem.classList.add("carousel-item");
-                        if (index === 0) carouselItem.classList.add("active"); // Set first image as active
-
-                        carouselItem.innerHTML = `<img src="${image}" class="d-block w-100" alt="Cafe Image">`;
-                        carouselInner.appendChild(carouselItem);
+                const urlParams = new URLSearchParams(window.location.search);
+                const cafeIndex = urlParams.get('index');
+                const cafe = cafes.find(c => c.Index == cafeIndex);
+        
+                if (cafe && typeof cafe.Menu === "string") {
+                    let menuArray = cafe.Menu.slice(1, -1).split(", '");
+        
+                    menuItems = menuArray.map(item => {
+                        let keyValue = item.split(": ");
+                        let dishName = keyValue[0].replace(/'/g, "").trim();
+                        let dishDetails = keyValue[1].trim();
+        
+                        let foodType = dishDetails.includes("veg") ? "veg" : dishDetails.includes("egg") ? "egg" : "non-veg";
+                        let priceMatch = dishDetails.match(/\d+(\.\d+)?/);
+                        let price = priceMatch ? `₹${priceMatch[0]}` : "Price N/A";
+        
+                        return { dishName, foodType, price };
                     });
-                    // Parse food images
-                let images_food = JSON.parse(cafe.food_image_urls.replace(/'/g, '"'));
+        
+                    renderMenu(); // Show first 10 items
+                }
+            })
+            .catch(error => console.error("Error fetching JSON:", error));
+        
+            
+            
+// Fetch and process menu data
+fetch('final_cleaned.json')
+    .then(response => response.json())
+    .then(cafes => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const cafeIndex = urlParams.get('index');
+        const cafe = cafes.find(c => c.Index == cafeIndex);
 
-                // Select the Swiper slider container
-                const foodSlider = document.getElementById("food-slider");
-                foodSlider.innerHTML = ""; // Clear existing content
+        if (cafe && typeof cafe.Menu === "string") {
+            let menuArray = cafe.Menu.slice(1, -1).split(", '");
 
-                // Loop through images and insert them into the slider
-                images_food.forEach((image, index) => {
-                    let slide = document.createElement("div");
-                    slide.classList.add("swiper-slide");
-                    slide.innerHTML = `
-                        <div class="th-team team-card">
-                            <div class="box-img">
-                                <img src="${image}" alt="Food Image ${index + 1}">
-                            </div>
-                            <h3 class="box-title"><a href="#">Dish ${index + 1}</a></h3>
-                            <p class="box-desig">Delicious Cuisine</p>
+            menuItems = menuArray.map(item => {
+                let keyValue = item.split(": ");
+                let dishName = keyValue[0].replace(/'/g, "").trim();
+                let dishDetails = keyValue[1].trim();
+
+                let foodType = dishDetails.includes("veg") ? "veg" : dishDetails.includes("egg") ? "egg" : "non-veg";
+                let priceMatch = dishDetails.match(/\d+(\.\d+)?/);
+                let price = priceMatch ? `₹${priceMatch[0]}` : "Price N/A";
+
+                return { dishName, foodType, price };
+            });
+
+            renderMenu(); // Show first 10 items
+        }
+    })
+    .catch(error => console.error("Error fetching JSON:", error));
+
+// Fetch and process menu data
+fetch('final_cleaned.json')
+    .then(response => response.json())
+    .then(cafes => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const cafeIndex = urlParams.get('index');
+        const cafe = cafes.find(c => c.Index == cafeIndex);
+
+        if (cafe && typeof cafe.Menu === "string") {
+            let menuArray = cafe.Menu.slice(1, -1).split(", '");
+
+            menuItems = menuArray.map(item => {
+                let keyValue = item.split(": ");
+                let dishName = keyValue[0].replace(/'/g, "").trim();
+                let dishDetails = keyValue[1].trim();
+
+                let foodType = dishDetails.includes("veg") ? "veg" : dishDetails.includes("egg") ? "egg" : "non-veg";
+                let priceMatch = dishDetails.match(/\d+(\.\d+)?/);
+                let price = priceMatch ? `₹${priceMatch[0]}` : "Price N/A";
+
+                return { dishName, foodType, price };
+            });
+
+            renderMenu(); // Show first 10 items
+        }
+    })
+    .catch(error => console.error("Error fetching JSON:", error));
+
+
+// Fetch and process menu data
+fetch('final_cleaned.json')
+    .then(response => response.json())
+    .then(cafes => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const cafeIndex = urlParams.get('index');
+        const cafe = cafes.find(c => c.Index == cafeIndex);
+
+        
+    })
+    .catch(error => console.error("Error fetching JSON:", error));
+
+        
+        // Fetch cafe Index from the URL query parameter
+const urlParams = new URLSearchParams(window.location.search);
+const cafeIndex = urlParams.get('index');
+
+// Fetch cafe data from the JSON file and find the specific cafe using the Index
+fetch('final_cleaned.json')
+    .then(response => response.json())
+    .then(cafes => {
+        const cafe = cafes.find(c => c.Index == cafeIndex); // Find the cafe by Index
+        
+        // Populate the details page with the cafe data
+        if (cafe) {
+            const images = cafe.image_urls; 
+            const carouselInner = document.querySelector('.carousel-inner');
+            const indicatorsContainer = document.querySelector('.carousel-indicators');
+
+            carouselInner.innerHTML = '';
+            indicatorsContainer.innerHTML = '';
+
+            images.forEach((image, index) => {
+                carouselInner.innerHTML += `
+                    <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                        <img src="${image}" class="d-block w-100" alt="Slide ${index + 1}">
+                    </div>
+                `;
+
+                indicatorsContainer.innerHTML += `
+                    <button type="button" 
+                        data-bs-target="#carouselExampleIndicators" 
+                        data-bs-slide-to="${index}"
+                        ${index === 0 ? 'class="active" aria-current="true"' : ''}
+                        aria-label="Slide ${index + 1}">
+                    </button>
+                `;
+            });
+
+            // Initialize carousel with auto-slide
+            new bootstrap.Carousel(document.getElementById('carouselExampleIndicators'), {
+                interval: 3000,  // Time in milliseconds between slides (3 seconds)
+                ride: 'carousel',
+                wrap: true      // Allows the carousel to cycle continuously
+            });
+
+            // Handle food images
+            const images_food = cafe.food_image_urls;
+            const foodSlider = document.getElementById("food-slider");
+            foodSlider.innerHTML = ""; // Clear existing content
+
+            images_food.forEach((image, index) => {
+                let slide = document.createElement("div");
+                slide.classList.add("swiper-slide");
+                slide.innerHTML = `
+                    <div class="th-team team-card">
+                        <div class="box-img">
+                            <img src="${image}" alt="Food Image ${index + 1}">
                         </div>
-                    `;
-                    foodSlider.appendChild(slide);
-                });
+                        <h3 class="box-title"><a href="#">Dish ${index + 1}</a></h3>
+                        <p class="box-desig">Delicious Cuisine</p>
+                    </div>
+                `;
+                foodSlider.appendChild(slide);
+            });
 
-                // Initialize Swiper after dynamically adding slides
-                new Swiper("#teamSlider1", {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                    loop: true,
-                    navigation: {
-                        nextEl: ".slider-next",
-                        prevEl: ".slider-prev",
-                    },
-                    breakpoints: {
-                        576: { slidesPerView: 2 },
-                        768: { slidesPerView: 2 },
-                        992: { slidesPerView: 3 },
-                        1200: { slidesPerView: 4 }
-                    }
-                });
-            
-                    // Set the values of all attributes
-                   // document.getElementById('cafe-image').src = cafe.Image_URLs;
-                    document.getElementById('cafe-title').textContent = cafe.name;
-                    document.getElementById('cafe-price').textContent = `Average Cost for Two: ${cafe.average_cost_for_two}`;
-                    document.getElementById('cafe-location').textContent = cafe.address;
-                    document.getElementById('cafe-establishment').textContent = cafe.establishment.replace(/[\[\]']+/g, ''); // Remove the list format
-                    document.getElementById('cafe-cuisines').textContent = cafe.cuisines;
-                    document.getElementById('cafe-more-info').textContent = cafe.more_info;
-                    document.getElementById('cafe-timings').textContent = cafe.timings || 'N/A'; // Handle null value
-    
-                    // Set the Google Maps and Cafe URL links
-                    document.getElementById('cafe-location-link').href = cafe.location_url;
-                    
-                    
-                    // Set the star rating based on the aggregate_rating
-                    const rating = cafe.aggregate_rating;
-                    const starsContainer = document.getElementById('stars-container');
-                    starsContainer.innerHTML = ''; // Clear any existing stars
-    
-                    // Calculate number of full and half stars
-                    const fullStars = Math.floor(rating); // Full stars (integer part)
-                    const halfStars = (rating % 1 >= 0.5) ? 1 : 0; // Half star if the decimal part is 0.5 or more
-                    const emptyStars = 5 - fullStars - halfStars; // Remaining empty stars
-    
-                    // Create full stars
-                    for (let i = 0; i < fullStars; i++) {
-                        const star = document.createElement('i');
-                        star.classList.add('fas', 'fa-star');
-                        starsContainer.appendChild(star);
-                    }
-    
-                    // Create half star if needed
-                    if (halfStars) {
-                        const halfStar = document.createElement('i');
-                        halfStar.classList.add('fas', 'fa-star-half-alt');
-                        starsContainer.appendChild(halfStar);
-                    }
-    
-                    // Create empty stars
-                    for (let i = 0; i < emptyStars; i++) {
-                        const emptyStar = document.createElement('i');
-                        emptyStar.classList.add('far', 'fa-star');
-                        starsContainer.appendChild(emptyStar);
-                    }
-                    if (cafe && cafe.Reviews) {
-                        let reviews = JSON.parse(cafe.Reviews.replace(/'/g, '"')); // Convert string to JSON
-                        const reviewList = document.getElementById("review-list");
-            
-                        // Check if a carousel is needed
-                        const useCarousel = reviews.length > 3;
-            
-                        if (useCarousel) {
-                            reviewList.classList.add("carousel", "slide");
-                            reviewList.setAttribute("data-ride", "carousel");
-                            reviewList.innerHTML = `
-                                <div class="carousel-inner">
-                                    ${reviews.map((review, index) => `
-                                        <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                                            <li class="review th-comment-item">
-                                                <div class="th-post-comment">
-                                                    <div class="comment-avater">
-                                                        <img src="assets/img/blog/comment-author-${index % 3 + 1}.jpg" alt="Reviewer Image">
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        <h4 class="name">${review.author}</h4>
-                                                        <div class="star-rating" role="img">
-                                                            ${'<i class="fas fa-star"></i>'.repeat(review.rating)}
-                                                            ${'<i class="far fa-star"></i>'.repeat(5 - review.rating)}
-                                                        </div>
-                                                        <p class="text">${review.description}</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </div>
-                                    `).join("")}
-                                </div>
-                                <a class="carousel-control-prev" href="#review-list" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#review-list" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            `;
-                        } else {
-                            // If no carousel is needed, just insert reviews normally
-                            reviewList.innerHTML = reviews.map(review => `
-                                <li class="review th-comment-item">
-                                    <div class="th-post-comment">
-                                        <div class="comment-avater">
-                                            <img src="assets/img/blog/comment-author-1.jpg" alt="Reviewer Image">
-                                        </div>
-                                        <div class="comment-content">
-                                            <h4 class="name">${review.author}</h4>
-                                            <div class="star-rating" role="img">
-                                                ${'<i class="fas fa-star"></i>'.repeat(review.rating)}
-                                                ${'<i class="far fa-star"></i>'.repeat(5 - review.rating)}
-                                            </div>
-                                            <p class="text">${review.description}</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            `).join("");
-                        }
-                    }
-                    
+            // Initialize Swiper after dynamically adding slides
+            new Swiper("#teamSlider1", {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: true,
+                navigation: {
+                    nextEl: ".slider-next",
+                    prevEl: ".slider-prev",
+                },
+                breakpoints: {
+                    576: { slidesPerView: 2 },
+                    768: { slidesPerView: 2 },
+                    992: { slidesPerView: 3 },
+                    1200: { slidesPerView: 4 }
                 }
             });
+
+            // Set cafe details
+            document.getElementById('cafe-title').textContent = cafe.name;
+            document.getElementById('cafe-price').textContent = `Average Cost for Two: ${cafe.average_cost_for_two}`;
+            document.getElementById('cafe-location').textContent = cafe.address;
+            document.getElementById('cafe-establishment').textContent = cafe.establishment.join(', '); // Convert array to string
+            document.getElementById('cafe-cuisines').textContent = cafe.cuisines;
+            document.getElementById('cafe-more-info').textContent = cafe.more_info || 'No additional information available';
+            document.getElementById('cafe-timings').textContent = cafe.timings || 'N/A'; // Handle null value
+
+            // Set the Google Maps and Cafe URL links
+            document.getElementById('cafe-location-link').href = cafe.location_url;
+
+            // Set the star rating
+            const rating = cafe.aggregate_rating;
+            const starsContainer = document.getElementById('stars-container');
+            starsContainer.innerHTML = ''; // Clear any existing stars
+
+            const fullStars = Math.floor(rating);
+            const halfStars = (rating % 1 >= 0.5) ? 1 : 0;
+            const emptyStars = 5 - fullStars - halfStars;
+
+            for (let i = 0; i < fullStars; i++) {
+                starsContainer.innerHTML += '<i class="fas fa-star"></i>';
+            }
+            if (halfStars) {
+                starsContainer.innerHTML += '<i class="fas fa-star-half-alt"></i>';
+            }
+            for (let i = 0; i < emptyStars; i++) {
+                starsContainer.innerHTML += '<i class="far fa-star"></i>';
+            }
+            // Display Reviews (Simply Print Key-Value Pairs)
+            const reviewContainer = document.getElementById("review-container");
+            reviewContainer.innerHTML = ''; // Clear previous reviews
+
+            if (cafe.Reviews && typeof cafe.Reviews === "string") {
+                let reviews = cafe.Reviews.slice(1, -1).split("}, {");
+
+                reviews.forEach((review, index) => {
+                    const formattedReview = `{${review.replace(/'/g, '"')}}`; // Fix single quotes
+                    const reviewItem = document.createElement("div");
+                    reviewItem.classList.add("review-item");
+                    reviewItem.innerHTML = `
+                        <h4>Review ${index + 1}</h4>
+                        <p>Value: ${formattedReview}</p>
+                    `;
+                    reviewContainer.appendChild(reviewItem);
+                });
+            } else {
+                reviewContainer.innerHTML = "<p>No reviews available.</p>";
+            }
+
+            /* const menuContainer = document.getElementById("menu-container");
+            menuContainer.innerHTML = ''; // Clear previous menu items
+
+            if (cafe.Menu && typeof cafe.Menu === "string") {
+                let menuItems = cafe.Menu.slice(1, -1).split(", '");
+
+                menuItems.forEach(item => {
+                    let keyValue = item.split(": ");
+                    if (keyValue.length === 2) {
+                        let dishName = keyValue[0].replace(/'/g, "").trim();
+                        let dishDetails = keyValue[1].trim();
+
+                        // Extracting food type and price from the tuple-like value
+                        let foodType = dishDetails.includes("veg") ? "veg" : dishDetails.includes("egg") ? "egg" : "non-veg";
+                        let priceMatch = dishDetails.match(/\d+(\.\d+)?/); // Extracts numeric price
+                        let price = priceMatch ? `₹${priceMatch[0]}` : "Price N/A";
+
+                        const menuItem = document.createElement("div");
+                        menuItem.classList.add("col-xl-6");
+                        menuItem.innerHTML = `
+                            <div class="menu-list-block">
+                                <div class="menu-list">
+                                    
+                                    <div class="media-body">
+                                        <h3 class="box-title"><a href="shop-details.html">${dishName}</a></h3>
+                                        <div class="box-content">
+                                            <p class="box-text">Category: <strong>${foodType.toUpperCase()}</strong></p>
+                                            <div class="box-line"></div>
+                                            <h4 class="box-price">${price}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        menuContainer.appendChild(menuItem);
+                    }
+                });
+            } else {
+                menuContainer.innerHTML = "<p>No menu available.</p>";
+            }*/
+        } 
+    });
+
             document.addEventListener("DOMContentLoaded", function () {
                 const token = localStorage.getItem("token");
                 if (!token) {

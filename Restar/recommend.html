@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🍽 Find the Best Restaurants</h1>
+        
+        <form action="/results" method="POST">
+            <label>Enter Area:</label>
+            <input type="text" name="area" placeholder="E.g. Navrangpura, Ahmedabad">
+
+            <label>Max Price for Two:</label>
+            <input type="number" name="max_price" placeholder="E.g. 400">
+
+            <label>Preferred Cuisine:</label>
+            <input type="text" name="cuisine" placeholder="E.g. North Indian, Chinese">
+
+            <label>Specific Food Item:</label>
+            <input type="text" name="food_item" placeholder="E.g. Khichdi, Pizza">
+
+            <label>Max Item Price:</label>
+            <input type="number" name="max_item_price" placeholder="E.g. 200">
+
+            <button type="submit" class="submit-btn">Find Restaurants</button>
+        </form>
+    </div>
+</body>
+</html>
