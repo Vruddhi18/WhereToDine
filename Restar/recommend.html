@@ -4,30 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Recommender</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>🍽 Find the Best Restaurants</h1>
+    <h2>Find the Best Restaurant for You</h2>
+    <form id="recommendationForm">
+        <label>Area:</label>
+        <input type="text" id="area" name="area"><br>
+
+        <label>Cuisine:</label>
+        <input type="text" id="cuisine" name="cuisine"><br>
+
+        <label>Max Price for Two:</label>
+        <input type="number" id="max_price" name="max_price"><br>
+
+        <label>Menu Item:</label>
+        <input type="text" id="menu_item" name="menu_item"><br>
+
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    <h3>Results:</h3>
+    <div id="results"></div>
+    <script>
+        document.getElementById("recommendationForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
         
-        <form action="/results" method="POST">
-            <label>Enter Area:</label>
-            <input type="text" name="area" placeholder="E.g. Navrangpura, Ahmedabad">
-
-            <label>Max Price for Two:</label>
-            <input type="number" name="max_price" placeholder="E.g. 400">
-
-            <label>Preferred Cuisine:</label>
-            <input type="text" name="cuisine" placeholder="E.g. North Indian, Chinese">
-
-            <label>Specific Food Item:</label>
-            <input type="text" name="food_item" placeholder="E.g. Khichdi, Pizza">
-
-            <label>Max Item Price:</label>
-            <input type="number" name="max_item_price" placeholder="E.g. 200">
-
-            <button type="submit" class="submit-btn">Find Restaurants</button>
-        </form>
-    </div>
+            const formData = {
+                area: document.getElementById("area").value,
+                cuisine: document.getElementById("cuisine").value,
+                max_price: document.getElementById("max_price").value,
+                menu_item: document.getElementById("menu_item").value
+            };
+        
+            const response = await fetch("/recommend", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            });
+        
+            const data = await response.json();
+            displayResults(data);
+        });
+        
+        function displayResults(recommendations) {
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = ""; // Clear previous results
+        
+            if (recommendations.length === 0) {
+                resultsDiv.innerHTML = "<p>No recommendations found.</p>";
+                return;
+            }
+        
+            recommendations.forEach(rest => {
+                const restElement = document.createElement("div");
+                restElement.innerHTML = `
+                    <h4>${rest.name} (⭐ ${rest.aggregate_rating})</h4>
+                    <p>📍 ${rest.address}</p>
+                    <p>🍽 ${rest.cuisines}</p>
+                    <p>💰 Cost for Two: ₹${rest.average_cost_for_two}</p>
+                    <hr>
+                `;
+                resultsDiv.appendChild(restElement);
+            });
+        }
+        
+    </script>
 </body>
 </html>

@@ -576,29 +576,7 @@
 	Header Area
 ==============================-->
     <header class="th-header header-layout1 ">
-        <div class="header-top">
-            <div class="container">
-                <div class="row justify-content-center justify-content-lg-between align-items-center gy-2">
-                    <div class="col-auto d-none d-lg-block">
-                        <div class="header-links">
-                            <ul>
-                                <li class="d-none d-xxl-inline-block"><i class="fas fa-location-dot"></i> <a href="https://www.google.com/maps/">9402 Main St, Plymouth, CA 95669, United States</a></li>
-                                <li><i class="fas fa-phone"></i> <a href="tel:+98782818015">+987-828-18015</a></li>
-                                <li><i class="fas fa-envelope"></i> <a href="mailto:info@restar.com">info@restar.com</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <div class="header-links">
-                            <div class="shape1"></div>
-                            <ul>
-                                <li><i class="fas fa-clock"></i> <b>Mondat to Friday:</b> 9:00am - 22:00pm</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <div class="sticky-wrapper">
             <!-- Main Menu Area -->
             <div class="menu-area">
@@ -612,68 +590,19 @@
                         <div class="col-auto">
                             <nav class="main-menu d-none d-lg-inline-block">
                                 <ul>
-                                    <li class="menu-item-has-children">
+                                    <li >
                                         <a href="index.html">Home</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="index.html">Restaurant Shop</a></li>
-                                            <li><a href="home-fast-food.html">Home Fast Food</a></li>
-                                            <li><a href="home-restaurant.html">Home Restaurant</a></li>
-                                        </ul>
                                     </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Pages</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="service.html">Service</a></li>
-                                            <li><a href="service-details.html">Service Details</a></li>
-                                            <li><a href="team.html">Chef</a></li>
-                                            <li><a href="team-details.html">Chef Details</a></li>
-                                            <li><a href="reservation.html">Reservation</a></li>
-                                            <li><a href="gallery.html">Gallery</a></li>
-                                            <li><a href="error.html">Error Page</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Menus</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="menu-one.html">Food Menu 1</a></li>
-                                            <li><a href="menu-two.html">Food Menu 2</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Shop</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="shop.html">Shop</a></li>
-                                            <li><a href="shop-details.html">Shop Details</a></li>
-                                            <li><a href="cart.html">Cart Page</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Blog</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
-                                        </ul>
+                                    <li >
+                                        <a href="shop.html">Cafes</a>
                                     </li>
                                     <li>
-                                        <a href="contact.html">Contact</a>
+                                        <a href="profile.html">Profile</a>
                                     </li>
                                 </ul>
                             </nav>
                         </div>
-                        <div class="col-auto">
-                            <div class="header-button">
-                                <button type="button" class="simple-icon searchBoxToggler d-none d-xl-block"><i class="fal fa-search"></i></button>
-                                <button type="button" class="simple-icon sideMenuToggler">
-                                    <span class="badge">5</span>
-                                    <i class="fal fa-cart-shopping"></i>
-                                </button>
-                                <a href="contact.html" class="th-btn style4 d-none d-xl-block">Book A Table</a>
-                                <button type="button" class="th-menu-toggle d-block d-lg-none"><i class="far fa-bars"></i></button>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -848,20 +777,7 @@
                     </section>
                     
                     
-                    
-                    
-                    
                     <div id="review-container"></div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    <!--==============================
-		Related Product  
-		==============================-->
                     
                 </div>
             </section>
@@ -947,90 +863,42 @@
         });
         
         // Fetch and process menu data
-        fetch('final_cleaned.json')
-            .then(response => response.json())
-            .then(cafes => {
-                const urlParams = new URLSearchParams(window.location.search);
-                const cafeIndex = urlParams.get('index');
-                const cafe = cafes.find(c => c.Index == cafeIndex);
-        
-                if (cafe && typeof cafe.Menu === "string") {
-                    let menuArray = cafe.Menu.slice(1, -1).split(", '");
-        
-                    menuItems = menuArray.map(item => {
-                        let keyValue = item.split(": ");
-                        let dishName = keyValue[0].replace(/'/g, "").trim();
-                        let dishDetails = keyValue[1].trim();
-        
-                        let foodType = dishDetails.includes("veg") ? "veg" : dishDetails.includes("egg") ? "egg" : "non-veg";
-                        let priceMatch = dishDetails.match(/\d+(\.\d+)?/);
-                        let price = priceMatch ? `₹${priceMatch[0]}` : "Price N/A";
-        
-                        return { dishName, foodType, price };
-                    });
-        
-                    renderMenu(); // Show first 10 items
-                }
-            })
-            .catch(error => console.error("Error fetching JSON:", error));
+fetch('final_cleaned.json')
+.then(response => response.json())
+.then(cafes => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const cafeIndex = urlParams.get('index');
+    const cafe = cafes.find(c => c.Index == cafeIndex);
+
+    const menuContainer = document.getElementById("menu-container");
+
+    if (cafe && typeof cafe.Menu === "string" && cafe.Menu.trim() !== "") {
+        let menuArray = cafe.Menu.slice(1, -1).split(", '");
+
+        menuItems = menuArray.map(item => {
+            let keyValue = item.split(": ");
+            let dishName = keyValue[0].replace(/'/g, "").trim();
+            let dishDetails = keyValue[1] ? keyValue[1].trim() : "";
+
+            let foodType = dishDetails.includes("veg") ? "veg" : dishDetails.includes("egg") ? "egg" : "non-veg";
+            let priceMatch = dishDetails.match(/\d+(\.\d+)?/);
+            let price = priceMatch ? `₹${priceMatch[0]}` : "Price N/A";
+
+            return { dishName, foodType, price };
+        });
+
+        renderMenu(); // Show first 10 items
+    } else {
+        // If menu is missing or empty, show a message
+        menuContainer.innerHTML = "<p style='text-align: center; font-size: 18px; font-weight: bold;'>No Menu Available</p>";
+    }
+})
+.catch(error => console.error("Error fetching JSON:", error));
+
         
             
             
-// Fetch and process menu data
-fetch('final_cleaned.json')
-    .then(response => response.json())
-    .then(cafes => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const cafeIndex = urlParams.get('index');
-        const cafe = cafes.find(c => c.Index == cafeIndex);
 
-        if (cafe && typeof cafe.Menu === "string") {
-            let menuArray = cafe.Menu.slice(1, -1).split(", '");
-
-            menuItems = menuArray.map(item => {
-                let keyValue = item.split(": ");
-                let dishName = keyValue[0].replace(/'/g, "").trim();
-                let dishDetails = keyValue[1].trim();
-
-                let foodType = dishDetails.includes("veg") ? "veg" : dishDetails.includes("egg") ? "egg" : "non-veg";
-                let priceMatch = dishDetails.match(/\d+(\.\d+)?/);
-                let price = priceMatch ? `₹${priceMatch[0]}` : "Price N/A";
-
-                return { dishName, foodType, price };
-            });
-
-            renderMenu(); // Show first 10 items
-        }
-    })
-    .catch(error => console.error("Error fetching JSON:", error));
-
-// Fetch and process menu data
-fetch('final_cleaned.json')
-    .then(response => response.json())
-    .then(cafes => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const cafeIndex = urlParams.get('index');
-        const cafe = cafes.find(c => c.Index == cafeIndex);
-
-        if (cafe && typeof cafe.Menu === "string") {
-            let menuArray = cafe.Menu.slice(1, -1).split(", '");
-
-            menuItems = menuArray.map(item => {
-                let keyValue = item.split(": ");
-                let dishName = keyValue[0].replace(/'/g, "").trim();
-                let dishDetails = keyValue[1].trim();
-
-                let foodType = dishDetails.includes("veg") ? "veg" : dishDetails.includes("egg") ? "egg" : "non-veg";
-                let priceMatch = dishDetails.match(/\d+(\.\d+)?/);
-                let price = priceMatch ? `₹${priceMatch[0]}` : "Price N/A";
-
-                return { dishName, foodType, price };
-            });
-
-            renderMenu(); // Show first 10 items
-        }
-    })
-    .catch(error => console.error("Error fetching JSON:", error));
 
 
 // Fetch and process menu data
@@ -1102,8 +970,7 @@ fetch('final_cleaned.json')
                         <div class="box-img">
                             <img src="${image}" alt="Food Image ${index + 1}">
                         </div>
-                        <h3 class="box-title"><a href="#">Dish ${index + 1}</a></h3>
-                        <p class="box-desig">Delicious Cuisine</p>
+                        
                     </div>
                 `;
                 foodSlider.appendChild(slide);
@@ -1223,7 +1090,6 @@ fetch('final_cleaned.json')
             document.addEventListener("DOMContentLoaded", function () {
                 const token = localStorage.getItem("token");
                 if (!token) {
-                    alert("Please log in to add favorites.");
                     return;
                 }
             
@@ -1253,8 +1119,7 @@ fetch('final_cleaned.json')
                         body: JSON.stringify({ cafeIndex })
                     })
                     .then(response => response.json())
-                    .then(data => {
-                        alert(data.message); // Show success message
+                    .then(data => { // Show success message
                         if (data.status === "added") {
                             favoriteIcon.classList.remove("far");
                             favoriteIcon.classList.add("fas", "text-danger");
@@ -1269,7 +1134,6 @@ fetch('final_cleaned.json')
             document.addEventListener("DOMContentLoaded", function () {
                 const token = localStorage.getItem("token");
                 if (!token) {
-                    alert("Please log in to add Visit Later.");
                     return;
                 }
 
@@ -1298,7 +1162,6 @@ fetch('final_cleaned.json')
                     })
                     .then(response => response.json())
                     .then(data => {
-                        alert(data.message); // Show success message
                         if (data.status === "added") {
                             visitLaterBtn.classList.add("active");
                             visitLaterBtn.textContent = "Remove from Visit Later";

@@ -68,29 +68,7 @@
     
     <!-- Header (Copied from contact.html) -->
     <header class="th-header header-layout1 ">
-        <div class="header-top">
-            <div class="container">
-                <div class="row justify-content-center justify-content-lg-between align-items-center gy-2">
-                    <div class="col-auto d-none d-lg-block">
-                        <div class="header-links">
-                            <ul>
-                                <li class="d-none d-xxl-inline-block"><i class="fas fa-location-dot"></i> <a href="https://www.google.com/maps/">9402 Main St, Plymouth, CA 95669, United States</a></li>
-                                <li><i class="fas fa-phone"></i> <a href="tel:+98782818015">+987-828-18015</a></li>
-                                <li><i class="fas fa-envelope"></i> <a href="mailto:info@restar.com">info@restar.com</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <div class="header-links">
-                            <div class="shape1"></div>
-                            <ul>
-                                <li><i class="fas fa-clock"></i> <b>Mondat to Friday:</b> 9:00am - 22:00pm</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <div class="sticky-wrapper">
             <!-- Main Menu Area -->
             <div class="menu-area">
@@ -106,11 +84,6 @@
                                 <ul>
                                     <li >
                                         <a href="index.html">Home</a>
-                                        
-                                    </li>
-                                    
-                                    <li>
-                                        <a href="profile.html">Profile</a>
                                     </li>
                                     <li>
                                         <a href="shop.html">Cafes</a>
@@ -118,17 +91,7 @@
                                 </ul>
                             </nav>
                         </div>
-                        <div class="col-auto">
-                            <div class="header-button">
-                                <button type="button" class="simple-icon searchBoxToggler d-none d-xl-block"><i class="fal fa-search"></i></button>
-                                <button type="button" class="simple-icon sideMenuToggler">
-                                    <span class="badge">5</span>
-                                    <i class="fal fa-cart-shopping"></i>
-                                </button>
-                                <a href="contact.html" class="th-btn style4 d-none d-xl-block">Book A Table</a>
-                                <button type="button" class="th-menu-toggle d-block d-lg-none"><i class="far fa-bars"></i></button>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -152,7 +115,7 @@
                         
                         <div class="text-center mt-4">
                             <p><strong>Username:</strong> <span id="username"></span></p>
-                        <p><strong>Email:</strong> <span id="email"></span></p>
+                        
                         </div>
                         <h2>Your Favorite Cafes</h2>
                         <ul id="favorites-list"></ul>
@@ -169,9 +132,15 @@
     </section>
     
     <!-- Footer (Copied from contact.html) -->
-    <footer class="footer-wrapper" data-bg-src="assets/img/bg/footer_bg_1.jpg">
-        <div class="container text-center py-3">
-            <p>&copy; 2025 Restar. All rights reserved.</p>
+    <footer class="footer-wrapper footer-layout1" data-bg-src="assets/img/bg/footer_bg_2.jpg">         
+        <div class="copyright-wrap">
+            <div class="container">
+                <div class="row gx-1 gy-2 align-items-center">
+                    <div class="col-md-7">
+                        <p class="copyright-text">Copyright <i class="fal fa-copyright"></i> 2024 <a href="index.html">WhereToDine</a>. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
     
@@ -196,7 +165,7 @@
         document.addEventListener("DOMContentLoaded", async function () {
             const token = localStorage.getItem("token");
             if (!token) {
-                alert("Please log in first!");
+                
                 window.location.href = "login.html";
                 return;
             }
@@ -253,7 +222,6 @@
                                         })
                                         .then(response => response.json())
                                         .then(data => {
-                                            alert(data.message);
                                             this.parentElement.remove(); // Remove from UI
                                         })
                                         .catch(error => console.error("Error:", error));
@@ -263,7 +231,6 @@
                     })
                     .catch(error => console.error("Error fetching favorites:", error));
                 } else {
-                    alert(data.message);
                     window.location.href = "login.html";
                 }
             } catch (error) {
@@ -274,7 +241,6 @@
         document.addEventListener("DOMContentLoaded", async function () {
     const token = localStorage.getItem("token");
     if (!token) {
-        alert("Please log in first!");
         window.location.href = "login.html";
         return;
     }
@@ -321,7 +287,6 @@
                             })
                             .then(response => response.json())
                             .then(data => {
-                                alert(data.message);
                                 this.parentElement.remove(); // Remove from UI
                             })
                             .catch(error => console.error("Error:", error));
