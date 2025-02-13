@@ -1,0 +1,7 @@
+timestamp,recommendation_id,selected_restaurants,favorite_dishes
+2025-02-13 21:26:21.497069,20250213_212615,['Mocha'],[Dish(name='Pizza')]
+2025-02-13 21:37:14.041367,20250213_213709,['sankalp'],[Dish(name='dosa')]
+2025-02-14 04:22:15.771153,20250214_042209,['honest'],[Dish(name='pav bhaji')]
+2025-02-14 04:23:35.294833,20250214_042331,['honest'],[Dish(name='pav bhaji')]
+2025-02-14 05:05:16.281970,20250214_050501,"['mocha', 'pepito']",[]
+2025-02-14 05:09:14.555367,20250214_050830,"['sankalp', 'balan dosa', 'honest']","[Dish(name='idli'), Dish(name='dosa')]"
