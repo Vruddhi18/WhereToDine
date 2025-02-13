@@ -737,28 +737,7 @@
                         <button class="slider-arrow slider-prev"><span class="icon"></span></button>
                         <button class="slider-arrow slider-next"><span class="icon"></span></button>
                     </div>
-                    
-                        
-                    
-                    
-                    <ul class="nav product-tab-style1" id="productTab" role="tablist">
-                        
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link th-btn active" id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="true">Customer Reviews</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="productTabContent">
-                        <div class="tab-pane fade show active" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                            <div class="woocommerce-Reviews">
-                                <div class="th-comments-wrap">
-                                    <ul class="comment-list" id="review-list">
-                                        <!-- Reviews will be dynamically inserted here -->
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
+                   
                     <section class="space">
                         <div class="container">
                             <div class="title-area text-center">
@@ -777,7 +756,17 @@
                     </section>
                     
                     
-                    <div id="review-container"></div>
+                    <section class="space">
+                        <div class="container">
+                            <div class="title-area text-center">
+                                <span class="sub-title3"><img src="assets/img/theme-img/title_icon2.svg" alt="Icon">Customer Reviews</span>
+                                <h2 class="sec-title title-ani">What Our Customers Say</h2>
+                            </div>
+                            <div class="row gy-30" id="review-container">
+                                <!-- Reviews will be inserted here dynamically -->
+                            </div>
+                        </div>
+                    </section>
                     
                 </div>
             </section>
@@ -894,27 +883,8 @@ fetch('final_cleaned.json')
     }
 })
 .catch(error => console.error("Error fetching JSON:", error));
-
-        
-            
-            
-
-
-
-// Fetch and process menu data
-fetch('final_cleaned.json')
-    .then(response => response.json())
-    .then(cafes => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const cafeIndex = urlParams.get('index');
-        const cafe = cafes.find(c => c.Index == cafeIndex);
-
-        
-    })
-    .catch(error => console.error("Error fetching JSON:", error));
-
-        
-        // Fetch cafe Index from the URL query parameter
+     
+// Fetch cafe Index from the URL query parameter
 const urlParams = new URLSearchParams(window.location.search);
 const cafeIndex = urlParams.get('index');
 
@@ -1023,7 +993,6 @@ fetch('final_cleaned.json')
             for (let i = 0; i < emptyStars; i++) {
                 starsContainer.innerHTML += '<i class="far fa-star"></i>';
             }
-            // Display Reviews (Simply Print Key-Value Pairs)
             const reviewContainer = document.getElementById("review-container");
             reviewContainer.innerHTML = ''; // Clear previous reviews
 
@@ -1031,14 +1000,50 @@ fetch('final_cleaned.json')
                 let reviews = cafe.Reviews.slice(1, -1).split("}, {");
 
                 reviews.forEach((review, index) => {
-                    const formattedReview = `{${review.replace(/'/g, '"')}}`; // Fix single quotes
-                    const reviewItem = document.createElement("div");
-                    reviewItem.classList.add("review-item");
-                    reviewItem.innerHTML = `
-                        <h4>Review ${index + 1}</h4>
-                        <p>Value: ${formattedReview}</p>
-                    `;
-                    reviewContainer.appendChild(reviewItem);
+                    try {
+                        const formattedReview = JSON.parse(`{${review.replace(/'/g, '"')}}`); // Convert to JSON
+
+                        // ✅ Generate star ratings dynamically
+                        let ratingStars = "";
+                        let fullStars = Math.floor(formattedReview.rating);
+                        let halfStars = formattedReview.rating % 1 >= 0.5 ? 1 : 0;
+                        let emptyStars = 5 - fullStars - halfStars;
+
+                        // Append full stars ⭐
+                        for (let i = 0; i < fullStars; i++) {
+                            ratingStars += `<i class="fas fa-star"></i>`; 
+                        }
+                        // Append half star ⭐ (if applicable)
+                        if (halfStars) {
+                            ratingStars += `<i class="fas fa-star-half-alt"></i>`;
+                        }
+                        // Append empty stars ☆
+                        for (let i = 0; i < emptyStars; i++) {
+                            ratingStars += `<i class="far fa-star"></i>`;
+                        }
+
+                        const reviewItem = document.createElement("div");
+                        reviewItem.classList.add("col-xl-6"); // Display 2 reviews per row
+
+                        reviewItem.innerHTML = `
+                            <div class="menu-list-block">
+                                <div class="menu-list">
+                                    
+                                    <div class="media-body">
+                                        <h3 class="box-title">${formattedReview.author}</h3>
+                                        <div class="box-content">
+                                            <p class="box-text">${formattedReview.description}</p>
+                                            <div class="box-line"></div>
+                                            ${ratingStars} <!-- Star rating here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        reviewContainer.appendChild(reviewItem);
+                    } catch (error) {
+                        console.error("Error parsing review:", error);
+                    }
                 });
             } else {
                 reviewContainer.innerHTML = "<p>No reviews available.</p>";
