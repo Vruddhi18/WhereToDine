@@ -606,26 +606,22 @@ Product Area
                 <div class="th-product product-grid">
                     <div class="product-img transparent-img">
                         <img src="assets/img/Aesthetic/Aesthetic_2.jpg" alt="Product Image">
-                        
                     </div>
                     <div class="product-content">
                         
-                        <h3 class="product-title"><a href="shop-details.html">Outdoor Seating</a></h3>
+                        <h3 class="product-title" onclick="filterCafesByCategory('romantic_dining')"><a href="shop-details.html">Outdoor Seating</a></h3>
                         
                     </div>
                 </div>
             </div>
 
             <div class="col-xl-3 col-lg-4 col-sm-6 filter-item cat1 cat2">
-                <div class="th-product product-grid">
+                <div class="th-product product-grid" onclick="filterCafes('highlights_romantic_dining')">
                     <div class="product-img transparent-img">
-                        <img src="assets/img/Aesthetic/Aesthetic_21.jpg" alt="Product Image">
-                        
+                        <img src="assets/img/Aesthetic/Aesthetic_26.jpg" alt="Product Image">
                     </div>
                     <div class="product-content">
-                        
-                        <h3 class="product-title"><a href="shop-details.html">Romantic Dining</a></h3>
-                        
+                        <h3 class="product-title"><a href="shop.html">Romantic Dining</a></h3>
                     </div>
                 </div>
             </div>
@@ -671,6 +667,7 @@ Product Area
                     </div>
                 </div>
             </div>
+            
 
             <div class="col-xl-3 col-lg-4 col-sm-6 filter-item cat1 cat2">
                 <div class="th-product product-grid">
@@ -792,6 +789,11 @@ Product Area
             localStorage.setItem("selectedFood", foodItem); // Store food name in localStorage
             window.location.href = "shop.html"; // Redirect to shop page
         }
+        function filterCafes(highlightType) {
+            localStorage.setItem("selectedHighlight", highlightType); // Store filter type
+            window.location.href = "shop.html"; // Redirect to shop page
+        }
+        
         </script>
 </body>
 

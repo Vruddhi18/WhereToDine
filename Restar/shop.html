@@ -143,7 +143,7 @@
 
     <div id="smooth-wrapper">
         <div id="smooth-content">
-            
+            <div id="cafe-list" class="row"></div>
             <!--==============================
             Product Area
             ==============================-->
@@ -247,6 +247,54 @@
                         localStorage.removeItem("selectedFood");
                     }).catch(error => console.error("Error fetching JSON:", error));
                 });
+                document.addEventListener("DOMContentLoaded", function () {
+                    let selectedHighlight = localStorage.getItem("selectedHighlight");
+            
+                    fetch('final_cleaned.json') // Fetch the cafe data
+                        .then(response => response.json())
+                        .then(data => {
+                            let container = document.getElementById("cafe-list");
+                            container.innerHTML = ""; // Clear existing cafes
+            
+                            if (selectedHighlight) {
+                                let filteredCafes = data.filter(cafe => cafe[selectedHighlight] === 1); // Filter only romantic dining cafes
+            
+                                console.log("Filtered Cafes:", filteredCafes); // Debugging output
+            
+                                if (filteredCafes.length === 0) {
+                                    container.innerHTML = `<p>No cafes found with Romantic Dining.</p>`;
+                                } else {
+                                    filteredCafes.forEach(cafe => {
+                                        let card = document.createElement("div");
+                                        card.classList.add("col-xl-3", "col-lg-4", "col-sm-6");
+            
+                                        card.innerHTML = `
+                                            <div class="th-product product-grid">
+                                                <div class="product-img transparent-img">
+                                                    <img src="${cafe.Image_URLs || 'assets/img/placeholder.jpg'}" alt="${cafe.name}">
+                                                </div>
+                                                <div class="product-content">
+                                                    <h3 class="product-title"><a href="shop-details.html?index=${cafe.Index}">${cafe.name}</a></h3>
+                                                    <p><strong>Location:</strong> ${cafe.locality}</p>
+                                                    <p><strong>Avg Cost for Two:</strong> ${cafe.average_cost_for_two}</p>
+                                                    <p><strong>Rating:</strong> ${cafe.aggregate_rating || 'N/A'}</p>
+                                                </div>
+                                            </div>`;
+            
+                                        container.appendChild(card);
+                                    });
+                                }
+                            } else {
+                                console.log("No highlight selected");
+                            }
+            
+                            // Remove stored highlight filter after use
+                            localStorage.removeItem("selectedHighlight");
+                        })
+                        .catch(error => console.error("Error fetching JSON:", error));
+                });
+                
+
             </script>
             <!--==============================
 	        Footer Area
