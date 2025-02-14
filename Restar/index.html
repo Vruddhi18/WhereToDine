@@ -603,13 +603,13 @@ Product Area
 
 
             <div class="col-xl-3 col-lg-4 col-sm-6 filter-item cat1 cat2">
-                <div class="th-product product-grid">
+                <div class="th-product product-grid" onclick="filterCafes('highlights_outdoor_seating')">
                     <div class="product-img transparent-img">
                         <img src="assets/img/Aesthetic/Aesthetic_2.jpg" alt="Product Image">
                     </div>
                     <div class="product-content">
                         
-                        <h3 class="product-title" onclick="filterCafesByCategory('romantic_dining')"><a href="shop-details.html">Outdoor Seating</a></h3>
+                        <h3 class="product-title"><a href="shop.html">Outdoor Seating</a></h3>
                         
                     </div>
                 </div>
@@ -627,42 +627,42 @@ Product Area
             </div>
 
             <div class="col-xl-3 col-lg-4 col-sm-6 filter-item cat1 cat2">
-                <div class="th-product product-grid">
+                <div class="th-product product-grid" onclick="filterCafes('highlights_luxury_dining')">
                     <div class="product-img transparent-img">
                         <img src="assets/img/Aesthetic/Aesthetic_22.jpg" alt="Product Image">
                         
                     </div>
                     <div class="product-content">
                         
-                        <h3 class="product-title"><a href="shop-details.html">Luxury Dining</a></h3>
+                        <h3 class="product-title"><a href="shop.html">Luxury Dining</a></h3>
                         
                     </div>
                 </div>
             </div>
 
             <div class="col-xl-3 col-lg-4 col-sm-6 filter-item cat1 cat2">
-                <div class="th-product product-grid">
+                <div class="th-product product-grid" onclick="filterCafes('highlights_gaming_area')">
                     <div class="product-img transparent-img">
                         <img src="assets/img/Aesthetic/Aesthetic_23.jpg" alt="Product Image">
                         
                     </div>
                     <div class="product-content">
                         
-                        <h3 class="product-title"><a href="shop-details.html">Indoor Games</a></h3>
+                        <h3 class="product-title"><a href="shop.html">Indoor Games</a></h3>
                         
                     </div>
                 </div>
             </div>
 
             <div class="col-xl-3 col-lg-4 col-sm-6 filter-item cat1 cat2">
-                <div class="th-product product-grid">
+                <div class="th-product product-grid" onclick="filterCafes('highlights_rooftop')">
                     <div class="product-img transparent-img">
                         <img src="assets/img/Aesthetic/Aesthetic_24.jpg" alt="Product Image">
                         
                     </div>
                     <div class="product-content">
                         
-                        <h3 class="product-title"><a href="shop-details.html">Rooftop</a></h3>
+                        <h3 class="product-title"><a href="shop.html">Rooftop</a></h3>
                         
                     </div>
                 </div>
@@ -670,41 +670,41 @@ Product Area
             
 
             <div class="col-xl-3 col-lg-4 col-sm-6 filter-item cat1 cat2">
-                <div class="th-product product-grid">
+                <div class="th-product product-grid" onclick="filterCafes('highlights_romantic_dining')">
                     <div class="product-img transparent-img">
                         <img src="assets/img/Aesthetic/Aesthetic_25.jpg" alt="Product Image">
                         
                     </div>
                     <div class="product-content">
                         
-                        <h3 class="product-title"><a href="shop-details.html">Aesthetic</a></h3>
+                        <h3 class="product-title"><a href="shop.html">Aesthetic</a></h3>
                         
                     </div>
                 </div>
             </div>
 
             <div class="col-xl-3 col-lg-4 col-sm-6 filter-item cat1 cat2">
-                <div class="th-product product-grid">
+                <div class="th-product product-grid" onclick="filterCafes('highlights_work_friendly')">
                     <div class="product-img transparent-img">
                         <img src="assets/img/Aesthetic/Aesthetic_26.jpg" alt="Product Image">
                         
                     </div>
                     <div class="product-content">
                         
-                        <h3 class="product-title"><a href="shop-details.html">Work Friendly</a></h3>
+                        <h3 class="product-title"><a href="shop.html">Work Friendly</a></h3>
                         
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4 col-sm-6 filter-item cat1 cat2">
-                <div class="th-product product-grid">
+                <div class="th-product product-grid" onclick="filterCafes('highlights_gluten_free_options')">
                     <div class="product-img transparent-img">
                         <img src="assets/img/Aesthetic/Aesthetic_28.jpg" alt="Product Image">
                         
                     </div>
                     <div class="product-content">
                         
-                        <h3 class="product-title"><a href="shop-details.html">Diet</a></h3>
+                        <h3 class="product-title"><a href="shop.html">Diet</a></h3>
                         
                     </div>
                 </div>
@@ -789,10 +789,11 @@ Product Area
             localStorage.setItem("selectedFood", foodItem); // Store food name in localStorage
             window.location.href = "shop.html"; // Redirect to shop page
         }
-        function filterCafes(highlightType) {
-            localStorage.setItem("selectedHighlight", highlightType); // Store filter type
+        function filterCafes(highlight) {
+            localStorage.setItem("selectedHighlight", highlight); // Store highlight filter
             window.location.href = "shop.html"; // Redirect to shop page
         }
+        
         
         </script>
 </body>
