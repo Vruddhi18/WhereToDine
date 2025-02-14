@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Restaurant Recommender</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Root Variables */
+        :root {
+            --main-container: 1250px;
+            --bs-blue: #0d6efd;
+            --bs-indigo: #6610f2;
+            --bs-purple: #6f42c1;
+            --bs-pink: #d63384;
+            --bs-red: #dc3545;
+            --bs-orange: #fd7e14;
+            --bs-yellow: #ffc107;
+            --bs-green: #198754;
+            --bs-teal: #20c997;
+            --bs-cyan: #0dcaf0;
+            --bs-white: #fff;
+            --bs-gray: #6c757d;
+            --bs-gray-dark: #343a40;
+            --container-gutters: 30px;
+        }
+
+        /* Grid System */
+        .row {
+            --bs-gutter-x: 30px;
+        }
+
+        .gy-30 {
+            --bs-gutter-y: 30px;
+        }
+
+        .gy-40 {
+            --bs-gutter-y: 40px;
+        }
+
+        .gy-50 {
+            --bs-gutter-y: 50px;
+        }
+
+        .gx-10 {
+            --bs-gutter-x: 10px;
+        }
+
+        .gy-10 {
+            --bs-gutter-y: 10px;
+        }
+
+        /* Container Styles */
+        @media only screen and (min-width: 1300px) {
+            .container-xxl,
+            .container-xl,
+            .container-lg,
+            .container-md,
+            .container-sm,
+            .container {
+                max-width: calc(var(--main-container) + var(--container-gutters));
+                padding-left: calc(var(--container-gutters) / 2);
+                padding-right: calc(var(--container-gutters) / 2);
+            }
+            
+            .container.px-0 {
+                max-width: var(--main-container);
+            }
+        }
+
+        /* Existing styles */
+        .menu-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .menu-card .box-img {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .menu-card .box-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .menu-card .box-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .menu-card .box-price {
+            font-size: 1rem;
+            font-weight: bold;
+            background: black;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* Star Rating Styles */
+        .fas.fa-star,
+        .fas.fa-star-half-alt,
+        .far.fa-star {
+            color: var(--bs-yellow);
+        }
+
+        /* Carousel Styles */
+        .carousel-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .product-big-img {
+            max-width: 500px;
+            height: 400px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .carousel {
+            max-width: 600px;
+            height: 400px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        /* Action Buttons */
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .actions .th-btn {
+            padding: 10px 20px;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .actions .icon-btn {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        /* Media Queries */
+        @media (min-width: 1560px) {
+            .th-container2 {
+                width: 100%;
+                max-width: 1560px;
+                margin-left: auto;
+                margin-right: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            
+            .th-container3 {
+                width: 100%;
+                max-width: 1560px;
+                margin-left: 0;
+                margin-right: auto;
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gy-50 {
+                --bs-gutter-y: 40px;
+            }
+            
+            .carousel-item img {
+                height: 300px;
+            }
+            
+            .product-big-img {
+                height: 300px;
+            }
+        }
+
+        /* Product Information Styles */
+        .cafe-info-section {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            margin: 20px 0;
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .info-item {
+            padding: 15px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .info-label i {
+            font-size: 1.2em;
+            color: #fd7e14;
+        }
+
+        .info-label strong {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .info-content {
+            padding-left: 30px;
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .cafe-info-section {
+                padding: 15px;
+            }
+
+            .info-item {
+                padding: 12px;
+            }
+        }
+
+        /* Add these styles to your existing style section */
+        .th-team .box-img {
+            width: 100%;
+            height: 250px; /* Fixed height for all food gallery images */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .th-team .box-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This ensures images cover the area without distortion */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Optional: Add hover effect */
+        .th-team:hover .box-img img {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        /* Enhanced Carousel Styles */
+        .product-gallery {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .carousel {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-item {
+            position: relative;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Carousel Controls */
+        .carousel-control-prev,
+        .carousel-control-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+        }
+
+        .carousel-control-prev {
+            left: 0;
+        }
+
+        .carousel-control-next {
+            right: 0;
+        }
+
+        .carousel:hover .carousel-control-prev,
+        .carousel:hover .carousel-control-next {
+            opacity: 1;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 20px;
+            height: 20px;
+            background-color: #000;
+            border-radius: 50%;
+            filter: none;
+        }
+
+        /* Thumbnails Navigation */
+        .thumbnail-gallery {
+            margin-top: 20px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .thumbnail-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .thumbnail {
+            width: 100px;
+            height: 70px;
+            border-radius: 8px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            border-color: #fd7e14;
+        }
+
+        /* Action Buttons */
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .actions .th-btn {
+            flex: 1;
+            padding: 12px 25px;
+            background: #fd7e14;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .actions .th-btn:hover {
+            background: #e86b0c;
+            transform: translateY(-2px);
+        }
+
+        .actions .icon-btn {
+            width: 45px;
+            height: 45px;
+            border: 2px solid #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .actions .icon-btn:hover {
+            border-color: #fd7e14;
+            transform: translateY(-2px);
+        }
+
+        .actions .icon-btn i {
+            font-size: 1.2rem;
+            color: #fd7e14;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .carousel-item img {
+                height: 350px;
+            }
+
+            .thumbnail {
+                width: 80px;
+                height: 60px;
+            }
+
+            .actions {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Basic Carousel Styling */
+        .carousel {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .carousel-item {
+            height: 500px;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .carousel-item {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+
+<body class="theme-golden">
+    <!-- Preloader -->
+    <div class="preloader">
+        <button class="th-btn preloaderCls">Cancel Preloader</button>
+        <div class="preloader-inner">
+            <div class="loader">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Area -->
+    <header class="th-header header-layout3">
+        <div class="sticky-wrapper">
+            <div class="menu-area">
+                <div class="w-100">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <div class="header-logo">
+                                <a href="index.html"><img src="assets/img/logo-white.png" alt="Restar"></a>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <nav class="main-menu d-none d-lg-inline-block">
+                                <ul>
+                                    <li><a href="shop.html">Cafes</a></li>
+                                    <li><a href="recommender.html">Recommend</a></li>
+                                    <li><a href="profile.html">Profile</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-4xl mx-auto bg-black rounded-lg shadow-lg p-6 mt-8">
+        <h1 class="text-3xl font-bold text-center mb-8" style="color: #C59D5F;">Restaurant Recommender</h1>
+        
+        <!-- Input Section -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold mb-4" style="color: #C59D5F;">Select Restaurants</h2>
+            <div class="flex gap-4 mb-4">
+                <input type="text" id="restaurantInput" placeholder="Enter restaurant name" 
+                class="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <button onclick="addRestaurant()" 
+                class="th-btn style-3 " style="background-color: #C59D5F; border-color: #C59D5F;">
+                    Add Restaurant
+                </button>
+            </div>
+            <div id="selectedRestaurants" class="space-y-2"></div>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold mb-4" style="color: #C59D5F;">Favorite Dishes (Optional)</h2>
+            <div class="flex gap-4 mb-4">
+                <input type="text" id="dishInput" placeholder="Enter dish name" 
+                       class="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <button onclick="addDish()" 
+                class="th-btn style-3 " style="background-color: #C59D5F; border-color: #C59D5F;" >
+                    Add Dish
+                </button>
+            </div>
+            <div id="selectedDishes" class="space-y-2"></div>
+        </div>
+
+        <button onclick="getRecommendations()" 
+        class="th-btn style-3 " style="background-color: #C59D5F; border-color: #C59D5F;">
+            Get Recommendations
+        </button>
+
+        <!-- Results Section -->
+        <div id="results" class="hidden">
+            <h2 class="text-2xl font-semibold mb-4" style="color: #C59D5F;">Recommended Restaurants</h2>
+            <div id="recommendedRestaurants" class="space-y-4"></div>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4" style="color: #C59D5F;">Similar Dishes</h2>
+            <div id="similarDishes" class="space-y-4"></div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="hidden">
+            <div class="flex justify-center items-center py-8">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Area -->
+    <footer class="footer-wrapper footer-layout1" style="margin-top:200px;">         
+        <div class="copyright-wrap">
+            <div class="container">
+                <div class="row gx-1 gy-2 align-items-center">
+                    <div class="col-md-7">
+                        <p class="copyright-text">Copyright <i class="fal fa-copyright"></i> 2024 <a href="index.html">WhereToDine</a>. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-5 text-center text-md-end">
+                        <div class="footer-links">
+                            <ul>
+                                <li><a href="about.html">Terms & Condition</a></li>
+                                <li><a href="about.html">Privacy & Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="recommender.js"></script>
+</body>
+</html>

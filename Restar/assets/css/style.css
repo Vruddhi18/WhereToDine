@@ -1939,7 +1939,7 @@ textarea.is-invalid {
   padding-top: 40px;
   display: block;
   text-align: center;
-  background-color: var(--smoke-color2);
+  /* background-color: var(--smoke-color2); */
 }
 
 .th-menu-wrapper .mobile-logo svg {
@@ -6252,8 +6252,9 @@ ol.wp-block-rss {
 }
 
 .header-logo {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  height:auto;
 }
 
 .header-links ul {
@@ -6396,7 +6397,7 @@ ol.wp-block-rss {
     font-size: 36px;
   }
   .header-logo img {
-    max-width: 160px;
+    max-width: 200px;
   }
 }
 
@@ -6582,10 +6583,10 @@ ol.wp-block-rss {
 }
 
 .header-layout3 .header-logo {
-  background-color: var(--theme-color);
   padding: 20px 65px;
-  height: 100%;
+  height: 80px; /* Set the desired height for the logo container */
 }
+
 
 @media (max-width: 1700px) {
   .header-layout3 .header-logo {

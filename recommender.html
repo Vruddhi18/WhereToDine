@@ -1,14 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="zxx">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Restaurant Recommender</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="bg-gray-100 min-h-screen p-8">
-    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+<body class="theme-golden">
+    <!-- Preloader -->
+    <div class="preloader">
+        <button class="th-btn preloaderCls">Cancel Preloader</button>
+        <div class="preloader-inner">
+            <div class="loader">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Area -->
+    <header class="th-header header-layout3">
+        <div class="sticky-wrapper">
+            <div class="menu-area">
+                <div class="w-100">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <div class="header-logo">
+                                <a href="index.html"><img src="assets/img/logo-white.png" alt="Restar"></a>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <nav class="main-menu d-none d-lg-inline-block">
+                                <ul>
+                                    <li><a href="shop.html">Cafes</a></li>
+                                    <li><a href="recommender.html">Recommend</a></li>
+                                    <li><a href="profile.html">Profile</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6 mt-8">
         <h1 class="text-3xl font-bold text-center mb-8">Restaurant Recommender</h1>
         
         <!-- Input Section -->
@@ -59,6 +100,32 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer Area -->
+    <footer class="footer-wrapper footer-layout1" data-bg-src="assets/img/bg/footer_bg_2.jpg">         
+        <div class="copyright-wrap">
+            <div class="container">
+                <div class="row gx-1 gy-2 align-items-center">
+                    <div class="col-md-7">
+                        <p class="copyright-text">Copyright <i class="fal fa-copyright"></i> 2024 <a href="index.html">WhereToDine</a>. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-5 text-center text-md-end">
+                        <div class="footer-links">
+                            <ul>
+                                <li><a href="about.html">Terms & Condition</a></li>
+                                <li><a href="about.html">Privacy & Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
     <script src="recommender.js"></script>
 </body>
 </html>
