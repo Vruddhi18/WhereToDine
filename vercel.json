@@ -1,14 +1,12 @@
 {
+  "version": 2,
   "builds": [
-    {
-      "src": "Restar/app.py",
-      "use": "@vercel/python"
-    }
+    { "src": "Restar/app.py", "use": "@vercel/python" }
   ],
   "routes": [
-    {
-      "src": "/Restar/(.*)",
-      "dest": "Restar/app.py"
-    }
-  ]
+    { "src": "/Restar(.*)", "dest": "/app.py" }
+  ],
+  "env": {
+    "APP_MODULE": "app:app"
+  }
 }
