@@ -9,7 +9,7 @@
       }
     },
     {
-      "src": "/.",
+      "src": "api/app.py",
       "use": "@vercel/uvicorn app:app --reload"
     }
   ],
