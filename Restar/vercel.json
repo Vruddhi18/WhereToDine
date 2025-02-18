@@ -2,25 +2,25 @@
   "version": 2,
   "builds": [
     {
-      "src": "Restar/assets/js/server.js",
+      "src": "assets/js/server.js",
       "use": "@vercel/node",
       "config": {
         "includeFiles": ["src/**"]
       }
     },
     {
-      "src": "api/app.py",
+      "src": "/.",
       "use": "@vercel/uvicorn app:app --reload"
     }
   ],
   "routes": [
     {
-      "src": "/Restar/(.*)",
-      "dest": "Restar/app.py"
+      "src": "/(.*)",
+      "dest": "app.py"
     },
     {
-      "src": "/Restar/assets/js/(.*)",
-      "dest": "Restar/assets/js/server.js",
+      "src": "assets/js/(.*)",
+      "dest": "assets/js/server.js",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
     }
   ]
