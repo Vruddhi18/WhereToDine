@@ -7,7 +7,7 @@ WhereToDine is an AI-powered restaurant recommendation system that helps users f
 - **Personalized Recommendations**: Suggests restaurants based on user preferences, including cuisine type, price range, ambiance, and specific food items.
 - **Hybrid Recommendation System**: Utilizes content-based filtering (restaurant attributes) and collaborative filtering (user reviews) for improved accuracy.
 - **Data-Driven Insights**: Analyzes restaurant features, reviews, and menu data to enhance recommendations.
-- **User-Centric Filtering**: Allows users to filter recommendations based on location, food type, and budget constraints.
+- **User-Centric Filtering**: Allows users to filter recommendations based on location, cuisine, and budget constraints.
 - **Review & Sentiment Analysis**: Evaluates customer reviews to identify trending dishes and user sentiments.
 
 ## 📂 Dataset Information
