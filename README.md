@@ -69,4 +69,5 @@ Contributions are welcome! Feel free to fork the repository and submit pull requ
 This project is open-source and available under the MIT License.
 
 ---
-🔹 **WhereToDine** – Making dining decisions easier with AI!
+🔹 **WhereToDine** – Making dining decisions easier with us!
+
