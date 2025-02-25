@@ -37,7 +37,7 @@ The project utilizes the following datasets:
 ## 🤖 Technologies Used
 - **Python** (Pandas, NumPy, Scikit-Learn, TensorFlow)
 - **Machine Learning** (Hybrid Recommendation System)
-- **NLP** (Sentiment Analysis on Reviews)- **FastAPI** (For Model Deployment)
+- **NLP** (Sentiment Analysis on Reviews) **FastAPI** (For Model Deployment)
 - **HTML, JavaScript** (For Building the Website)
 - **PostgreSQL** (For Database Management)
 
