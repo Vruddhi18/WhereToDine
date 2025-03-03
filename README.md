@@ -7,7 +7,7 @@ WhereToDine is an AI-powered restaurant recommendation system that helps users f
 - **Personalized Recommendations**: Suggests restaurants based on user preferences, including cuisine type, price range, ambiance, and specific food items.
 - **Hybrid Recommendation System**: Utilizes content-based filtering (restaurant attributes) and collaborative filtering (user reviews) for improved accuracy.
 - **Data-Driven Insights**: Analyzes restaurant features, reviews, and menu data to enhance recommendations.
-- **User-Centric Filtering**: Allows users to filter recommendations based on location, food type, and budget constraints.
+- **User-Centric Filtering**: Allows users to filter recommendations based on location, cuisine, and budget constraints.
 - **Review & Sentiment Analysis**: Evaluates customer reviews to identify trending dishes and user sentiments.
 
 ## 📂 Dataset Information
@@ -37,7 +37,7 @@ The project utilizes the following datasets:
 ## 🤖 Technologies Used
 - **Python** (Pandas, NumPy, Scikit-Learn, TensorFlow)
 - **Machine Learning** (Hybrid Recommendation System)
-- **NLP** (Sentiment Analysis on Reviews)- **FastAPI** (For Model Deployment)
+- **NLP** (Sentiment Analysis on Reviews) **FastAPI** (For Model Deployment)
 - **HTML, JavaScript** (For Building the Website)
 - **PostgreSQL** (For Database Management)
 
@@ -69,4 +69,5 @@ Contributions are welcome! Feel free to fork the repository and submit pull requ
 This project is open-source and available under the MIT License.
 
 ---
-🔹 **WhereToDine** – Making dining decisions easier with AI!
+🔹 **WhereToDine** – Making dining decisions easier with us!
+
