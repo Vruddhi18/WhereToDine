@@ -10,7 +10,7 @@
     },
     {
       "src": "Restar/app.py",
-      "use": "@vercel/uvicorn app:app --reload"
+      "use": "@vercel/python"
     }
   ],
   "routes": [

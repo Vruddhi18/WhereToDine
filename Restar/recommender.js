@@ -1,10 +1,9 @@
-// Store selected restaurants and dishes
 let selectedRestaurants = [];
 let selectedDishes = [];
 
 // Add a restaurant to the selection
 function addRestaurant() {
-    const input = document.getElementById('restaurantInput');
+    const input = document.getElementById('search-bar');
     const name = input.value.trim();
     
     if (name && selectedRestaurants.length < 5) {
@@ -81,7 +80,6 @@ async function getRecommendations() {
     results.classList.add('hidden');
 
     try {
-        // Modified fetch call with error handling
         const response = await fetch('http://127.0.0.1:8000/recommendations/', {
             method: 'POST',
             headers: {
@@ -116,41 +114,52 @@ function displayResults(data) {
 
     // Display recommended restaurants
     restaurantsContainer.innerHTML = data.recommended_restaurants.map(restaurant => `
-        <div class="border rounded-lg p-4 hover:shadow-lg transition-shadow bg-gray-800"> <!-- Added bg-gray-800 for better contrast -->
-    <h3 class="text-xl font-semibold text-white">${restaurant.name}</h3> <!-- Changed text color to white -->
-    <p class="text-gray-300">${restaurant.address}</p> <!-- Changed text color to a lighter gray for better visibility -->
-    <p class="mt-2 text-white"><span class="font-medium text-white">Cuisines:</span> ${restaurant.cuisines}</p> <!-- Changed text color to white -->
-    <div class="mt-2 flex flex-wrap gap-2">
-        ${restaurant.highlights ? restaurant.highlights.split(',').map(highlight => 
-            `<span class="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded">${highlight.trim()}</span>`
-        ).join('') : ''}
-    </div>
-    <div class="mt-3 grid grid-cols-2 gap-2 text-sm text-white"> <!-- Changed text color to white -->
-        <div>💰 Avg Cost: ₹${restaurant.avg_price}</div>
-        <div>👥 Votes: ${restaurant.votes}</div>
-        <div>👍 Positive Reviews: ${(restaurant.positive_ratio * 100).toFixed(1)}%</div>
-        <div>📊 Total Reviews: ${restaurant.total_reviews}</div>
-    </div>
-</div>
+        <div class="border rounded-lg p-4 hover:shadow-lg transition-shadow bg-gray-800">
+            <h3 class="text-xl font-semibold text-white">${restaurant.name}</h3>
+            <p class="text-gray-300">${restaurant.address}</p>
+            <p class="mt-2 text-white"><span class="font-medium text-white">Cuisines:</span> ${restaurant.cuisines}</p>
+            <div class="mt-2 flex flex-wrap gap-2">
+                ${restaurant.highlights ? restaurant.highlights.split(',').map(highlight => 
+                    `<span class="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded">${highlight.trim()}</span>`
+                ).join('') : ''}
+            </div>
+            <div class="mt-3 grid grid-cols-2 gap-2 text-sm text-white">
+                <div>💰 Avg Cost: ₹${restaurant.avg_price}</div>
+                <div>👥 Votes: ${restaurant.votes}</div>
+                <div>👍 Positive Reviews: ${(restaurant.positive_ratio * 100).toFixed(1)}%</div>
+                <div>📊 Total Reviews: ${restaurant.total_reviews}</div>
+            </div>
+        </div>
     `).join('');
 
     // Display similar dishes if available
     if (data.similar_dishes && data.similar_dishes.length > 0) {
         dishesContainer.innerHTML = data.similar_dishes.map(dish => `
-            <div class="border rounded-lg p-4 hover:shadow-lg transition-shadow bg-gray-800"> <!-- Optional: Added a background color for contrast -->
-    <h3 class="text-lg font-semibold text-white">${dish.similar_dish}</h3> <!-- Text color set to white -->
-    <p class="text-white">${dish.restaurant}</p> <!-- Text color set to white -->
-    <div class="mt-2 grid grid-cols-2 gap-2 text-sm text-white"> <!-- Text color set to white -->
-        <div>💰 Price: ₹${dish.price}</div>
-        <div>🥬 Type: ${dish.veg_status}</div>
-        ${dish.rating ? `<div class="text-white">⭐ Rating: ${dish.rating}</div>` : ''} <!-- Text color set to white -->
-        <div>📊 Similarity: ${dish.similarity}%</div>
-    </div>
-</div>
+            <div class="border rounded-lg p-4 hover:shadow-lg transition-shadow bg-gray-800">
+                <h3 class="text-lg font-semibold text-white">${dish.similar_dish}</h3>
+                <p class="text-white">${dish.restaurant}</p>
+                <div class="mt-2 grid grid-cols-2 gap-2 text-sm text-white">
+                    <div>💰 Price: ₹${dish.price}</div>
+                    <div>🥬 Type: ${dish.veg_status}</div>
+                    ${dish.rating ? `<div class="text-white">⭐ Rating: ${dish.rating}</div>` : ''}
+                    <div>📊 Similarity: ${dish.similarity}%</div>
+                </div>
+            </div>
         `).join('');
     } else {
         dishesContainer.innerHTML = '<p class="text-gray-500">No similar dishes found</p>';
     }
 
     results.classList.remove('hidden');
+}
+
+function searchCafes() {
+    let input = document.getElementById('search-bar').value.toLowerCase();
+    const container = document.getElementById('selectedRestaurants');
+    const restaurantItems = container.getElementsByTagName('div');
+
+    for (let item of restaurantItems) {
+        const name = item.textContent.toLowerCase();
+        item.style.display = name.includes(input) ? "flex" : "none";
+    }
 }
