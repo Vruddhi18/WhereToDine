@@ -7,7 +7,7 @@ let cafes = []; // This will be populated with data from the recommender
 // Fetch cafe names from the recommender
 async function fetchCafeNames() {
     try {
-        const response = await fetch('http://127.0.0.1:8000/cafe-names/'); // Adjust the endpoint as needed
+        const response = await fetch('https://where-to-dine.vercel.app/api/cafe-names/'); // Adjust the endpoint as needed
         if (!response.ok) throw new Error('Network response was not ok');
         cafes = await response.json(); // Assuming the response is a JSON array of cafe names
     } catch (error) {
@@ -132,7 +132,7 @@ async function getRecommendations() {
     results.classList.add('hidden');
 
     try {
-        const response = await fetch('http://127.0.0.1:8000/recommendations/', {
+        const response = await fetch('https://where-to-dine.vercel.app/api/recommendations/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -209,7 +209,7 @@
                                     button.addEventListener("click", function () {
                                         const cafeIndex = this.getAttribute("data-index");
         
-                                        fetch("http://localhost:8001/update-favorites", {
+                                        fetch("https://where-to-dine.vercel.app/server/update-favorites", {
                                             method: "POST",
                                             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
                                             body: JSON.stringify({ cafeIndex })
