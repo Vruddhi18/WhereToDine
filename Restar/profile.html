@@ -166,7 +166,7 @@
         
             try {
                 // Fetch user profile using token
-                const response = await fetch("http://localhost:8001/profile", {
+                const response = await fetch("https://where-to-dine.vercel.app/profile", {
                     headers: { "Authorization": `Bearer ${token}` }
                 });
         
@@ -176,7 +176,7 @@
                     document.getElementById("email").innerText = data.email;
         
                     // Fetch user's favorite cafes
-                    fetch("http://localhost:8001/get-favorites", {
+                    fetch("https://where-to-dine.vercel.app/get-favorites", {
                         headers: { "Authorization": `Bearer ${token}` }
                     })
                     .then(response => response.json())
@@ -209,7 +209,7 @@
                                     button.addEventListener("click", function () {
                                         const cafeIndex = this.getAttribute("data-index");
         
-                                        fetch("https://where-to-dine.vercel.app/server/update-favorites", {
+                                        fetch("https://where-to-dine.vercel.app/update-favorites", {
                                             method: "POST",
                                             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
                                             body: JSON.stringify({ cafeIndex })
@@ -241,7 +241,7 @@
 
     try {
         // Fetch user's visit later cafes
-        fetch("http://localhost:8001/get-visit-later", {
+        fetch("https://where-to-dine.vercel.app/get-visit-later", {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => response.json())
@@ -274,7 +274,7 @@
                         button.addEventListener("click", function () {
                             const cafeIndex = this.getAttribute("data-index");
 
-                            fetch("http://localhost:8001/update-visit-later", {
+                            fetch("https://where-to-dine.vercel.app/update-visit-later", {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
                                 body: JSON.stringify({ cafeIndex })
