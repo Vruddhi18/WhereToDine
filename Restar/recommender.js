@@ -1,6 +1,23 @@
 let selectedRestaurants = [];
 let selectedDishes = [];
 
+// Sample list of cafes for autocomplete (to be replaced with actual data from the recommender)
+let cafes = []; // This will be populated with data from the recommender
+
+// Fetch cafe names from the recommender
+async function fetchCafeNames() {
+    try {
+        const response = await fetch('http://127.0.0.1:8000/cafe-names/'); // Adjust the endpoint as needed
+        if (!response.ok) throw new Error('Network response was not ok');
+        cafes = await response.json(); // Assuming the response is a JSON array of cafe names
+    } catch (error) {
+        console.error('Error fetching cafe names:', error);
+    }
+}
+
+// Call the function to fetch cafe names on page load
+fetchCafeNames();
+
 // Add a restaurant to the selection
 function addRestaurant() {
     const input = document.getElementById('search-bar');
@@ -10,9 +27,44 @@ function addRestaurant() {
         selectedRestaurants.push(name);
         updateRestaurantsList();
         input.value = '';
+        document.getElementById('suggestions').innerHTML = ''; // Clear suggestions
+        document.getElementById('suggestions').classList.add('hidden'); // Hide suggestions
     } else if (selectedRestaurants.length >= 5) {
         alert('Maximum 5 restaurants can be selected');
     }
+}
+
+// Show suggestions based on user input
+function showSuggestions() {
+    const input = document.getElementById('search-bar').value.toLowerCase();
+    const suggestionsContainer = document.getElementById('suggestions');
+    suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+
+    if (input) {
+        const filteredCafes = cafes.filter(cafe => cafe.toLowerCase().startsWith(input));
+        
+        if (filteredCafes.length > 0) {
+            suggestionsContainer.classList.remove('hidden'); // Show suggestions
+            filteredCafes.forEach(cafe => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.textContent = cafe;
+                suggestionItem.classList.add('suggestion-item', 'p-2', 'cursor-pointer');
+                suggestionItem.onclick = () => selectCafe(cafe); // Select cafe on click
+                suggestionsContainer.appendChild(suggestionItem);
+            });
+        } else {
+            suggestionsContainer.classList.add('hidden'); // Hide if no matches
+        }
+    } else {
+        suggestionsContainer.classList.add('hidden'); // Hide if input is empty
+    }
+}
+
+// Select a cafe from suggestions
+function selectCafe(cafe) {
+    document.getElementById('search-bar').value = cafe; // Set input value
+    document.getElementById('suggestions').classList.add('hidden'); // Hide suggestions
+    addRestaurant(); // Add the selected cafe to the list
 }
 
 // Add a dish to the selection
@@ -151,15 +203,4 @@ function displayResults(data) {
     }
 
     results.classList.remove('hidden');
-}
-
-function searchCafes() {
-    let input = document.getElementById('search-bar').value.toLowerCase();
-    const container = document.getElementById('selectedRestaurants');
-    const restaurantItems = container.getElementsByTagName('div');
-
-    for (let item of restaurantItems) {
-        const name = item.textContent.toLowerCase();
-        item.style.display = name.includes(input) ? "flex" : "none";
-    }
 }

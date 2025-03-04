@@ -62,6 +62,14 @@ def store_recommendation_data(recommendation_id: str, input_data: dict, output_d
             str(output_data.get('similar_dishes', []))
         ])
 
+@app.get("/cafe-names/")
+async def get_cafe_names():
+    """Endpoint to get the list of cafe names."""
+    try:
+        cafe_names = recommender.get_cafe_names()  # Call the method to get cafe names
+        return cafe_names
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 @app.post("/recommendations/", response_model=RecommendationResponse)
 async def get_recommendations(request: RecommendationRequest):
     try:

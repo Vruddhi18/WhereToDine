@@ -32,7 +32,9 @@ class DualRecommender:
 
         # Normalize numerical features
         self._normalize_features()
-
+    def get_cafe_names(self):
+        """Return a list of cafe names from the dataset."""
+        return self.df['cleaned_name'].tolist()
     def _extract_base_name(self, name):
         """Extract base restaurant name by removing location identifiers"""
         # Common location identifiers and branch indicators

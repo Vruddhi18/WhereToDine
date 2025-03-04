@@ -494,6 +494,25 @@
                 height: 350px;
             }
         }
+        #suggestions {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 1000;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none; /* Initially hidden */
+        }
+
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
+        }
     </style>
 </head>
 
@@ -538,13 +557,14 @@
         <h1 class="text-3xl font-bold text-center mb-8" style="color: #C59D5F;">Restaurant Recommender</h1>
         
         <!-- Input Section -->
-        <div class="mb-8">
+        <div class="mb-8 relative">
             <h2 class="text-xl font-semibold mb-4" style="color: #C59D5F;">Select Restaurants</h2>
             <div class="header-button mb-4">
                 <form class="header-search" onsubmit="event.preventDefault(); addRestaurant();">
-                    <input type="text" placeholder="Search restaurant" id="search-bar" onkeyup="searchCafes()" style="background-color: white !important;">
+                    <input type="text" placeholder="Search restaurant" id="search-bar" onkeyup="showSuggestions()" style="background-color: white !important;">
                     <button type="submit"><i class="far fa-search"></i></button>
                 </form>
+                <div id="suggestions" class="absolute"></div>
             </div>
             <div id="selectedRestaurants" class="space-y-2"></div>
         </div>
