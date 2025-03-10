@@ -5,3 +5,4 @@ numpy==1.21.2
 scikit-learn==0.24.2
 fuzzywuzzy==0.18.0
 python-Levenshtein==0.12.2
+python-multipart

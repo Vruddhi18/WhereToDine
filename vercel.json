@@ -12,11 +12,11 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/api/(.*)",
       "dest": "Restar/app.py"
     },
     {
-      "src": "/(.*)",
+      "src": "/server/(.*)",
       "dest": "Restar/assets/js/server.js"
     }
   ]
