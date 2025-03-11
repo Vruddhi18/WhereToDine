@@ -1,7 +1,7 @@
 # WhereToDine
 
 ## 📌 Overview
-WhereToDine is an AI-powered restaurant recommendation system that helps users find the best dining options based on their preferences. The system leverages a hybrid recommendation model combining content-based and collaborative filtering to ensure accurate and personalized suggestions.
+WhereToDine is a AI-powered restaurant recommendation system that helps users find the best dining options based on their preferences. The system leverages a hybrid recommendation model combining content-based and collaborative filtering to ensure accurate and personalized suggestions.
 
 ## 🎯 Features
 - **Personalized Recommendations**: Suggests restaurants based on user preferences, including cuisine type, price range, ambiance, and specific food items.
