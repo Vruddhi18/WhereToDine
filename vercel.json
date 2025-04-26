@@ -2,8 +2,12 @@
   "version": 2,
   "builds": [
     {
-      "src": "Restar/app.py",
-      "use": "@vercel/python"
+      "src": "Restar/run.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "runtime": "python3.11"
+      }
     },
     {
       "src": "Restar/assets/js/server.js",
@@ -13,7 +17,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "Restar/app.py"
+      "dest": "Restar/run.py"
     },
     {
       "src": "/server/(.*)",
