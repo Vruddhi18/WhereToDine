@@ -140,7 +140,7 @@
 import logging
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from recommender import DualRecommender
+from Restar.recommender import DualRecommender
 import pandas as pd
 
 # Initialize logging for production
