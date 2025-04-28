@@ -148,7 +148,12 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 # Load the restaurant dataset once
-df = pd.read_csv('merged_file_all.csv', encoding="latin1")
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(current_dir, 'merged_file_all.csv')
+
+df = pd.read_csv(csv_path, encoding="latin1")
 recommender = DualRecommender(df)
 
 # FastAPI application setup
