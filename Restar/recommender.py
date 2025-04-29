@@ -435,7 +435,12 @@ class DualRecommender:
         self.min_votes = min_votes
         self._prepare_data()
         self._initialize_models()
-
+    def _extract_base_name(self, name):
+        # Example logic: remove everything after a comma
+        if pd.isnull(name):
+            return ""
+        return name.split(",")[0].strip()
+    
     def _prepare_data(self):
         """Clean and preprocess the dataset"""
         logger.info("Preparing dataset: Cleaning and normalizing data")
