@@ -440,6 +440,30 @@ class DualRecommender:
         if pd.isnull(name):
             return ""
         return name.split(",")[0].strip()
+    def _process_food_sentiments(self, sentiment_json):
+        try:
+            data = ast.literal_eval(sentiment_json) if isinstance(sentiment_json, str) else sentiment_json
+            pos = data.get("positive", 0)
+            neg = data.get("negative", 0)
+            total = pos + neg if pos + neg > 0 else 1
+            return {
+                "positive": pos,
+                "negative": neg,
+                "positive_ratio": pos / total
+            }
+        except Exception as e:
+            logger.error(f"Failed to process sentiment: {e}")
+            return {"positive": 0, "negative": 0, "positive_ratio": 0.0}
+
+    def _process_menu(self, menu_data):
+        try:
+            items = ast.literal_eval(menu_data) if isinstance(menu_data, str) else menu_data
+            if isinstance(items, list):
+                return items
+            return []
+        except Exception as e:
+            logger.error(f"Menu parsing failed: {e}")
+            return []
     
     def _prepare_data(self):
         """Clean and preprocess the dataset"""
