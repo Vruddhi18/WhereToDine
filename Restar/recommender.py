@@ -435,11 +435,13 @@ class DualRecommender:
         self.min_votes = min_votes
         self._prepare_data()
         self._initialize_models()
+
     def _extract_base_name(self, name):
         # Example logic: remove everything after a comma
         if pd.isnull(name):
             return ""
         return name.split(",")[0].strip()
+    
     def _process_food_sentiments(self, sentiment_json):
         try:
             data = ast.literal_eval(sentiment_json) if isinstance(sentiment_json, str) else sentiment_json
@@ -515,7 +517,25 @@ class DualRecommender:
         best_match = max(similarities, key=lambda x: x[1])
         return best_match[0] if best_match[1] > 60 else None
 
-    # Other methods like _process_food_sentiments, _process_menu, etc. would also have similar logging added.
+    def _get_avg_price(self, menu_text):
+        """
+        Calculate average price from menu JSON.
+        """
+        try:
+            menu = self._process_menu(menu_text)
+            prices = []
+            for item in menu:
+                try:
+                    price = float(item.get('price', 0))
+                    prices.append(price)
+                except (ValueError, TypeError):
+                    continue
+            if prices:
+                return sum(prices) / len(prices)
+            return 0
+        except Exception as e:
+            logger.error(f"Error processing average price from menu: {e}")
+            return 0
 
     def feature_based_recommendations(self, selected_indices, n_recommendations=20):
         """Generate feature-based recommendations"""
