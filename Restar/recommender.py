@@ -418,78 +418,35 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from fuzzywuzzy import fuzz
-import re
 import ast
+import re
 import logging
 
-# Initialize logging for operations
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 class DualRecommender:
     def __init__(self, df, min_votes=50):
-        """
-        Initialize the recommender with a dataframe and minimum votes threshold.
-        """
         self.df = df
         self.min_votes = min_votes
         self._prepare_data()
         self._initialize_models()
 
     def _extract_base_name(self, name):
-        # Example logic: remove everything after a comma
         if pd.isnull(name):
             return ""
         return name.split(",")[0].strip()
-    
-    def _process_food_sentiments(self, sentiment_json):
-        try:
-            data = ast.literal_eval(sentiment_json) if isinstance(sentiment_json, str) else sentiment_json
-            pos = data.get("positive", 0)
-            neg = data.get("negative", 0)
-            total = pos + neg if pos + neg > 0 else 1
-            return {
-                "positive": pos,
-                "negative": neg,
-                "positive_ratio": pos / total
-            }
-        except Exception as e:
-            logger.error(f"Failed to process sentiment: {e}")
-            return {"positive": 0, "negative": 0, "positive_ratio": 0.0}
 
-    def _process_menu(self, menu_data):
-        try:
-            items = ast.literal_eval(menu_data) if isinstance(menu_data, str) else menu_data
-            if isinstance(items, list):
-                return items
-            return []
-        except Exception as e:
-            logger.error(f"Menu parsing failed: {e}")
-            return []
-    
     def _prepare_data(self):
-        """Clean and preprocess the dataset"""
-        logger.info("Preparing dataset: Cleaning and normalizing data")
-
-        # Convert votes to numeric
+        logger.info("Preparing dataset")
         self.df['votes'] = pd.to_numeric(self.df['votes'], errors='coerce')
-
-        # Clean restaurant names
         self.df['cleaned_name'] = self.df['name'].astype(str).replace("", "\\")
         self.df['base_name'] = self.df['cleaned_name'].apply(self._extract_base_name)
-
-        # Process food sentiments
         self.df['sentiment_scores'] = self.df['Food Sentiments'].apply(self._process_food_sentiments)
-
-        # Calculate average price from the menu
         self.df['avg_price'] = self.df['Menu'].apply(self._get_avg_price)
-
-        # Normalize numerical features (votes and avg_price)
         self._normalize_features()
 
     def _normalize_features(self):
-        """Normalize numerical features (votes, avg_price)"""
-        logger.info("Normalizing features: votes and average price")
         for column in ['votes', 'avg_price']:
             if column in self.df.columns:
                 self.df[f'normalized_{column}'] = (
@@ -499,47 +456,32 @@ class DualRecommender:
 
     def _initialize_models(self):
         """Initialize recommendation models (Feature-based and Menu-based)"""
-        logger.info("Initializing models: Feature-based and Menu-based")
+        logger.info("Initializing TF-IDF models")
+
+        # Feature-based TF-IDF
         self.feature_vectorizer = TfidfVectorizer(stop_words='english')
-        self.df['combined_features'] = self.df.apply(self._combine_features, axis=1)
+        self.df['combined_features'] = self.df.apply(self._combine_features, axis=1).fillna("")
         self.feature_matrix = self.feature_vectorizer.fit_transform(self.df['combined_features'])
 
+        # Menu-based TF-IDF
         self.menu_vectorizer = TfidfVectorizer(stop_words='english')
         self.df['menu_text'] = self.df['Menu'].apply(
-            lambda x: ' '.join([item['item'] for item in self._process_menu(x)]))
+            lambda x: ' '.join([item['item'] for item in self._process_menu(x)])
+        )
+
+        # Handle empty strings to prevent TF-IDF errors
+        self.df['menu_text'] = self.df['menu_text'].replace('', 'empty_placeholder')
+
         self.menu_matrix = self.menu_vectorizer.fit_transform(self.df['menu_text'])
 
     def find_restaurant(self, name):
-        """Find the restaurant index based on fuzzy matching"""
         name = name.lower().strip()
-        similarities = [(idx, fuzz.ratio(name, str(rest_name))) 
+        similarities = [(idx, fuzz.ratio(name, str(rest_name)))
                         for idx, rest_name in enumerate(self.df['cleaned_name'])]
         best_match = max(similarities, key=lambda x: x[1])
         return best_match[0] if best_match[1] > 60 else None
 
-    def _get_avg_price(self, menu_text):
-        """
-        Calculate average price from menu JSON.
-        """
-        try:
-            menu = self._process_menu(menu_text)
-            prices = []
-            for item in menu:
-                try:
-                    price = float(item.get('price', 0))
-                    prices.append(price)
-                except (ValueError, TypeError):
-                    continue
-            if prices:
-                return sum(prices) / len(prices)
-            return 0
-        except Exception as e:
-            logger.error(f"Error processing average price from menu: {e}")
-            return 0
-
     def feature_based_recommendations(self, selected_indices, n_recommendations=20):
-        """Generate feature-based recommendations"""
-        logger.info("Generating feature-based recommendations")
         selected_vectors = self.feature_matrix[selected_indices]
         average_vector = selected_vectors.mean(axis=0)
         average_vector = average_vector.A
@@ -548,11 +490,67 @@ class DualRecommender:
         feature_scores = feature_similarities.flatten() * quality_scores
         return self._get_top_recommendations(feature_scores, selected_indices, n_recommendations)
 
-    # Other methods such as menu_based_recommendations, _get_top_recommendations would also have logging and comments
+    def menu_based_recommendations(self, selected_indices, n_recommendations=20):
+        selected_vectors = self.menu_matrix[selected_indices]
+        average_vector = selected_vectors.mean(axis=0)
+        average_vector = average_vector.A
+        menu_similarities = cosine_similarity(self.menu_matrix, average_vector)
+        quality_scores = self.df['sentiment_scores'].apply(lambda x: x['positive_ratio']) * 0.4
+        menu_scores = menu_similarities.flatten() * quality_scores
+        return self._get_top_recommendations(menu_scores, selected_indices, n_recommendations)
 
     def _get_top_recommendations(self, scores, excluded_indices, n):
-        """Get top restaurant recommendations based on scores, excluding specific indices"""
-        logger.info(f"Selecting top {n} recommendations, excluding indices: {excluded_indices}")
         mask = (self.df['votes'] >= self.min_votes)
         scored_indices = [(i, scores[i]) for i in range(len(self.df)) if i not in excluded_indices and mask[i]]
         return sorted(scored_indices, key=lambda x: x[1], reverse=True)[:n]
+
+    def _process_menu(self, menu_data):
+        """
+        Parse the Menu field from string to list of dictionaries.
+        Each entry should be a dict with 'item' and optionally 'price'.
+        Handles empty, malformed, or non-list data safely.
+        """
+        if pd.isnull(menu_data) or not isinstance(menu_data, str) or menu_data.strip() == '':
+            return []
+
+        try:
+            parsed = ast.literal_eval(menu_data)
+            if isinstance(parsed, list):
+                return [item for item in parsed if isinstance(item, dict) and 'item' in item]
+        except (ValueError, SyntaxError):
+            pass
+
+        return []
+
+    def _get_avg_price(self, menu_str):
+        items = self._process_menu(menu_str)
+        prices = []
+        for item in items:
+            try:
+                price = float(re.sub(r'[^0-9.]', '', str(item['price'])))
+                prices.append(price)
+            except:
+                continue
+        return np.mean(prices) if prices else 0
+
+    def _process_food_sentiments(self, sentiment_str):
+        try:
+            data = ast.literal_eval(sentiment_str)
+            if isinstance(data, dict):
+                pos = data.get('positive', 0)
+                neg = data.get('negative', 0)
+                total = pos + neg if (pos + neg) != 0 else 1
+                return {'positive': pos, 'negative': neg, 'positive_ratio': pos / total}
+        except (ValueError, SyntaxError):
+            pass
+        return {'positive': 0, 'negative': 0, 'positive_ratio': 0.5}
+
+    def _combine_features(self, row):
+        features = [
+            str(row.get('base_name', '')),
+            str(row.get('location', '')),
+            str(row.get('cuisines', '')),
+            str(row.get('type', ''))
+        ]
+        return ' '.join(features)
+
