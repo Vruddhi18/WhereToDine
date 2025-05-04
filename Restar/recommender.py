@@ -484,7 +484,6 @@ class DualRecommender:
     def feature_based_recommendations(self, selected_indices, n_recommendations=20):
         selected_vectors = self.feature_matrix[selected_indices]
         average_vector = selected_vectors.mean(axis=0)
-        average_vector = average_vector.A
         feature_similarities = cosine_similarity(self.feature_matrix, average_vector)
         quality_scores = self.df['sentiment_scores'].apply(lambda x: x['positive_ratio']) * 0.4
         feature_scores = feature_similarities.flatten() * quality_scores
@@ -493,7 +492,6 @@ class DualRecommender:
     def menu_based_recommendations(self, selected_indices, n_recommendations=20):
         selected_vectors = self.menu_matrix[selected_indices]
         average_vector = selected_vectors.mean(axis=0)
-        average_vector = average_vector.A
         menu_similarities = cosine_similarity(self.menu_matrix, average_vector)
         quality_scores = self.df['sentiment_scores'].apply(lambda x: x['positive_ratio']) * 0.4
         menu_scores = menu_similarities.flatten() * quality_scores
@@ -553,4 +551,24 @@ class DualRecommender:
             str(row.get('type', ''))
         ]
         return ' '.join(features)
+    def combine_recommendations(self, selected_indices, n_recommendations=20, alpha=0.5):
+        """
+        Combine feature-based and menu-based recommendations.
+        alpha: weight for feature-based (0 to 1). (1 - alpha) is weight for menu-based.
+        """
+        # Feature-based
+        selected_feature_vectors = self.feature_matrix[selected_indices]
+        avg_feature_vector = selected_feature_vectors.mean(axis=0).A
+        feature_similarities = cosine_similarity(self.feature_matrix, avg_feature_vector).flatten()
+
+        # Menu-based
+        selected_menu_vectors = self.menu_matrix[selected_indices]
+        avg_menu_vector = selected_menu_vectors.mean(axis=0).A
+        menu_similarities = cosine_similarity(self.menu_matrix, avg_menu_vector).flatten()
+
+        # Combine scores
+        quality_scores = self.df['sentiment_scores'].apply(lambda x: x['positive_ratio']).values * 0.4
+        combined_scores = (alpha * feature_similarities + (1 - alpha) * menu_similarities) * quality_scores
+
+        return self._get_top_recommendations(combined_scores, selected_indices, n_recommendations)
 
