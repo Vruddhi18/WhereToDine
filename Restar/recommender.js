@@ -209,9 +209,7 @@ let selectedDishes = [];
 let cafes = []; // To be populated from API
 
 // Dynamically get base URL
-const BASE_URL = window.location.origin.includes('localhost') 
-  ? 'https://where-to-dine.vercel.app' 
-  : window.location.origin;
+const BASE_URL = 'https://wheretodine.onrender.com';
 
 // Fetch cafe names from API
 async function fetchCafeNames() {

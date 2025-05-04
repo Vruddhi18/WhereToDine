@@ -140,15 +140,16 @@
 import logging
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 from Restar.recommender import DualRecommender
 import pandas as pd
+import os
 
 # Initialize logging for production
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 # Load the restaurant dataset once
-import os
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 csv_path = os.path.join(current_dir, 'merged_file_all.csv')
@@ -158,6 +159,14 @@ recommender = DualRecommender(df)
 
 # FastAPI application setup
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://where-to-dine.vercel.app"],  # Vercel URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Model for user input (restaurant names, favorite dishes)
 class RestaurantRequest(BaseModel):
