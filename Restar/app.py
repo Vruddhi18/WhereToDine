@@ -8,7 +8,7 @@ import logging
 
 # Local imports
 from models import *
-from recommender import DualRecommender
+from Restar.recommender import DualRecommender
 
 # Initialize logger
 logging.basicConfig(
@@ -34,7 +34,9 @@ app.add_middleware(
 
 # Load dataset and initialize recommender
 try:
-    df = pd.read_csv('merged_file_all.csv', encoding="latin1")
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_path = os.path.join(current_dir, 'merged_file_all.csv')
+    df = pd.read_csv(csv_path, encoding="latin1")    
     recommender = DualRecommender(df)
     logger.info("Dataset loaded and recommender initialized.")
 except Exception as e:
