@@ -7,7 +7,7 @@ import math
 import logging
 
 # Local imports
-from models import *
+from Restar.models import *
 from Restar.recommender import DualRecommender
 
 # Initialize logger
