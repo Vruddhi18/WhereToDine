@@ -7,7 +7,7 @@ env/
 ENV/
 .venv/
 .pip/
-myenv
+menv
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
 
