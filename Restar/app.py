@@ -101,7 +101,7 @@ async def get_recommendations(request: RecommendationRequest):
                 'address': restaurant['address'],
                 'cuisines': restaurant['cuisines'],
                 'votes': restaurant['votes'],
-                'avg_price': float(restaurant['avg_price']),
+                'avg_price': int(round(restaurant['avg_price'])),
                 'positive_ratio': sentiments['positive_ratio'],
                 'total_reviews': sentiments['total_reviews'],
                 'highlights': restaurant['highlights'],
