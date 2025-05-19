@@ -399,3 +399,17 @@ function displayResults(data) {
 
     results.classList.remove('hidden');
 }
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize mobile menu toggle
+    const toggleBtn = document.getElementById('mobileMenuToggle');
+    const menu = document.getElementById('mobileMenu');
+
+    if (toggleBtn && menu) {
+        toggleBtn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    }
+
+    // Initial fetch of cafe names
+    fetchCafeNames();
+});

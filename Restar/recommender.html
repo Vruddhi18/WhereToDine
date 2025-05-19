@@ -513,6 +513,74 @@
         .suggestion-item:hover {
             background-color: #f0f0f0;
         }
+        /* NEW Styles */
+        .th-header {
+            background-color: #1e1e1e;
+            padding: 16px 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Logo */
+        .header-logo img {
+            max-height: 48px;
+        }
+
+        /* Desktop Menu */
+        .main-menu ul {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .main-menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .main-menu ul li a:hover {
+            color: #f4c15b;
+        }
+
+        /* Mobile Toggle Button */
+        .mobile-menu-btn {
+            font-size: 28px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Mobile Nav */
+        .mobile-nav {
+            background-color: #1e1e1e;
+            padding: 16px;
+            display: none;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav ul li {
+            margin: 12px 0;
+        }
+
+        .mobile-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .mobile-nav ul li a:hover {
+            color: #f4c15b;
+        }
+
     </style>
 </head>
 
@@ -528,7 +596,7 @@
     </div>
 
     <!-- Header Area -->
-    <header class="th-header header-layout3">
+    <!-- <header class="th-header header-layout3">
         <div class="sticky-wrapper">
             <div class="menu-area">
                 <div class="w-100">
@@ -551,7 +619,54 @@
                 </div>
             </div>
         </div>
+    </header> -->
+        <!-- Header Area -->
+    <header class="th-header header-layout3">
+        <div class="sticky-wrapper">
+            <div class="menu-area">
+                <div class="w-100">
+                    <div class="row align-items-center justify-content-between">
+                        <!-- Logo -->
+                        <div class="col-auto">
+                            <div class="header-logo">
+                                <a href="index.html">
+                                    <img src="assets/img/logo-white.png" alt="WhereToDine Logo">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Desktop Menu -->
+                        <div class="col d-none d-lg-block text-end">
+                            <nav class="main-menu">
+                                <ul>
+                                    <li><a href="shop.html">Cafes</a></li>
+                                    <li><a href="recommender.html">Recommend</a></li>
+                                    <li><a href="profile.html">Profile</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <!-- Mobile Menu Toggle -->
+                        <div class="col-auto d-lg-none">
+                            <button id="mobileMenuToggle" class="mobile-menu-btn" aria-label="Toggle navigation">
+                                &#9776;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu (Hidden by default) -->
+            <div id="mobileMenu" class="mobile-nav d-lg-none">
+                <ul>
+                    <li><a href="shop.html">Cafes</a></li>
+                    <li><a href="recommender.html">Recommend</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+        </div>
     </header>
+
     
     <!-- <div class="max-w-4xl mx-auto bg-black rounded-lg shadow-lg p-6 mt-8"> -->
         <!-- <h1 class="text-3xl font-bold text-center mb-8" style="color: #C59D5F;">Restaurant Recommender</h1> -->
