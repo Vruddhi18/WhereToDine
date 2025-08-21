@@ -68,6 +68,4 @@ Contributions are welcome! Feel free to fork the repository and submit pull requ
 ## 📜 License
 This project is open-source and available under the MIT License.
 
----
-🔹 **WhereToDine** – Making dining decisions easier with us!
 
