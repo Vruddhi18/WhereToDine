@@ -6587,8 +6587,8 @@ ol.wp-block-rss {
 }
 
 .header-layout3 .header-logo {
-  padding: 8px 24px;
-  height: 64px; /* Reduce height for better navbar fit */
+  padding: 0 16px;
+  height: 56px; /* Match navbar height for perfect fit */
 }
 
 
@@ -6862,8 +6862,10 @@ ol.wp-block-rss {
 }
 
 .newsletter-widget {
-  max-width: 160px;
+  max-width: 100px;
   max-height: 48px;
+  vertical-align: middle;
+  display: inline-block;
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   border-radius: 8px;
   background: rgba(255,255,255,0.5); /* Softer background */
