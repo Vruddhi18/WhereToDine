@@ -6587,8 +6587,8 @@ ol.wp-block-rss {
 }
 
 .header-layout3 .header-logo {
-  padding: 20px 65px;
-  height: 80px; /* Set the desired height for the logo container */
+  padding: 8px 24px;
+  height: 64px; /* Reduce height for better navbar fit */
 }
 
 
@@ -6862,11 +6862,12 @@ ol.wp-block-rss {
 }
 
 .newsletter-widget {
-  max-width: 300px;
-}
-
-.newsletter-widget .th-social {
-  margin-top: 25px;
+  max-width: 160px;
+  max-height: 48px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.5); /* Softer background */
+  padding: 4px;
 }
 
 .newsletter-widget .newsletter-form {
