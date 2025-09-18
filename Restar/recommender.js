@@ -204,36 +204,24 @@
 
 //     results.classList.remove('hidden');
 // }
-
 let selectedRestaurants = [];
 let selectedDishes = [];
-let cafes = [];
+let cafes = []; // To be populated from API
 
-// Load cafe names from final_cleaned.json for autocomplete
+// Dynamically get base URL
+const BASE_URL = 'https://wheretodine.onrender.com';
+
+// Fetch cafe names from API
 async function fetchCafeNames() {
     try {
-        const response = await fetch('final_cleaned.json');
+        const response = await fetch(`${BASE_URL}/cafe-names/`);
         if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-        cafes = data.map(cafe => cafe.name);
+        cafes = await response.json();
     } catch (error) {
         console.error('Error fetching cafe names:', error);
-        // Fallback for local testing
-        cafes = [
-            'Mocha',
-            'Moca Cabana',
-            'Refresh Mocktail',
-            'Cafe Coffee Day',
-            'Starbucks',
-            'The Chocolate Room',
-            'Tea Post',
-            'La Milano',
-            'Turquoise Villa',
-            'Cafe Alfresco'
-        ];
     }
 }
-fetchCafeNames();
+fetchCafeNames(); // Fetch on page load
 
 // Add a restaurant
 function addRestaurant() {
