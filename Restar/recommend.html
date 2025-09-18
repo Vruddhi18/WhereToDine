@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Recommender</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="recommender.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <h2>Find the Best Restaurant for You</h2>
     <form id="recommendationForm">
-        <div style="position:relative; max-width:350px; margin-bottom:24px;">
-            <input type="text" id="search-bar" name="restaurant" autocomplete="off" placeholder="Search for a restaurant..." oninput="showSuggestions()" style="width:100%; padding:12px 40px 12px 16px; border-radius:24px; border:1px solid #ddd; font-size:18px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-            <span style="position:absolute; right:16px; top:50%; transform:translateY(-50%); color:#fd7e14; font-size:22px; cursor:pointer;"><i class="fas fa-search"></i></span>
-            <div id="suggestions" class="suggestions-container hidden" style="position:absolute; top:110%; left:0; width:100%; background:#222; color:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.15); z-index:10; font-size:18px;"></div>
-        </div>
+    <label>Restaurant Name:</label>
+    <input type="text" id="search-bar" name="restaurant" autocomplete="off" oninput="showSuggestions()">
+    <div id="suggestions" class="suggestions-container hidden" style="border:1px solid #ccc; background:#fff; position:absolute; z-index:10; width:250px;"></div>
+    <br>
     <label>Area:</label>
     <input type="text" id="area" name="area"><br>
 
@@ -33,8 +31,48 @@
     <h3>Results:</h3>
     <div id="results"></div>
     <script>
-    // The JS logic for search bar suggestions is in recommender.js
-    // The search bar and dropdown are now styled to match shop.html
+        document.getElementById("recommendationForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+        
+            const formData = {
+                area: document.getElementById("area").value,
+                cuisine: document.getElementById("cuisine").value,
+                max_price: document.getElementById("max_price").value,
+                menu_item: document.getElementById("menu_item").value
+            };
+        
+            const response = await fetch("/recommend", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            });
+        
+            const data = await response.json();
+            displayResults(data);
+        });
+        
+        function displayResults(recommendations) {
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = ""; // Clear previous results
+        
+            if (recommendations.length === 0) {
+                resultsDiv.innerHTML = "<p>No recommendations found.</p>";
+                return;
+            }
+        
+            recommendations.forEach(rest => {
+                const restElement = document.createElement("div");
+                restElement.innerHTML = `
+                    <h4>${rest.name} (⭐ ${rest.aggregate_rating})</h4>
+                    <p>📍 ${rest.address}</p>
+                    <p>🍽 ${rest.cuisines}</p>
+                    <p>💰 Cost for Two: ₹${rest.average_cost_for_two}</p>
+                    <hr>
+                `;
+                resultsDiv.appendChild(restElement);
+            });
+        }
+        
     </script>
 </body>
 </html>
