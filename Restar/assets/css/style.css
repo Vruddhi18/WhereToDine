@@ -6412,9 +6412,9 @@ ol.wp-block-rss {
       
 .header-logo img {
   max-height: 50px;
-/*   background: transparent; /* Remove white background */
-/*   box-shadow: none;        /* Remove drop shadow */  */
-  background: rgba(255,255,255,0.7);
+  background: transparent; /* Remove white background */
+/*   box-shadow: none;        /* Remove drop shadow */ 
+    
   box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   border-radius: 0;
   padding: 0;
