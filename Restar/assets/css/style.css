@@ -6401,7 +6401,7 @@ ol.wp-block-rss {
   box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   border-radius: 12px;
   background: rgba(255,255,255,0.7); /* Soft white background for blending */
-  padding: 0px;
+  padding: 8px;
   }
 }
 
@@ -6594,7 +6594,7 @@ ol.wp-block-rss {
 
 @media (max-width: 1700px) {
   .header-layout3 .header-logo {
-    padding: 20px;
+    padding: 0px;
   }
 }
 
