@@ -6254,8 +6254,9 @@ ol.wp-block-rss {
 .header-logo {
   padding-top: 0px;
   padding-bottom: 0px;
-  height:auto;
-}
+/*   height:auto;*/
+height:50px;
+} 
 
 .header-links ul {
   margin: 0;
