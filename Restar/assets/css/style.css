@@ -6381,7 +6381,7 @@ ol.wp-block-rss {
   }
      .header-logo img {
   max-width: 200px;
-    max-height:50px;
+    max-height:60px;
 /*   box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   border-radius: 12px; */
 /*   background: rgba(255,255,255,0.7); /* Soft white background for blending */
@@ -6406,7 +6406,7 @@ ol.wp-block-rss {
   }
   .header-logo img {
   max-width: 200px;
-    max-height:50px;
+    max-height:60px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   border-radius: 12px;
 /*   background: rgba(255,255,255,0.7); /* Soft white background for blending */
