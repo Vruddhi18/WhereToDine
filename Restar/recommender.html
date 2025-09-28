@@ -495,14 +495,16 @@
             }
         }
         #suggestions {
+            display:block;
+            width:100%;
             position: absolute;
             background: white;
             border: 1px solid #ccc;
             border-radius: 5px;
-            z-index: 9999 !important;
+            z-index: 9999;
             max-height: 200px;
             overflow-y: auto;
-            display: none; /* Initially hidden */
+            /* display: none; /* Initially hidden */ */
         }
 
         .suggestion-item {
