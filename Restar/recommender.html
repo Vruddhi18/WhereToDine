@@ -724,12 +724,20 @@
         <section class="bg-white rounded-lg p-6 shadow-md">
             <h2 class="text-xl font-semibold mb-4">Select Your Favorite Restaurants</h2>
             <div class="header-button mb-4">
-                <form class="header-search" onsubmit="event.preventDefault();" autocomplete="off">
-                    <input type="text" id="search-bar" placeholder="Search cafe" onkeyup="showSuggestions(); style="background-color: white !important; border-radius: 8px; class="w-full px-4 py-3 border focus:outline-none focus:ring focus:ring-yellow-300">
+                  <form class="header-search" onsubmit="event.preventDefault(); addRestaurant();" autocomplete="off">
+                    <input 
+                      type="text" 
+                      id="search-bar" 
+                      placeholder="Search cafe" 
+                      oninput="showSuggestions()" 
+                      style="background-color: white !important; border-radius: 8px;" 
+                      class="w-full px-4 py-3 border focus:outline-none focus:ring focus:ring-yellow-300"
+                    >
                     <button type="submit"><i class="far fa-search"></i></button>
-                </form>
-                <div id="suggestions" class="absolute w-full bg-white border rounded mt-1 hidden z-10"></div>
+                  </form>
+                  <div id="suggestions" class="absolute w-full bg-white border rounded mt-1 hidden z-10"></div>
             </div>
+
             <button onclick="addRestaurant()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Restaurant</button>
 
             <div id="selectedRestaurants" class="mt-6 space-y-2"></div>
