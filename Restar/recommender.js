@@ -276,11 +276,14 @@ function showSuggestions() {
         return;
     }
 
-    const filtered = cafes.filter(cafe => cafe.toLowerCase().includes(input));
+    // Filter cafes that start with the input string (case-insensitive)
+    const filtered = cafes.filter(cafe => cafe.toLowerCase().startsWith(input));
+
     if (filtered.length === 0) {
         suggestionsContainer.classList.add('hidden');
         return;
     }
+
     suggestionsContainer.classList.remove('hidden');
     filtered.forEach(cafe => {
         const div = document.createElement('div');
@@ -294,13 +297,6 @@ function showSuggestions() {
         suggestionsContainer.appendChild(div);
     });
 }
-
-// Hide suggestions when clicking outside
-document.addEventListener('click', function(event) {
-    if (!event.target.closest('.header-button')) {
-        document.getElementById('suggestions').classList.add('hidden');
-    }
-});
 
 
 // Select a cafe from suggestions
