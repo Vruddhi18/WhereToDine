@@ -239,29 +239,69 @@ function addRestaurant() {
 }
 
 // Show suggestions while typing
+// function showSuggestions() {
+//     const input = document.getElementById('search-bar').value.toLowerCase();
+//     const suggestionsContainer = document.getElementById('suggestions');
+//     suggestionsContainer.innerHTML = '';
+
+//     if (input) {
+//         const filteredCafes = cafes.filter(cafe => cafe.toLowerCase().startsWith(input));
+//         if (filteredCafes.length > 0) {
+//             suggestionsContainer.classList.remove('hidden');
+//             filteredCafes.forEach(cafe => {
+//                 const suggestionItem = document.createElement('div');
+//                 suggestionItem.textContent = cafe;
+//                 suggestionItem.classList.add('suggestion-item', 'p-2', 'cursor-pointer');
+//                 suggestionItem.onclick = () => selectCafe(cafe);
+//                 suggestionsContainer.appendChild(suggestionItem);
+//             });
+//         } else {
+//             suggestionsContainer.classList.add('hidden');
+//         }
+//     } else {
+//         suggestionsContainer.classList.add('hidden');
+//     }
+// }
+
+// Example: cafes = ['Cafe Mocha', 'Chai Point', 'Brew Bros', ...];
+// Already populated from API
+
 function showSuggestions() {
-    const input = document.getElementById('search-bar').value.toLowerCase();
+    const input = document.getElementById('search-bar').value.trim().toLowerCase();
     const suggestionsContainer = document.getElementById('suggestions');
     suggestionsContainer.innerHTML = '';
 
-    if (input) {
-        const filteredCafes = cafes.filter(cafe => cafe.toLowerCase().startsWith(input));
-        if (filteredCafes.length > 0) {
-            suggestionsContainer.classList.remove('hidden');
-            filteredCafes.forEach(cafe => {
-                const suggestionItem = document.createElement('div');
-                suggestionItem.textContent = cafe;
-                suggestionItem.classList.add('suggestion-item', 'p-2', 'cursor-pointer');
-                suggestionItem.onclick = () => selectCafe(cafe);
-                suggestionsContainer.appendChild(suggestionItem);
-            });
-        } else {
-            suggestionsContainer.classList.add('hidden');
-        }
-    } else {
+    if (input.length === 0) {
         suggestionsContainer.classList.add('hidden');
+        return;
     }
+
+    const filtered = cafes.filter(cafe => cafe.toLowerCase().includes(input));
+    if (filtered.length === 0) {
+        suggestionsContainer.classList.add('hidden');
+        return;
+    }
+    suggestionsContainer.classList.remove('hidden');
+    filtered.forEach(cafe => {
+        const div = document.createElement('div');
+        div.textContent = cafe;
+        div.className = 'suggestion-item p-2 cursor-pointer hover:bg-yellow-100';
+        div.onclick = () => {
+            document.getElementById('search-bar').value = cafe;
+            suggestionsContainer.classList.add('hidden');
+            addRestaurant();
+        };
+        suggestionsContainer.appendChild(div);
+    });
 }
+
+// Hide suggestions when clicking outside
+document.addEventListener('click', function(event) {
+    if (!event.target.closest('.header-button')) {
+        document.getElementById('suggestions').classList.add('hidden');
+    }
+});
+
 
 // Select a cafe from suggestions
 function selectCafe(cafe) {
