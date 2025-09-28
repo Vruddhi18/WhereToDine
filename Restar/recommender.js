@@ -270,20 +270,17 @@ function showSuggestions() {
     const input = document.getElementById('search-bar').value.trim().toLowerCase();
     const suggestionsContainer = document.getElementById('suggestions');
     suggestionsContainer.innerHTML = '';
-
+    console.log('Input:', input, 'cafes:', cafes);
     if (input.length === 0) {
         suggestionsContainer.classList.add('hidden');
         return;
     }
-
-    // Filter cafes that start with the input string (case-insensitive)
     const filtered = cafes.filter(cafe => cafe.toLowerCase().startsWith(input));
-
+    console.log('Filtered:', filtered);
     if (filtered.length === 0) {
         suggestionsContainer.classList.add('hidden');
         return;
     }
-
     suggestionsContainer.classList.remove('hidden');
     filtered.forEach(cafe => {
         const div = document.createElement('div');
@@ -297,7 +294,6 @@ function showSuggestions() {
         suggestionsContainer.appendChild(div);
     });
 }
-
 
 // Select a cafe from suggestions
 function selectCafe(cafe) {
