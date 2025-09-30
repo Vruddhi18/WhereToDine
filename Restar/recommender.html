@@ -493,7 +493,7 @@
             .carousel-item {
                 height: 350px;
             }
-        }
+        /* }
         #suggestions {
             display:block;
             width:100%;
@@ -505,7 +505,22 @@
             max-height: 200px;
             overflow-y: auto;
             /* display: none; /* Initially hidden */ */
+        } */
+        #suggestions {
+          position: absolute;
+          top: 100%; /* start exactly below the input */
+          left: 0;
+          width: 100%;
+          background: white;
+          border: 1px solid #ccc;
+          border-radius: 0.25rem;
+          margin-top: 0.25rem;
+          z-index: 50;
+          max-height: 13rem; /* ~200px */
+          overflow-y: auto;
+          display: none; /* hidden by default */
         }
+
 
         .suggestion-item {
             padding: 10px;
@@ -755,7 +770,9 @@
                 >
                 <button type="submit"><i class="far fa-search"></i></button>
               </form>
-              <div id="suggestions" class="absolute w-full bg-white border rounded mt-1 hidden z-10"></div>
+              <!-- <div id="suggestions" class="absolute w-full bg-white border rounded mt-1 hidden z-10"></div> -->
+            <div id="suggestions" class="absolute top-full left-0 w-full bg-white border border-gray-300 rounded mt-1 hidden z-50 max-h-52 overflow-y-auto"></div>
+
             </div>
 
             <button onclick="addRestaurant()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Restaurant</button>
