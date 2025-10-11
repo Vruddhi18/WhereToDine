@@ -6576,6 +6576,8 @@ ol.wp-block-rss {
 
 .header-layout3 .sticky-wrapper {
   background-color: #111;
+ z-index: 1000 !important;
+  position: relative;
 }
 
 .header-layout3 .sticky-wrapper:before {
