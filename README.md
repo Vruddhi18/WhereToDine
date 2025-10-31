@@ -10,12 +10,6 @@ WhereToDine is an AI-powered restaurant recommendation system that helps users f
 - **User-Centric Filtering**: Allows users to filter recommendations based on location, cuisine, and budget constraints.
 - **Review & Sentiment Analysis**: Evaluates customer reviews to identify trending dishes and user sentiments.
 
-## 📂 Dataset Information
-The project utilizes the following datasets:
-1. **Restaurants Dataset**: Contains restaurant names, locations, cuisines, price range, and other key features.
-2. **Reviews Dataset**: Includes customer ratings, review descriptions, and author details.
-3. **Menu Dataset**: Lists menu items, pricing, and availability across different restaurants.
-
 ## 🔍 How It Works
 1. **Data Preprocessing**: Cleans and structures data from restaurant listings, reviews, and menus.
 2. **Feature Engineering**: Extracts meaningful features from reviews, ratings, and restaurant descriptions.
