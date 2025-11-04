@@ -219,35 +219,50 @@
     /*----------- 07. Global Slider ----------*/
 
     $('.th-slider').each(function () {
+    var thSlider = $(this);
+    var settings = thSlider.data('slider-options');
 
-        var thSlider = $(this);
-        var settings = $(this).data('slider-options');
+    // Store references to the navigation Slider
+    var prevArrow = thSlider.find('.slider-prev');
+    var nextArrow = thSlider.find('.slider-next');
+    var paginationEl = thSlider.find('.slider-pagination');
 
-        // Store references to the navigation Slider
-        var prevArrow = thSlider.find('.slider-prev');
-        var nextArrow = thSlider.find('.slider-next');
-        var paginationEl = thSlider.find('.slider-pagination');
+    var autoplayconditon = settings['autoplay'];
 
-        var autoplayconditon = settings['autoplay'];
-
-        var sliderDefault = {
-            slidesPerView: 1,
-            spaceBetween: settings['spaceBetween'] ? settings['spaceBetween'] : 30,
-            loop: settings['loop'] == false ? false : true,
-            speed: settings['speed'] ? settings['speed'] : 1000,
-            autoplay: autoplayconditon ? autoplayconditon : {delay: 6000, disableOnInteraction: false},
-            navigation: {
-                nextEl: nextArrow.get(0),
-                prevEl: prevArrow.get(0),  
+    var sliderDefault = {
+        slidesPerView: 1,
+        spaceBetween: settings['spaceBetween'] ? settings['spaceBetween'] : 30,
+        loop: settings['loop'] === false ? false : true,
+        speed: settings['speed'] ? settings['speed'] : 1000,
+        autoplay: autoplayconditon ? autoplayconditon : {delay: 6000, disableOnInteraction: false},
+        navigation: {
+            nextEl: nextArrow.get(0),
+            prevEl: prevArrow.get(0),  
+        },
+        pagination: {
+            el: paginationEl.get(0),
+            clickable: true, 
+            renderBullet: function (index, className) {
+                return '<span class="' + className + '" aria-label="Go to Slide ' + (index + 1) + '"></span>';
             },
-            pagination: {
-                el: paginationEl.get(0),
-                clickable: true, 
-                renderBullet: function (index, className) {
-                    return '<span class="' + className + '" aria-label="Go to Slide ' + (index + 1) + '"></span>';
-                },
-            },
-        };
+        },
+        breakpoints: {
+            0:     { slidesPerView: 1 },
+            400:   { slidesPerView: 2 },
+            768:   { slidesPerView: 3 },
+            992:   { slidesPerView: 4 },
+            1200:  { slidesPerView: 5 },
+            1300:  { slidesPerView: 6 }
+        }
+    };
+
+    // Extend slider default with custom settings (from HTML)
+    var options = $.extend(true, {}, sliderDefault, settings);
+    
+    // Initialize Swiper
+    var swiper = new Swiper(thSlider.get(0), options);
+});
+
 
         var options = JSON.parse(thSlider.attr('data-slider-options'));
         options = $.extend({}, sliderDefault, options);
