@@ -216,96 +216,87 @@
         });
     };
 
-    /*----------- 07. Global Slider ----------*/
+  /*----------- 07. Global Slider ----------*/
+$('.th-slider').each(function () {
+    var thSlider = $(this);
+    var settings = thSlider.data('slider-options') || {};
 
-    $('.th-slider').each(function () {
+    // Navigation and pagination element references
+    var prevArrow = thSlider.find('.slider-prev');
+    var nextArrow = thSlider.find('.slider-next');
+    var paginationEl = thSlider.find('.slider-pagination');
 
-        var thSlider = $(this);
-        var settings = $(this).data('slider-options');
-
-        // Store references to the navigation Slider
-        var prevArrow = thSlider.find('.slider-prev');
-        var nextArrow = thSlider.find('.slider-next');
-        var paginationEl = thSlider.find('.slider-pagination');
-
-        var autoplayconditon = settings['autoplay'];
-
-        var sliderDefault = {
-            slidesPerView: 1,
-            spaceBetween: settings['spaceBetween'] ? settings['spaceBetween'] : 30,
-            loop: settings['loop'] == false ? false : true,
-            speed: settings['speed'] ? settings['speed'] : 1000,
-            autoplay: autoplayconditon ? autoplayconditon : {delay: 6000, disableOnInteraction: false},
-            navigation: {
-                nextEl: nextArrow.get(0),
-                prevEl: prevArrow.get(0),  
-            },
-            pagination: {
-                el: paginationEl.get(0),
-                clickable: true, 
-                renderBullet: function (index, className) {
-                    return '<span class="' + className + '" aria-label="Go to Slide ' + (index + 1) + '"></span>';
-                },
-            },
-        };
-
-        var options = JSON.parse(thSlider.attr('data-slider-options'));
-        options = $.extend({}, sliderDefault, options);
-        var swiper = new Swiper(thSlider.get(0), options); // Assign the swiper variable
-
-        if ($('.slider-area').length > 0) {
-            $('.slider-area').closest(".container").parent().addClass("arrow-wrap");
+    var sliderDefault = {
+        slidesPerView: 1,
+        spaceBetween: settings.spaceBetween ? settings.spaceBetween : 30,
+        loop: settings.loop === false ? false : true,
+        speed: settings.speed ? settings.speed : 1000,
+        autoplay: settings.autoplay ? settings.autoplay : { delay: 6000, disableOnInteraction: false },
+        navigation: {
+            nextEl: nextArrow.get(0),
+            prevEl: prevArrow.get(0),
+        },
+        pagination: {
+            el: paginationEl.get(0),
+            clickable: true,
+            renderBullet: function (index, className) {
+                return '<span class="' + className + '" aria-label="Go to Slide ' + (index + 1) + '"></span>';
+            }
+        },
+        breakpoints: {
+            0:     { slidesPerView: 1 },
+            400:   { slidesPerView: 2 },
+            768:   { slidesPerView: 3 },
+            992:   { slidesPerView: 4 },
+            1200:  { slidesPerView: 5 },
+            1300:  { slidesPerView: 6 }
         }
+    };
 
-        if (thSlider.hasClass('slider-tab')) {
-            var swiperTab = new Swiper(thSlider.get(0), options);
-        } else if (thSlider.hasClass('tab-view')) {
-            var swiperView = new Swiper(thSlider.get(0), options);
-        } else {
-            var swiper = new Swiper(thSlider.get(0), options); // Assign the swiper variable
-        }
-        
-        if (swiperView & swiperTab) {
-            swiperView.controller.control = swiperTab;
-            swiperTab.controller.control = swiperView;
-        }
+    var options = $.extend(true, {}, sliderDefault, settings);
 
-    });
+    // Only one Swiper instance, regardless of custom classes
+    var swiper = new Swiper(thSlider[0], options);
 
-    // Function to add animation classes
-    function animationProperties() {
-        $('[data-ani]').each(function () {
-            var animationName = $(this).data('ani');
-            $(this).addClass(animationName);
-        });
-
-        $('[data-ani-delay]').each(function () {
-            var delayTime = $(this).data('ani-delay');
-            $(this).css('animation-delay', delayTime);
-        });
+    // If slider is inside .slider-area, add .arrow-wrap to parent container for styling
+    if (thSlider.closest('.slider-area').length > 0) {
+        thSlider.closest('.container').parent().addClass('arrow-wrap');
     }
-    animationProperties();
+});
 
-    // Add click event handlers for external slider arrows based on data attributes
-    $('[data-slider-prev], [data-slider-next]').on('click', function () {
-        var sliderSelectors = ($(this).data('slider-prev') || $(this).data('slider-next')).split(', ');
+// Animation properties setup
+function animationProperties() {
+    $('[data-ani]').each(function () {
+        var animationName = $(this).data('ani');
+        $(this).addClass(animationName);
+    });
+    $('[data-ani-delay]').each(function () {
+        var delayTime = $(this).data('ani-delay');
+        $(this).css('animation-delay', delayTime);
+    });
+}
+animationProperties();
 
-        sliderSelectors.forEach(function(sliderSelector) {
-            var targetSlider = $(sliderSelector);
-
-            if (targetSlider.length) {
-                var swiper = targetSlider[0].swiper;
-
-                if (swiper) {
-                    if ($(this).data('slider-prev')) {
-                        swiper.slidePrev(); 
-                    } else {
-                        swiper.slideNext(); 
-                    }
+// External slider arrow click handler
+$('[data-slider-prev], [data-slider-next]').on('click', function () {
+    var sliderSelectors = ($(this).data('slider-prev') || $(this).data('slider-next')).split(', ');
+    var that = $(this);
+    sliderSelectors.forEach(function(sliderSelector) {
+        var targetSlider = $(sliderSelector);
+        if (targetSlider.length) {
+            var swiper = targetSlider.get(0).swiper;
+            if (swiper) {
+                if (that.data('slider-prev')) {
+                    swiper.slidePrev();
+                } else {
+                    swiper.slideNext();
                 }
             }
-        });
+        }
     });
+});
+/*----------- End Global Slider ----------*/
+
 
     /*-------------- 08. Slider Tab -------------*/
     $.fn.activateSliderThumbs = function (options) {
