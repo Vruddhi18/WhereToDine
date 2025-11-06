@@ -218,11 +218,11 @@
 
     /*----------- 07. Global Slider ----------*/
 
-    $('.th-slider').each(function () {
+   $('.th-slider').each(function () {
     var thSlider = $(this);
-    var settings = thSlider.data('slider-options');
+    var settings = thSlider.data('slider-options') || {};
 
-    // Store references to the navigation Slider
+    // Store references to navigation/pagination
     var prevArrow = thSlider.find('.slider-prev');
     var nextArrow = thSlider.find('.slider-next');
     var paginationEl = thSlider.find('.slider-pagination');
@@ -234,17 +234,17 @@
         spaceBetween: settings['spaceBetween'] ? settings['spaceBetween'] : 30,
         loop: settings['loop'] === false ? false : true,
         speed: settings['speed'] ? settings['speed'] : 1000,
-        autoplay: autoplayconditon ? autoplayconditon : {delay: 6000, disableOnInteraction: false},
+        autoplay: autoplayconditon ? autoplayconditon : { delay: 6000, disableOnInteraction: false },
         navigation: {
             nextEl: nextArrow.get(0),
-            prevEl: prevArrow.get(0),  
+            prevEl: prevArrow.get(0),
         },
         pagination: {
             el: paginationEl.get(0),
-            clickable: true, 
+            clickable: true,
             renderBullet: function (index, className) {
                 return '<span class="' + className + '" aria-label="Go to Slide ' + (index + 1) + '"></span>';
-            },
+            }
         },
         breakpoints: {
             0:     { slidesPerView: 1 },
@@ -256,12 +256,13 @@
         }
     };
 
-    // Extend slider default with custom settings (from HTML)
+    // Merge custom slider settings from HTML
     var options = $.extend(true, {}, sliderDefault, settings);
-    
+
     // Initialize Swiper
-    var swiper = new Swiper(thSlider.get(0), options);
+    var swiper = new Swiper(thSlider[0], options);
 });
+
 
 
         var options = JSON.parse(thSlider.attr('data-slider-options'));
