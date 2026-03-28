@@ -85,9 +85,9 @@ We welcome community contributions! Whether it's adding a new feature, fixing a 
 
 To contribute:
 1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+2. Create your feature branch (`git checkout -b feature/Feature`).
 3. Commit your changes.
-4. Push to the branch (`git push origin feature/AmazingFeature`).
+4. Push to the branch (`git push origin feature/Feature`).
 5. Open a Pull Request.
 
 For detailed guidelines on our coding standards and pull request process, please read our [CONTRIBUTING.md](CONTRIBUTING.md) guide.
