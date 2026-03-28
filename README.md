@@ -1,65 +1,97 @@
-# WhereToDine
+# WhereToDine 🍽️
 
-## 📌 Overview
-WhereToDine is an AI-powered restaurant recommendation system that helps users find the best dining options based on their preferences. The system leverages a hybrid recommendation model combining content-based and collaborative filtering to ensure accurate and personalized suggestions.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python Version](https://img.shields.io/badge/python-3.11-blue.svg)](https://python.org)
+[![Node.js Version](https://img.shields.io/badge/node->=14.0.0-green.svg)](https://nodejs.org/)
 
-## 🎯 Features
-- **Personalized Recommendations**: Suggests restaurants based on user preferences, including cuisine type, price range, ambiance, and specific food items.
-- **Hybrid Recommendation System**: Utilizes content-based filtering (restaurant attributes) and collaborative filtering (user reviews) for improved accuracy.
-- **Data-Driven Insights**: Analyzes restaurant features, reviews, and menu data to enhance recommendations.
-- **User-Centric Filtering**: Allows users to filter recommendations based on location, cuisine, and budget constraints.
-- **Review & Sentiment Analysis**: Evaluates customer reviews to identify trending dishes and user sentiments.
+WhereToDine is an intelligent, AI-powered restaurant recommendation system that helps users find the perfect dining spot based on their specific tastes and preferences. By combining content-based filtering (restaurant attributes and menus) with collaborative filtering (user sentiments and votes), it provides highly accurate and personalized dining suggestions.
 
-## 🔍 How It Works
-1. **Data Preprocessing**: Cleans and structures data from restaurant listings, reviews, and menus.
-2. **Feature Engineering**: Extracts meaningful features from reviews, ratings, and restaurant descriptions.
-3. **Hybrid Recommendation Model**:
-   - **Content-Based Filtering**: Matches user preferences with restaurant attributes.
-   - **Collaborative Filtering**: Leverages user reviews and ratings for better recommendations.
-4. **User Query Processing**: Takes input (cuisine, budget, ambiance, dish preference) and returns the best matching restaurants.
-5. **Result Optimization**: Filters out unsuitable options to ensure high-quality suggestions.
+## 🚀 Why WhereToDine?
 
-## 🚀 Deployment
-- The system can be deployed as a **web application** or **API** to integrate with other platforms.
-- Future enhancements may include **real-time user feedback** to refine recommendations further.
+Finding the right restaurant can be overwhelming. WhereToDine simplifies this process by leveraging Machine Learning and Natural Language Processing to analyze restaurant data, menus, and customer sentiment.
 
-## 📌 Future Scope
-- **Real-Time User Feedback**: Improve recommendation accuracy by incorporating user choices.
-- **Geospatial Analysis**: Enhance location-based recommendations using mapping APIs.
-- **Mobile App Integration**: Expand accessibility through a dedicated mobile application.
+### Key Features
+- **Hybrid Recommendation Engine**: Employs both feature-based matching (cuisines, location, price) and menu-based matching to deliver tailored suggestions.
+- **Fuzzy Search Integration**: Easily find restaurants even with slight misspellings or incomplete names.
+- **Sentiment-Aware**: Factors in real user feedback by analyzing the ratio of positive to negative food sentiments in reviews.
+- **User Accounts & Preferences**: Save your favorite spots and create a "Visit Later" list using our secure, JWT-authenticated Node.js backend.
+- **Dish-Level Recommendations**: Input your favorite dishes to discover similar menu items across different restaurants in your city.
 
-## 🤖 Technologies Used
-- **Python** (Pandas, NumPy, Scikit-Learn, TensorFlow)
-- **Machine Learning** (Hybrid Recommendation System)
-- **NLP** (Sentiment Analysis on Reviews) **FastAPI** (For Model Deployment)
-- **HTML, JavaScript** (For Building the Website)
-- **PostgreSQL** (For Database Management)
+## 🛠️ Getting Started
 
-## 📌 Installation & Usage
-```bash
-# Clone the repository
-git clone https://github.com/Vruddhi18/WhereToDine.git
+Follow these instructions to set up the project on your local machine for development and testing.
 
-# Navigate to the project directory
-cd WhereToDine
+### Prerequisites
+- [Python 3.11+](https://www.python.org/downloads/)
+- [Node.js & npm](https://nodejs.org/)
+- [PostgreSQL](https://www.postgresql.org/) (Ensure you have a database named `wheretodine` running locally)
 
-# Install dependencies
-pip install -r requirements.txt
+### Installation
 
-# Run the FASRAPI application
-uvicorn app:app --reload
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Vruddhi18/WhereToDine.git
+   cd WhereToDine
+   ```
 
-# Start the Node.js server
-node server.js
+2. **Set up the PostgreSQL Database:**
+   - Create a database called `wheretodine`.
+   - Ensure the required tables are set up (e.g., `users` with `id`, `username`, `password`, `favorites`, and `visit_later` columns).
 
-# Open the website
-Open index.html in a browser
-```
+3. **Install Python Dependencies (FastAPI Machine Learning Server):**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## 🏆 Contributing
-Contributions are welcome! Feel free to fork the repository and submit pull requests.
+4. **Install Node.js Dependencies (Express Auth Server):**
+   ```bash
+   cd Restar/assets/js
+   npm install express pg cors bcryptjs jsonwebtoken dotenv
+   ```
 
-## 📜 License
-This project is open-source and available under the MIT License.
+### Usage
 
+The application utilizes two separate servers focusing on the recommendation engine and user authentication.
 
+1. **Start the FastAPI Recommendation Server:**
+   From the root of the project, run:
+   ```bash
+   uvicorn Restar.app:app --reload --port 8000
+   ```
+
+2. **Start the Node.js Authentication Server:**
+   From the `Restar/assets/js` directory, run:
+   ```bash
+   node server.js
+   ```
+
+**(Note: The Express server defaults to port 8001. Ensure your `.env` is configured properly if you use different ports, and your `JWT_SECRET` is set securely).**
+
+3. **Open the Application:**
+   Open `Restar/index.html` in your favorite web browser to explore the platform.
+
+## 🤝 Where to Get Help
+
+If you run into any issues during setup or usage:
+- **Documentation**: We plan to host more detailed guides on the [GitHub Wiki](https://github.com/Vruddhi18/WhereToDine/wiki) (coming soon).
+- **Issue Tracker**: Found a bug or have a suggestion? Open an issue on our [GitHub Issues page](https://github.com/Vruddhi18/WhereToDine/issues).
+- **Direct Support**: Contact the maintainers directly through GitHub.
+
+## 👨‍💻 Maintainers and Contributing
+
+**Maintainer**: [Vruddhi18](https://github.com/Vruddhi18)
+
+We welcome community contributions! Whether it's adding a new feature, fixing a bug, or improving documentation, your help is appreciated.
+
+To contribute:
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes.
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+
+For detailed guidelines on our coding standards and pull request process, please read our [CONTRIBUTING.md](CONTRIBUTING.md) guide.
+
+### License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
