@@ -285,7 +285,7 @@ function showSuggestions() {
     filtered.forEach(cafe => {
         const div = document.createElement('div');
         div.textContent = cafe;
-        div.className = 'suggestion-item p-2 cursor-pointer hover:bg-yellow-100';
+        div.className = 'suggestion-item';
         div.onclick = () => {
             document.getElementById('search-bar').value = cafe;
             suggestionsContainer.classList.add('hidden');
@@ -317,10 +317,7 @@ function addDish() {
 function updateRestaurantsList() {
     const container = document.getElementById('selectedRestaurants');
     container.innerHTML = selectedRestaurants.map((name, index) => `
-        <div class="flex justify-between items-center bg-gray-50 p-2 rounded">
-            <span>${name}</span>
-            <button onclick="removeRestaurant(${index})" class="text-red-500 hover:text-red-700">Remove</button>
-        </div>
+        <span class="chip">${name}<button onclick="removeRestaurant(${index})" aria-label="Remove"><i class="fa-solid fa-xmark"></i></button></span>
     `).join('');
 }
 
@@ -328,10 +325,7 @@ function updateRestaurantsList() {
 function updateDishesList() {
     const container = document.getElementById('selectedDishes');
     container.innerHTML = selectedDishes.map((name, index) => `
-        <div class="flex justify-between items-center bg-gray-50 p-2 rounded">
-            <span>${name}</span>
-            <button onclick="removeDish(${index})" class="text-red-500 hover:text-red-700">Remove</button>
-        </div>
+        <span class="chip">${name}<button onclick="removeDish(${index})" aria-label="Remove"><i class="fa-solid fa-xmark"></i></button></span>
     `).join('');
 }
 
@@ -393,40 +387,43 @@ function displayResults(data) {
     const restaurantsContainer = document.getElementById('recommendedRestaurants');
     const dishesContainer = document.getElementById('similarDishes');
 
-    restaurantsContainer.innerHTML = data.recommended_restaurants.map(restaurant => `
-        <div class="border rounded-lg p-4 hover:shadow-lg transition-shadow bg-gray-800">
-            <h3 class="text-xl font-semibold text-white">${restaurant.name}</h3>
-            <p class="text-gray-300">${restaurant.address}</p>
-            <p class="mt-2 text-white"><span class="font-medium text-white">Cuisines:</span> ${restaurant.cuisines}</p>
-            <div class="mt-2 flex flex-wrap gap-2">
-                ${restaurant.highlights ? restaurant.highlights.split(',').map(highlight => 
-                    `<span class="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded">${highlight.trim()}</span>`
-                ).join('') : ''}
+    const restaurants = data.recommended_restaurants || [];
+    if (restaurants.length === 0) {
+        restaurantsContainer.innerHTML = '<p style="color:var(--muted);">No matching cafes found.</p>';
+    } else {
+        restaurantsContainer.innerHTML = restaurants.map(restaurant => `
+            <div class="result-card">
+                <h5>${restaurant.name}</h5>
+                <p class="result-addr"><i class="fa-solid fa-location-dot" style="color:var(--theme-color);margin-top:2px;"></i> ${restaurant.address || ''}</p>
+                ${restaurant.cuisines ? `<p style="font-size:13.5px;color:var(--ink);margin-bottom:10px;"><strong>Cuisines:</strong> ${restaurant.cuisines}</p>` : ''}
+                <div class="result-tags">
+                    ${restaurant.highlights ? restaurant.highlights.split(',').map(h => `<span>${h.trim()}</span>`).join('') : ''}
+                </div>
+                <div class="result-meta">
+                    <div><i class="fa-solid fa-indian-rupee-sign"></i> Avg cost: ₹${restaurant.avg_price ?? '—'}</div>
+                    <div><i class="fa-solid fa-users"></i> Votes: ${restaurant.votes ?? '—'}</div>
+                    <div><i class="fa-solid fa-thumbs-up"></i> Positive: ${restaurant.positive_ratio != null ? (restaurant.positive_ratio * 100).toFixed(1) + '%' : '—'}</div>
+                    <div><i class="fa-solid fa-chart-simple"></i> Reviews: ${restaurant.total_reviews ?? '—'}</div>
+                </div>
             </div>
-            <div class="mt-3 grid grid-cols-2 gap-2 text-sm text-white">
-                <div>💰 Avg Cost: ₹${restaurant.avg_price}</div>
-                <div>👥 Votes: ${restaurant.votes}</div>
-                <div>👍 Positive Reviews: ${(restaurant.positive_ratio * 100).toFixed(1)}%</div>
-                <div>📊 Total Reviews: ${restaurant.total_reviews}</div>
-            </div>
-        </div>
-    `).join('');
+        `).join('');
+    }
 
     if (data.similar_dishes && data.similar_dishes.length > 0) {
         dishesContainer.innerHTML = data.similar_dishes.map(dish => `
-            <div class="border rounded-lg p-4 hover:shadow-lg transition-shadow bg-gray-800">
-                <h3 class="text-lg font-semibold text-white">${dish.similar_dish}</h3>
-                <p class="text-white">${dish.restaurant}</p>
-                <div class="mt-2 grid grid-cols-2 gap-2 text-sm text-white">
-                    <div>💰 Price: ₹${dish.price}</div>
-                    <div>🥬 Type: ${dish.veg_status}</div>
-                    ${dish.rating ? `<div>⭐ Rating: ${dish.rating}</div>` : ''}
-                    <div>📊 Similarity: ${dish.similarity}%</div>
+            <div class="result-card">
+                <h5>${dish.similar_dish}</h5>
+                <p class="result-addr"><i class="fa-solid fa-store" style="color:var(--theme-color);margin-top:2px;"></i> ${dish.restaurant}</p>
+                <div class="result-meta">
+                    <div><i class="fa-solid fa-indian-rupee-sign"></i> Price: ₹${dish.price ?? '—'}</div>
+                    <div><i class="fa-solid fa-leaf"></i> ${dish.veg_status ?? '—'}</div>
+                    ${dish.rating ? `<div><i class="fa-solid fa-star"></i> Rating: ${dish.rating}</div>` : ''}
+                    <div><i class="fa-solid fa-chart-simple"></i> Similarity: ${dish.similarity}%</div>
                 </div>
             </div>
         `).join('');
     } else {
-        dishesContainer.innerHTML = '<p class="text-gray-500">No similar dishes found</p>';
+        dishesContainer.innerHTML = '<p style="color:var(--muted);">No similar dishes found.</p>';
     }
 
     results.classList.remove('hidden');

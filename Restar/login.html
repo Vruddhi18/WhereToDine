@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Login - Restar</title>
+        <title>Login - WhereToDine</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
         <!-- Styles from Template -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/fontawesome.min.css">
@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="assets/css/jquery.datetimepicker.min.css">
         <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/app.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
@@ -29,41 +30,7 @@
         </div>
     </div>
 
-    <div class="th-menu-wrapper">
-        <div class="th-menu-area text-center">
-            <div class="th-mobile-menu">
-                <ul>
-                    <li class="menu-item-has-children">
-                        <a href="home-restaurant-shop.html">Home</a>
-                        <ul class="sub-menu">
-                            <li><a href="home-restaurant-shop.html">Restaurant Shop</a></li>
-                            <li><a href="home-fast-food.html">Home Fast Food</a></li>
-                            <li><a href="home-restaurant.html">Home Restaurant</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                        <a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="service.html">Service</a></li>
-                            <li><a href="team.html">Chef</a></li>
-                            <li><a href="reservation.html">Reservation</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                        <a href="#">Menus</a>
-                        <ul class="sub-menu">
-                            <li><a href="menu-one.html">Food Menu 1</a></li>
-                            <li><a href="menu-two.html">Food Menu 2</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Header (Copied from contact.html) -->
+    <!-- Header -->
     <header class="th-header header-layout3">
         <div class="sticky-wrapper">
             <div class="menu-area">
@@ -71,7 +38,7 @@
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
                             <div class="header-logo">
-                                <a href="index.html"><img src="assets/img/logo-white.png" alt="Restar"></a>
+                                <a href="index.html"><img src="assets/img/logo-white.PNG" alt="WhereToDine"></a>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -90,66 +57,73 @@
     </header>
 
     <!-- Login Section -->
-
-    <section class="space">
+    <section class="app-page">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="title-area text-center">
-                        <span class="sub-title3">
-                            <img src="assets/img/theme-img/title_icon.svg" alt="Icon">
-                            Welcome Back
-                        </span>
-                        <h2 class="sec-title text-black">Login to Your Account</h2>
+            <div class="auth-wrap">
+                <!-- Brand / story side -->
+                <aside class="auth-aside">
+                    <div>
+                        <img class="auth-logo" src="assets/img/logo-white.PNG" alt="WhereToDine">
+                        <h3>Find your next favorite table.</h3>
+                        <p>Sign in to save cafes you love, build a visit‑later list, and get dish‑level picks tailored to your taste.</p>
+                        <ul class="auth-points">
+                            <li><i class="fa-solid fa-heart"></i> Save favorite cafes in one tap</li>
+                            <li><i class="fa-solid fa-bookmark"></i> Keep a "visit later" shortlist</li>
+                            <li><i class="fa-solid fa-wand-magic-sparkles"></i> Personalized recommendations</li>
+                        </ul>
                     </div>
-                    <div class="login-form-wrap" style="background-color: rgba(244, 239, 227, 0.95); border-radius: 15px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                        <form id="loginForm" class="login-form">
-                            <div class="form-group">
-                                <label class="form-label" style="color: var(--title-color); font-weight: 600;">
-                                    <i class="far fa-envelope me-2" style="color: #FA8507;"></i>Username
-                                </label>
-                                <input type="text" id="username" class="form-control" 
-                                    style="background: transparent; border: 2px solid #FA8507; padding: 12px 20px; border-radius: 8px;"
-                                    placeholder="Enter your username">
+                    <p class="auth-foot">WhereToDine · Ahmedabad and beyond</p>
+                </aside>
+
+                <!-- Form side -->
+                <div class="auth-form-side">
+                    <span class="app-eyebrow"><i class="fa-solid fa-utensils"></i> Welcome back</span>
+                    <h2 class="app-heading" style="font-size:30px;margin-bottom:6px;">Login to your account</h2>
+                    <p class="app-subtext" style="margin:0 0 26px;max-width:none;">Pick up right where you left off.</p>
+
+                    <div id="loginError" class="form-error"></div>
+
+                    <form id="loginForm" class="login-form" novalidate>
+                        <div class="field-row">
+                            <label class="form-label" for="username">Username</label>
+                            <div class="input-icon">
+                                <i class="fa-regular fa-user"></i>
+                                <input type="text" id="username" placeholder="Enter your username" autocomplete="username" required>
                             </div>
-                            <div class="form-group mt-4">
-                                <label class="form-label" style="color: var(--title-color); font-weight: 600;">
-                                    <i class="far fa-lock me-2" style="color: #FA8507;"></i>Password
-                                </label>
-                                <input type="password" id="password" class="form-control"
-                                    style="background: transparent; border: 2px solid #FA8507; padding: 12px 20px; border-radius: 8px;"
-                                    placeholder="Enter your password">
-                            </div>
-                            <div class="row mt-4 mb-4">
-                                <div class="col-6">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="rememberMe">
-                                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                                    </div>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <a href="#" style="color: #FA8507;">Forgot Password?</a>
-                                </div>
-                            </div>
-                            <button type="submit" class="th-btn style-3 w-100" style="background-color: #FA8507; border-color: #C59D5F;">
-                                <i class="far fa-sign-in me-2"></i>Login Now
-                            </button>
-                        </form>
-                        <div class="text-center mt-4">
-                            <p style="color: var(--body-color);">Don't have an account? 
-                                <a href="register.html" class="text-decoration-none" style="color: #FA8507; font-weight: 600;">
-                                    Sign up here
-                                </a>
-                            </p>
                         </div>
-                    </div>
+
+                        <div class="field-row">
+                            <label class="form-label" for="password">Password</label>
+                            <div class="input-icon has-toggle">
+                                <i class="fa-regular fa-lock"></i>
+                                <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password" required>
+                                <button type="button" class="pw-toggle" data-toggle-for="password" aria-label="Show password">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="auth-options">
+                            <label class="check-remember">
+                                <input type="checkbox" id="rememberMe"> Remember me
+                            </label>
+                            <a href="#">Forgot password?</a>
+                        </div>
+
+                        <button type="submit" class="btn-modern" id="loginSubmit">
+                            <span id="loginSubmitText">Login now</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+
+                    <p class="auth-switch">Don't have an account? <a href="register.html">Sign up here</a></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer (Copied from contact.html) -->
-    <footer class="footer-wrapper footer-layout1" data-bg-src="assets/img/bg/footer_bg_2.jpg">         
+    <!-- Footer -->
+    <footer class="footer-wrapper footer-layout1" data-bg-src="assets/img/bg/footer_bg_2.jpg">
         <div class="copyright-wrap">
             <div class="container">
                 <div class="row gx-1 gy-2 align-items-center">
@@ -184,13 +158,38 @@
     <script src="assets/js/SplitText.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/login.js"></script>
-        <script src="assets/js/auth.js"></script>
-        <script src="assets/js/server.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/server.js"></script>
     <script>
+        // Password visibility toggle
+        document.querySelectorAll(".pw-toggle").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const input = document.getElementById(btn.dataset.toggleFor);
+                const icon = btn.querySelector("i");
+                const show = input.type === "password";
+                input.type = show ? "text" : "password";
+                icon.className = show ? "fa-regular fa-eye-slash" : "fa-regular fa-eye";
+            });
+        });
+
         document.getElementById("loginForm").addEventListener("submit", async function(event) {
             event.preventDefault();
-            const username = document.getElementById("username").value;
+            const errorBox = document.getElementById("loginError");
+            const submitBtn = document.getElementById("loginSubmit");
+            const submitText = document.getElementById("loginSubmitText");
+            errorBox.classList.remove("show");
+
+            const username = document.getElementById("username").value.trim();
             const password = document.getElementById("password").value;
+
+            if (!username || !password) {
+                errorBox.textContent = "Please enter both username and password.";
+                errorBox.classList.add("show");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitText.textContent = "Logging in...";
 
             try {
                 const response = await fetch("https://where-to-dine.vercel.app/login", {
@@ -204,11 +203,16 @@
                     localStorage.setItem("token", data.token);
                     window.location.href = "profile.html";
                 } else {
-                    alert(data.message || "Login failed!");
+                    errorBox.textContent = data.message || "Login failed. Please check your credentials.";
+                    errorBox.classList.add("show");
                 }
             } catch (error) {
                 console.error("Login error:", error);
-                alert("Something went wrong!");
+                errorBox.textContent = "Something went wrong. Please try again.";
+                errorBox.classList.add("show");
+            } finally {
+                submitBtn.disabled = false;
+                submitText.textContent = "Login now";
             }
         });
     </script>

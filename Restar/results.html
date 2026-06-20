@@ -3,45 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recommendations</title>
+    <title>Recommendations - WhereToDine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        table {
+        :root{
+            --theme-color: #FA8507;
+            --ink: #1F1F1F;
+            --muted: #5C6574;
+            --cream: #F4EFE3;
+        }
+        *{ box-sizing: border-box; }
+        body{
+            margin: 0;
+            font-family: "Open Sans", sans-serif;
+            background: linear-gradient(180deg, var(--cream) 0%, #ffffff 320px);
+            color: var(--ink);
+            padding: 48px 20px;
+        }
+        .wrap{ max-width: 1000px; margin: 0 auto; }
+        h2{
+            font-family: "ZCOOL XiaoWei", sans-serif;
+            font-size: 30px;
+            margin-bottom: 24px;
+        }
+        h2 span{ color: var(--theme-color); }
+        .card{
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(31,31,31,0.08);
+            overflow: hidden;
+        }
+        table{
             width: 100%;
             border-collapse: collapse;
+            font-size: 14.5px;
         }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
+        th, td{
+            padding: 14px 18px;
             text-align: left;
+            border-bottom: 1px solid #EFEAE0;
         }
-        th {
-            background-color: #f2f2f2;
+        th{
+            background: var(--ink);
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12.5px;
+            letter-spacing: .04em;
+        }
+        tr:hover td{ background: #FBF9F4; }
+        .empty{
+            background: #fff;
+            border: 1.5px dashed #E2DCCD;
+            border-radius: 14px;
+            padding: 36px;
+            text-align: center;
+            color: var(--muted);
+        }
+        a.back{
+            display: inline-block;
+            margin-top: 24px;
+            color: var(--theme-color);
+            font-weight: 700;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <h2>Recommendations for {{ area }}</h2>
-    {% if recommendations %}
-        <table>
-            <thead>
-                <tr>
-                    {% for key in recommendations[0].keys() %}
-                        <th>{{ key }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for rec in recommendations %}
-                    <tr>
-                        {% for value in rec.values() %}
-                            <td>{{ value }}</td>
+    <div class="wrap">
+        <h2>Recommendations for <span>{{ area }}</span></h2>
+
+        {% if recommendations %}
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            {% for key in recommendations[0].keys() %}
+                                <th>{{ key }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rec in recommendations %}
+                            <tr>
+                                {% for value in rec.values() %}
+                                    <td>{{ value }}</td>
+                                {% endfor %}
+                            </tr>
                         {% endfor %}
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>No recommendations found.</p>
-    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="empty">No recommendations found for this area. Try a different search.</div>
+        {% endif %}
+
+        <a class="back" href="/">&larr; Back to search</a>
+    </div>
 </body>
 </html>

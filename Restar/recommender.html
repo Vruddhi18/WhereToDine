@@ -4,601 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Restaurant Recommender</title>
+    <title>Recommender - WhereToDine</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        /* Root Variables */
-        :root {
-            --main-container: 1250px;
-            --bs-blue: #0d6efd;
-            --bs-indigo: #6610f2;
-            --bs-purple: #6f42c1;
-            --bs-pink: #d63384;
-            --bs-red: #dc3545;
-            --bs-orange: #fd7e14;
-            --bs-yellow: #ffc107;
-            --bs-green: #198754;
-            --bs-teal: #20c997;
-            --bs-cyan: #0dcaf0;
-            --bs-white: #fff;
-            --bs-gray: #6c757d;
-            --bs-gray-dark: #343a40;
-            --container-gutters: 30px;
-        }
-
-        /* Grid System */
-        .row {
-            --bs-gutter-x: 30px;
-        }
-
-        .gy-30 {
-            --bs-gutter-y: 30px;
-        }
-
-        .gy-40 {
-            --bs-gutter-y: 40px;
-        }
-
-        .gy-50 {
-            --bs-gutter-y: 50px;
-        }
-
-        .gx-10 {
-            --bs-gutter-x: 10px;
-        }
-
-        .gy-10 {
-            --bs-gutter-y: 10px;
-        }
-
-        /* Container Styles */
-        @media only screen and (min-width: 1300px) {
-            .container-xxl,
-            .container-xl,
-            .container-lg,
-            .container-md,
-            .container-sm,
-            .container {
-                max-width: calc(var(--main-container) + var(--container-gutters));
-                padding-left: calc(var(--container-gutters) / 2);
-                padding-right: calc(var(--container-gutters) / 2);
-            }
-            
-            .container.px-0 {
-                max-width: var(--main-container);
-            }
-        }
-
-        /* Existing styles */
-        .menu-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-        
-        .menu-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .menu-card .box-img {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-        
-        .menu-card .box-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        
-        .menu-card .box-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        
-        .menu-card .box-price {
-            font-size: 1rem;
-            font-weight: bold;
-            background: black;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 50px;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
-        /* Star Rating Styles */
-        .fas.fa-star,
-        .fas.fa-star-half-alt,
-        .far.fa-star {
-            color: var(--bs-yellow);
-        }
-
-        /* Carousel Styles */
-        .carousel-item img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .product-big-img {
-            max-width: 500px;
-            height: 400px;
-            margin: auto;
-            overflow: hidden;
-        }
-
-        .carousel {
-            max-width: 600px;
-            height: 400px;
-            margin: auto;
-            overflow: hidden;
-        }
-
-        /* Action Buttons */
-        .actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .actions .th-btn {
-            padding: 10px 20px;
-            background: #000;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .actions .icon-btn {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        /* Media Queries */
-        @media (min-width: 1560px) {
-            .th-container2 {
-                width: 100%;
-                max-width: 1560px;
-                margin-left: auto;
-                margin-right: 0;
-                padding-left: 0;
-                padding-right: 0;
-            }
-            
-            .th-container3 {
-                width: 100%;
-                max-width: 1560px;
-                margin-left: 0;
-                margin-right: auto;
-                padding-left: 0;
-                padding-right: 0;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .gy-50 {
-                --bs-gutter-y: 40px;
-            }
-            
-            .carousel-item img {
-                height: 300px;
-            }
-            
-            .product-big-img {
-                height: 300px;
-            }
-        }
-
-        /* Product Information Styles */
-        .cafe-info-section {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-            margin: 20px 0;
-        }
-
-        .info-grid {
-            display: grid;
-            gap: 20px;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-
-        .info-item {
-            padding: 15px;
-            border-radius: 8px;
-            background: #f8f9fa;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .info-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        .info-label i {
-            font-size: 1.2em;
-            color: #fd7e14;
-        }
-
-        .info-label strong {
-            font-size: 1.1em;
-            font-weight: 600;
-        }
-
-        .info-content {
-            padding-left: 30px;
-            color: #666;
-            line-height: 1.6;
-            font-size: 0.95em;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .cafe-info-section {
-                padding: 15px;
-            }
-
-            .info-item {
-                padding: 12px;
-            }
-        }
-
-        /* Add these styles to your existing style section */
-        .th-team .box-img {
-            width: 100%;
-            height: 250px; /* Fixed height for all food gallery images */
-            overflow: hidden;
-            position: relative;
-        }
-
-        .th-team .box-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* This ensures images cover the area without distortion */
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        /* Optional: Add hover effect */
-        .th-team:hover .box-img img {
-            transform: scale(1.1);
-            transition: transform 0.3s ease;
-        }
-
-        /* Enhanced Carousel Styles */
-        .product-gallery {
-            position: relative;
-            margin-bottom: 30px;
-        }
-
-        .carousel {
-            background: #fff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .carousel-item {
-            position: relative;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .carousel-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Carousel Controls */
-        .carousel-control-prev,
-        .carousel-control-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-        }
-
-        .carousel-control-prev {
-            left: 0;
-        }
-
-        .carousel-control-next {
-            right: 0;
-        }
-
-        .carousel:hover .carousel-control-prev,
-        .carousel:hover .carousel-control-next {
-            opacity: 1;
-        }
-
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            width: 20px;
-            height: 20px;
-            background-color: #000;
-            border-radius: 50%;
-            filter: none;
-        }
-
-        /* Thumbnails Navigation */
-        .thumbnail-gallery {
-            margin-top: 20px;
-            padding: 10px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .thumbnail-container {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding: 10px;
-            scrollbar-width: none; /* Firefox */
-        }
-
-        .thumbnail-container::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
-        }
-
-        .thumbnail {
-            width: 100px;
-            height: 70px;
-            border-radius: 8px;
-            cursor: pointer;
-            opacity: 0.6;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-
-        .thumbnail.active {
-            opacity: 1;
-            border-color: #fd7e14;
-        }
-
-        /* Action Buttons */
-        .actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            padding: 15px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .actions .th-btn {
-            flex: 1;
-            padding: 12px 25px;
-            background: #fd7e14;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .actions .th-btn:hover {
-            background: #e86b0c;
-            transform: translateY(-2px);
-        }
-
-        .actions .icon-btn {
-            width: 45px;
-            height: 45px;
-            border: 2px solid #eee;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .actions .icon-btn:hover {
-            border-color: #fd7e14;
-            transform: translateY(-2px);
-        }
-
-        .actions .icon-btn i {
-            font-size: 1.2rem;
-            color: #fd7e14;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .carousel-item img {
-                height: 350px;
-            }
-
-            .thumbnail {
-                width: 80px;
-                height: 60px;
-            }
-
-            .actions {
-                flex-wrap: wrap;
-            }
-        }
-
-        /* Basic Carousel Styling */
-        .carousel {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .carousel-item {
-            height: 500px;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .carousel-item {
-                height: 350px;
-            }
-        /* }
-        #suggestions {
-            display:block;
-            width:100%;
-            position: absolute;
-            background: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            z-index: 9999;
-            max-height: 200px;
-            overflow-y: auto;
-            /* display: none; /* Initially hidden */ */
-        } */
-        #suggestions {
-          position: absolute;
-          top: 100%; /* start exactly below the input */
-          left: 0;
-          width: 100%;
-          background: white;
-          border: 1px solid #ccc;
-          border-radius: 0.25rem;
-          margin-top: 0.25rem;
-          z-index: 50;
-          max-height: 13rem; /* ~200px */
-          overflow-y: auto;
-          display: none; /* hidden by default */
-        }
-
-
-        .suggestion-item {
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .suggestion-item:hover {
-            background-color: #f0f0f0;
-        }
-        /* NEW Styles */
-        .th-header {
-            background-color: #1e1e1e;
-            padding: 16px 0;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* Logo */
-        .header-logo img {
-            max-height: 48px;
-        }
-
-        /* Desktop Menu */
-        .main-menu ul {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .main-menu ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-
-        .main-menu ul li a:hover {
-            color: #f4c15b;
-        }
-
-        /* Mobile Toggle Button */
-        .mobile-menu-btn {
-            font-size: 28px;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-        }
-
-        /* Mobile Nav */
-        .mobile-nav {
-            background-color: #1e1e1e;
-            padding: 16px;
-            display: none;
-        }
-
-        .mobile-nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .mobile-nav ul li {
-            margin: 12px 0;
-        }
-
-        .mobile-nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        .mobile-nav ul li a:hover {
-            color: #f4c15b;
-        }
-
-    </style>
+    <link rel="stylesheet" href="assets/css/app.css">
 </head>
 
 <body class="theme-golden">
@@ -613,31 +29,6 @@
     </div>
 
     <!-- Header Area -->
-    <!-- <header class="th-header header-layout3">
-        <div class="sticky-wrapper">
-            <div class="menu-area">
-                <div class="w-100">
-                    <div class="row align-items-center justify-content-between">
-                        <div class="col-auto">
-                            <div class="header-logo">
-                                <a href="index.html"><img src="assets/img/logo-white.png" alt="Restar"></a>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <nav class="main-menu d-none d-lg-inline-block">
-                                <ul>
-                                    <li><a href="shop.html">Cafes</a></li>
-                                    <li><a href="recommender.html">Recommend</a></li>
-                                    <li><a href="profile.html">Profile</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header> -->
-        <!-- Header Area -->
     <header class="th-header header-layout3">
         <div class="sticky-wrapper">
             <div class="menu-area">
@@ -647,7 +38,7 @@
                         <div class="col-auto">
                             <div class="header-logo">
                                 <a href="index.html">
-                                    <img src="assets/img/logo-white.png" alt="WhereToDine Logo">
+                                    <img src="assets/img/logo-white.PNG" alt="WhereToDine Logo">
                                 </a>
                             </div>
                         </div>
@@ -673,8 +64,8 @@
                 </div>
             </div>
 
-            <!-- Mobile Menu (Hidden by default) -->
-            <div id="mobileMenu" class="mobile-nav d-lg-none">
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="mobile-nav d-lg-none hidden">
                 <ul>
                     <li><a href="shop.html">Cafes</a></li>
                     <li><a href="recommender.html">Recommend</a></li>
@@ -684,141 +75,74 @@
         </div>
     </header>
 
-    
-    <!-- <div class="max-w-4xl mx-auto bg-black rounded-lg shadow-lg p-6 mt-8"> -->
-        <!-- <h1 class="text-3xl font-bold text-center mb-8" style="color: #C59D5F;">Restaurant Recommender</h1> -->
-        <!-- Input Section
-        <div class="mb-8 relative">
-            <h2 class="text-xl font-semibold mb-4" style="color: #C59D5F;">Select Restaurants</h2>
-            <div class="header-button mb-4">
-                <form class="header-search" onsubmit="event.preventDefault(); addRestaurant();">
-                    <input type="text" placeholder="Search restaurant" id="search-bar" onkeyup="showSuggestions()" style="background-color: white !important;">
-                    <button type="submit"><i class="far fa-search"></i></button>
-                </form>
-                <div id="suggestions" class="absolute"></div>
-            </div>
-            <div id="selectedRestaurants" class="space-y-2"></div>
-        </div>
+    <main class="app-page">
+        <div class="container" style="max-width: 920px;">
 
-        <div class="mb-8"> -->
-            <!-- <h2 class="text-xl font-semibold mb-4" style="color: #C59D5F;">Favorite Dishes (Optional)</h2>
-            <div class="flex gap-4 mb-4">
-                <input type="text" id="dishInput" placeholder="Enter dish name" 
-                       class="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <button onclick="addDish()" 
-                class="th-btn style-3 " style="background-color: #C59D5F; border-color: #C59D5F;" >
-                    Add Dish
+            <div class="reco-hero">
+                <span class="app-eyebrow"><i class="fa-solid fa-wand-magic-sparkles"></i> For you</span>
+                <h1 class="app-heading">Get personalized cafe picks</h1>
+                <p class="app-subtext">Tell us a couple of cafes and dishes you already love, and we'll surface similar spots and dishes around the city.</p>
+            </div>
+
+            <!-- Step 1: Restaurants -->
+            <section class="reco-card">
+                <h4><span class="reco-step-num">1</span> Select cafes you already love</h4>
+                <p class="reco-help">Pick at least 2 to get recommendations.</p>
+
+                <div class="search-shell">
+                    <form onsubmit="event.preventDefault(); addRestaurant();" autocomplete="off">
+                        <input type="text" id="search-bar" placeholder="Search a cafe, e.g. Cafe Mocha" oninput="showSuggestions()">
+                        <button type="submit" class="search-go" aria-label="Add cafe"><i class="fa-solid fa-plus"></i></button>
+                    </form>
+                    <div id="suggestions" class="suggestions-panel hidden"></div>
+                </div>
+
+                <div id="selectedRestaurants" class="chip-row"></div>
+            </section>
+
+            <!-- Step 2: Dishes -->
+            <section class="reco-card">
+                <h4><span class="reco-step-num">2</span> Favorite dishes <span style="font-weight:400;color:var(--muted);font-size:14px;">(optional)</span></h4>
+                <p class="reco-help">Add a dish you can't stop ordering and we'll find similar ones nearby.</p>
+
+                <div class="dish-input-row">
+                    <div class="input-icon">
+                        <i class="fa-solid fa-bowl-food"></i>
+                        <input id="dishInput" type="text" placeholder="e.g. Paneer Butter Masala">
+                    </div>
+                    <button onclick="addDish()" class="btn-modern outline" style="width:auto;padding:13px 26px;"><i class="fa-solid fa-plus"></i> Add dish</button>
+                </div>
+
+                <div id="selectedDishes" class="chip-row"></div>
+            </section>
+
+            <!-- CTA -->
+            <div class="reco-cta-wrap">
+                <button onclick="getRecommendations()" class="btn-modern wide">
+                    <i class="fa-solid fa-magnifying-glass"></i> Get recommendations
                 </button>
             </div>
-            <div id="selectedDishes" class="space-y-2"></div>
+
+            <!-- Loading -->
+            <div id="loading" class="loader-modern hidden">
+                <div class="spinner-ring"></div>
+                <p>Finding great matches for you...</p>
+            </div>
+
+            <!-- Results -->
+            <section id="results" class="hidden">
+                <h2 class="results-section-title"><i class="fa-solid fa-utensils"></i> Recommended cafes</h2>
+                <div id="recommendedRestaurants" class="results-grid"></div>
+
+                <h2 class="results-section-title"><i class="fa-solid fa-bowl-food"></i> Similar dishes</h2>
+                <div id="similarDishes" class="results-grid"></div>
+            </section>
+
         </div>
-
-        <button onclick="getRecommendations()" 
-        class="th-btn style-3 " style="background-color: #C59D5F; border-color: #C59D5F;">
-            Get Recommendations
-        </button> -->
-
-        <!-- Results Section -->
-        <!-- <div id="results" class="hidden">
-            <h2 class="text-2xl font-semibold mb-4" style="color: #C59D5F;">Recommended Restaurants</h2>
-            <div id="recommendedRestaurants" class="space-y-4"></div>
-
-            <h2 class="text-2xl font-semibold mt-8 mb-4" style="color: #C59D5F;">Similar Dishes</h2>
-            <div id="similarDishes" class="space-y-4"></div>
-        </div> -->
-
-        <!-- Loading Spinner -->
-        <!-- <div id="loading" class="hidden">
-            <div class="flex justify-center items-center py-8">
-                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-            </div>
-        </div>
-    </div>
-     -->
-     <main class="flex-1 container mx-auto p-6 space-y-6">
-         <!-- Newly Added -->
-        <div class="flex items-center justify-between mt-8 mb-4">
-          <div>
-            <h2 class="text-lg font-semibold text-[#C59D5F] mb-1">For You</h2>
-            <p class="text-gray-600 text-base">Personalized recommendations based on your taste</p>
-          </div>
-          <button class="flex gap-2 items-center rounded-xl bg-[#C59D5F] text-black px-6 py-2 shadow-lg font-semibold hover:bg-[#b19058] transition">
-            <i class="fas fa-sliders-h"></i> Preferences
-            <span class="ml-2 px-2 rounded-full bg-white text-[#C59D5F] font-bold shadow-inner">7</span>
-          </button>
-        </div>
-
-         <div class="flex bg-black shadow rounded-2xl max-w-lg mx-auto mb-8">
-          <button class="flex-1 py-2 text-lg font-medium rounded-2xl text-gray-500 hover:bg-gray-100 transition bg-gradient-to-r from-[#C59D5F] to-[#d4ae73] text-white shadow-lg">Restaurants</button>
-          <button class="flex-1 py-2 text-lg font-medium rounded-2xl text-gray-500 hover:bg-gray-100 transition">Dishes</button>
-          <button class="flex-1 py-2 text-lg font-medium rounded-2xl text-gray-500 hover:bg-gray-100 transition">All</button>
-        </div>
-
-         
-        <!-- Search Bar -->
-        <section class="bg-white rounded-lg p-6 shadow-md">
-            <h2 class="text-xl font-semibold mb-4">Select Your Favorite Restaurants</h2>
-            <div class="header-button mb-4" style="position: relative;">
-              <form class="header-search" onsubmit="event.preventDefault(); addRestaurant();" autocomplete="on">
-                <input
-                  type="text" 
-                  id="search-bar"
-                  placeholder="Search cafe"
-                  oninput="showSuggestions()"
-                  style="background-color: white !important; border-radius: 8px;"
-                  class="w-full px-4 py-3 border focus:outline-none focus:ring focus:ring-yellow-300"
-                >
-                <button type="submit"><i class="far fa-search"></i></button>
-              </form>
-              <!-- <div id="suggestions" class="absolute w-full bg-white border rounded mt-1 hidden z-10"></div> -->
-            <div id="suggestions" class="absolute top-full left-0 w-full bg-white border border-gray-300 rounded mt-1 hidden z-50 max-h-52 overflow-y-auto"></div>
-
-            </div>
-
-            <button onclick="addRestaurant()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Restaurant</button>
-
-            <div id="selectedRestaurants" class="mt-6 space-y-2"></div>
-        </section>
-
-        <!-- Favorite Dishes -->
-        <section class="bg-white rounded-lg p-6 shadow-md">
-            <h2 class="text-xl font-semibold mb-4">Optional: Add Favorite Dishes</h2>
-            <div class="flex gap-4">
-                <input id="dishInput" type="text" placeholder="Dish name..." class="flex-1 p-3 border rounded">
-                <button onclick="addDish()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Add Dish</button>
-            </div>
-            <div id="selectedDishes" class="mt-6 space-y-2"></div>
-        </section>
-
-        <!-- Get Recommendations Button -->
-        <section class="flex justify-center">
-            <button onclick="getRecommendations()" class="bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 text-lg">Get Recommendations</button>
-        </section>
-
-        <!-- Loading Spinner -->
-        <section id="loading" class="hidden flex justify-center mt-8">
-            <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
-        </section>
-
-        <!-- Results Section -->
-        <section id="results" class="hidden space-y-8">
-            <div>
-                <h2 class="text-2xl font-bold text-gray-700">Recommended Restaurants 🍴</h2>
-                <div id="recommendedRestaurants" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4"></div>
-            </div>
-
-            <div>
-                <h2 class="text-2xl font-bold text-gray-700">Similar Dishes 🥘</h2>
-                <div id="similarDishes" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4"></div>
-            </div>
-        </section>
-
-
-
     </main>
 
     <!-- Footer Area -->
-    <footer class="footer-wrapper footer-layout1" style="margin-top:200px;">         
+    <footer class="footer-wrapper footer-layout1" style="margin-top:80px;">
         <div class="copyright-wrap">
             <div class="container">
                 <div class="row gx-1 gy-2 align-items-center">
