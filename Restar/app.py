@@ -5,6 +5,7 @@ import pandas as pd
 import os
 import math
 import logging
+import requests
 
 # Local imports
 from Restar.models import *
@@ -125,6 +126,90 @@ async def get_recommendations(request: RecommendationRequest):
 async def health_check():
     """Health check endpoint."""
     return {"status": "healthy"}
+
+# ---------------------------------------------------------------------------
+# Live, extendable cafe data from OpenStreetMap (free, no API key required)
+#
+# The static dataset (merged_file_all.csv / final_cleaned.json) is a fixed
+# snapshot. To let the cafe database grow without needing a paid API key
+# (Google Places, Zomato, etc. all require billing or a restricted key),
+# this endpoint pulls live cafe/restaurant listings from OpenStreetMap's
+# Overpass API for any city, on demand.
+# ---------------------------------------------------------------------------
+OVERPASS_URL = "https://overpass-api.de/api/interpreter"
+NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
+
+@app.get("/api/osm-cafes")
+async def get_osm_cafes(city: str = "Ahmedabad, India", limit: int = 30):
+    """
+    Fetch live cafe/restaurant/fast-food listings near a city from OpenStreetMap.
+    Free and keyless: uses Nominatim to resolve the city to a bounding box,
+    then queries Overpass for matching points of interest within it.
+    """
+    try:
+        # Step 1: resolve the city name to a bounding box via Nominatim
+        geocode_resp = requests.get(
+            NOMINATIM_URL,
+            params={"q": city, "format": "json", "limit": 1},
+            headers={"User-Agent": "WhereToDine/1.0 (contact: support@wheretodine.app)"},
+            timeout=10,
+        )
+        geocode_resp.raise_for_status()
+        geo_results = geocode_resp.json()
+        if not geo_results:
+            raise HTTPException(status_code=404, detail=f"Could not locate city: {city}")
+
+        south, north, west, east = [float(v) for v in geo_results[0]["boundingbox"]]
+
+        # Step 2: query Overpass for cafes/restaurants/fast-food spots in that box
+        overpass_query = f"""
+        [out:json][timeout:25];
+        (
+          node["amenity"~"^(cafe|restaurant|fast_food)$"]({south},{west},{north},{east});
+        );
+        out center {int(limit)};
+        """
+        overpass_resp = requests.post(OVERPASS_URL, data={"data": overpass_query}, timeout=25)
+        overpass_resp.raise_for_status()
+        elements = overpass_resp.json().get("elements", [])
+
+        cafes = []
+        for el in elements:
+            tags = el.get("tags", {})
+            name = tags.get("name")
+            if not name:
+                continue
+            address = ", ".join(filter(None, [
+                tags.get("addr:housenumber"),
+                tags.get("addr:street"),
+                tags.get("addr:suburb"),
+                tags.get("addr:city"),
+            ]))
+            cafes.append({
+                "source": "openstreetmap",
+                "osm_id": el.get("id"),
+                "name": name,
+                "amenity": tags.get("amenity"),
+                "cuisine": tags.get("cuisine"),
+                "address": address or None,
+                "phone": tags.get("phone") or tags.get("contact:phone"),
+                "website": tags.get("website") or tags.get("contact:website"),
+                "opening_hours": tags.get("opening_hours"),
+                "lat": el.get("lat"),
+                "lon": el.get("lon"),
+            })
+
+        logger.info(f"Fetched {len(cafes)} live cafes from OpenStreetMap for '{city}'")
+        return {"city": city, "count": len(cafes), "cafes": cafes}
+
+    except requests.RequestException as e:
+        logger.exception("Failed to fetch data from OpenStreetMap")
+        raise HTTPException(status_code=502, detail=f"Could not reach OpenStreetMap: {str(e)}")
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception("Unexpected error fetching OSM cafes")
+        raise HTTPException(status_code=500, detail=str(e))
 
 # import logging
 # from fastapi import FastAPI, HTTPException

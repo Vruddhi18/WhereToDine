@@ -4,132 +4,91 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Restar - Fast Food & Restaurant HTML Template - Shop</title>
-    <meta name="author" content="Restar">
-    <meta name="description" content="Restar - Fast Food & Restaurant HTML Template">
-    <meta name="keywords" content="Restar - Fast Food & Restaurant HTML Template">
+    <title>Cafes - WhereToDine</title>
+    <meta name="author" content="WhereToDine">
+    <meta name="description" content="Browse all cafes and restaurants on WhereToDine">
     <meta name="robots" content="INDEX,FOLLOW">
-
-    <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Favicons - Place favicon.ico in the root directory -->
-    <link rel="apple-touch-icon" sizes="57x57" href="assets/img/favicons/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="assets/img/favicons/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="assets/img/favicons/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicons/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="assets/img/favicons/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="assets/img/favicons/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="assets/img/favicons/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="assets/img/favicons/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicons/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicons/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
     <link rel="manifest" href="assets/img/favicons/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="assets/img/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-    <!--==============================
-	  Google Fonts
-	============================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
 
-    <!--==============================
-	    All CSS File
-	============================== -->
-    <!-- Bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!-- Fontawesome Icon -->
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <!-- Magnific Popup -->
     <link rel="stylesheet" href="assets/css/magnific-popup.min.css">
-    <!-- Date Time -->
     <link rel="stylesheet" href="assets/css/jquery.datetimepicker.min.css">
-    <!-- Swiper Js -->
     <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-    <!-- Theme Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-
+    <link rel="stylesheet" href="assets/css/app.css">
 </head>
 
 <body>
-    <!--********************************
-   		Code Start From Here 
-	******************************** -->
-
     <!-- Scroll Smoother -->
     <div class="has-smooth" id="has_smooth"></div>
 
-    <!--==============================
-     Preloader
-  ==============================-->
-    <div class="preloader ">
-        <button class="th-btn preloaderCls">Cancel Preloader </button>
+    <!-- Preloader -->
+    <div class="preloader">
+        <button class="th-btn preloaderCls">Cancel Preloader</button>
         <div class="preloader-inner">
             <div class="loader">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span><span></span><span></span><span></span>
             </div>
         </div>
     </div>
-    <!--==============================
-    Sidemenu
-============================== -->
-    
-    <!--==============================
-    Mobile Menu
-  ============================== -->
-    <!--==============================
-	Header Area
-==============================-->
-<header class="th-header header-layout3">
-    <div class="sticky-wrapper">
-        <div class="menu-area">
-            <div class="w-100">
-                <div class="row align-items-center justify-content-between">
-                    <div class="col-auto">
-                        <div class="header-logo">
-                            <a href="index.html"><img src="assets/img/logo-white.png" alt="Restar"></a>
+
+    <!-- Mobile Menu -->
+    <div class="th-menu-wrapper">
+        <div class="th-menu-area text-center">
+            <button class="th-menu-toggle"><i class="fal fa-times"></i></button>
+            <div class="mobile-logo">
+                <a href="index.html"><img src="assets/img/logo-white.PNG" alt="WhereToDine"></a>
+            </div>
+            <div class="th-mobile-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Cafes</a></li>
+                    <li><a href="recommender.html">Recommend</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="th-header header-layout3">
+        <div class="sticky-wrapper">
+            <div class="menu-area">
+                <div class="w-100">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <div class="header-logo">
+                                <a href="index.html"><img src="assets/img/logo-white.PNG" alt="WhereToDine"></a>
+                            </div>
                         </div>
-                    </div>
                         <div class="col-auto">
                             <nav class="main-menu d-none d-lg-inline-block">
                                 <ul>
-                                    <li>
-                                        <a href="index.html">Home</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html">Cafes</a>
-                                    </li>
-                                    <li>
-                                        <a href="profile.html">Profile</a>
-                                    </li>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="shop.html">Cafes</a></li>
+                                    <li><a href="recommender.html">Recommend</a></li>
+                                    <li><a href="profile.html">Profile</a></li>
                                 </ul>
                             </nav>
                         </div>
                         <div class="col-auto">
                             <div class="header-button">
                                 <form class="header-search">
-                                    <input type="text" placeholder="Search cafe" id="search-bar" onkeyup="searchCafes()" style="background-color: white !important; ">
+                                    <input type="text" placeholder="Search cafe" id="search-bar" onkeyup="searchCafes()" style="background-color: white !important;">
                                     <button type="submit"><i class="far fa-search"></i></button>
                                 </form>
-                            </div>
-                            
-                        </div>
-                        
-                        <div class="col-auto">
-                            <div class="header-button">
-                                
-                                
+                                <button type="button" class="th-menu-toggle d-block d-lg-none"><i class="far fa-bars"></i></button>
                             </div>
                         </div>
                     </div>
@@ -142,122 +101,295 @@
         <div id="smooth-content">
             <section class="space-top space-extra-bottom">
                 <div class="container">
+
+                    <div class="shop-hero">
+                        <span class="app-eyebrow"><i class="fa-solid fa-mug-saucer"></i> All cafes</span>
+                        <h1 class="app-heading">Browse Cafes &amp; Restaurants</h1>
+                        <p class="app-subtext">Explore every spot on WhereToDine, sorted by rating. Search by name or jump in from the homepage categories.</p>
+                    </div>
+
+                    <div class="shop-toolbar">
+                        <p class="shop-result-count" id="resultCount"></p>
+                        <div id="activeFilterChip" class="active-filter-chip hidden"></div>
+                    </div>
+
+                    <div id="cafe-loading" class="cafe-loading">
+                        <div class="spinner-ring"></div>
+                        <p>Loading cafes...</p>
+                    </div>
+
                     <div class="row gy-40" id="cafe-list"></div>
+
+                    <div class="osm-load-more-wrap">
+                        <button type="button" id="loadOsmBtn" class="btn-modern outline" style="width:auto;padding:13px 28px;">
+                            <i class="fa-solid fa-earth-americas"></i> Load more cafes from OpenStreetMap
+                        </button>
+                        <p class="osm-load-more-note">Pulls live, free public data to extend the list beyond our curated database.</p>
+                    </div>
                 </div>
             </section>
 
             <script>
+                const FAV_BASE_URL = "https://where-to-dine.vercel.app";
+
                 document.addEventListener("DOMContentLoaded", function () {
-                    let selectedFood = localStorage.getItem("selectedFood"); 
-                    let selectedHighlight = localStorage.getItem("selectedHighlight"); 
+                    // Read any filter requested from the homepage, then clear it
+                    // right away so it never silently carries over to a later
+                    // visit to this page (this was the cause of the page
+                    // sometimes appearing to show only a handful of cafes).
+                    let selectedFood = localStorage.getItem("selectedFood");
+                    let selectedHighlight = localStorage.getItem("selectedHighlight");
+                    localStorage.removeItem("selectedFood");
+                    localStorage.removeItem("selectedHighlight");
+
+                    const loadingEl = document.getElementById("cafe-loading");
+                    const countEl = document.getElementById("resultCount");
+                    const filterChip = document.getElementById("activeFilterChip");
+
+                    if (selectedFood || selectedHighlight) {
+                        const label = selectedFood
+                            ? `Dish: "${selectedFood}"`
+                            : selectedHighlight.replace("highlights_", "").replace(/_/g, " ");
+                        filterChip.classList.remove("hidden");
+                        filterChip.innerHTML = `Filtered by <strong>${label}</strong> <button type="button" id="clearFilterBtn" aria-label="Clear filter"><i class="fa-solid fa-xmark"></i></button>`;
+                        document.getElementById("clearFilterBtn").addEventListener("click", () => window.location.href = "shop.html");
+                    }
 
                     Promise.all([
-                        fetch('final_cleaned.json').then(response => response.json()), 
-                        fetch('cafe_with_image.json').then(response => response.json()) 
+                        fetch('final_cleaned.json').then(response => response.json()),
+                        fetch('cafe_with_image.json').then(response => response.json())
                     ]).then(([cafesWithMenu, cafesWithImages]) => {
                         let container = document.getElementById("cafe-list");
-                        container.innerHTML = ""; 
+                        container.innerHTML = "";
                         let matchedCafes = [];
 
-                        // 1️⃣ **Filter Cafes Based on Food Selection**
                         if (selectedFood) {
                             matchedCafes = cafesWithMenu.filter(cafe => {
-                                return cafe.Menu && typeof cafe.Menu === "string" && 
+                                return cafe.Menu && typeof cafe.Menu === "string" &&
                                     cafe.Menu.toLowerCase().includes(selectedFood.toLowerCase());
                             });
-                        }
-
-                        // 2️⃣ **Filter Cafes Based on Highlights**
-                        else if (selectedHighlight) {
+                        } else if (selectedHighlight) {
                             matchedCafes = cafesWithMenu.filter(cafe => cafe[selectedHighlight] === 1);
-                        } 
-
-                        // 3️⃣ **If No Filter, Show All Cafes**
-                        else {
+                        } else {
                             matchedCafes = cafesWithImages;
                         }
 
-                        // **Merge Image Data from `cafe_with_image.json`**
                         matchedCafes = matchedCafes.map(cafe => {
                             let imageCafe = cafesWithImages.find(imgCafe => imgCafe.Index == cafe.Index);
-                            return { 
-                                ...cafe, 
-                                Image_URLs: imageCafe ? imageCafe.Image_URLs : "assets/img/placeholder.jpg"
+                            return {
+                                ...cafe,
+                                Image_URLs: imageCafe ? imageCafe.Image_URLs : "assets/img/product/menu_card_1.jpg"
                             };
                         });
 
-                        // **Sort Cafes by Rating (Highest First)**
                         matchedCafes.sort((a, b) => (b.aggregate_rating || 0) - (a.aggregate_rating || 0));
 
-                        // **Render Cafes**
+                        loadingEl.classList.add("hidden");
+
                         if (matchedCafes.length === 0) {
-                            container.innerHTML = `<p>No cafes found.</p>`;
+                            container.innerHTML = `<div class="col-12"><div class="empty-state"><i class="fa-solid fa-mug-saucer" style="font-size:22px;color:var(--theme-color);margin-bottom:8px;display:block;"></i>No cafes found. Try a different search or filter.</div></div>`;
+                            countEl.innerText = "";
                         } else {
+                            countEl.innerHTML = `Showing <strong>${matchedCafes.length}</strong> cafe${matchedCafes.length === 1 ? '' : 's'}`;
+
                             matchedCafes.forEach(cafe => {
                                 let card = document.createElement("div");
                                 card.classList.add("col-xl-3", "col-lg-4", "col-sm-6", "cafe-card");
+
+                                const rating = cafe.aggregate_rating ? Number(cafe.aggregate_rating).toFixed(1) : null;
 
                                 card.innerHTML = `
                                     <div class="th-product product-grid">
                                         <div class="product-img transparent-img">
                                             <img src="${cafe.Image_URLs}" alt="${cafe.name}" class="cafe-image">
-                                            <div class="actions">
-                                                <a href="#QuickView" class="icon-btn popup-content"><i class="far fa-eye"></i></a>
-                                                <a href="#" class="icon-btn"><i class="far fa-cart-plus"></i></a>
-                                                <a href="#" class="icon-btn"><i class="far fa-heart"></i></a>
-                                            </div>
+                                            ${rating ? `<span class="rating-badge"><i class="fa-solid fa-star"></i> ${rating}</span>` : ''}
+                                            <button type="button" class="cafe-fav-btn" data-index="${cafe.Index}" aria-label="Save to favorites">
+                                                <i class="fa-regular fa-heart"></i>
+                                            </button>
                                         </div>
-                                        <div class="product-content">
+                                        <div class="product-content cafe-card-body">
                                             <h3 class="product-title"><a href="shop-details.html?index=${cafe.Index}">${cafe.name}</a></h3>
                                             <span class="price">${cafe.cuisines || "Not Available"}</span>
-                                            <p class="cafe-location">${cafe.locality || "Unknown"}</p>
-                                            <p class="cafe-cost"><span>Average Cost For Two:</span> ${cafe.average_cost_for_two || "N/A"}</p>
-                                            <p class="cafe-rating"><strong>Rating: ${cafe.aggregate_rating || 'N/A'}</strong></p>
+                                            <p class="cafe-location"><i class="fa-solid fa-location-dot" style="color:var(--theme-color);"></i>${cafe.locality || "Unknown"}</p>
+                                            <p class="cafe-cost"><span>Avg. cost for two:</span> ₹${cafe.average_cost_for_two || "N/A"}</p>
                                         </div>
                                     </div>`;
 
                                 container.appendChild(card);
                             });
 
-                            // **Ensure Image Styles are Consistent**
                             document.querySelectorAll('.cafe-image').forEach(image => {
                                 image.style.width = '100%';
                                 image.style.height = '200px';
                                 image.style.objectFit = 'cover';
                             });
-                        }
 
-                        // **Delay Clearing Local Storage to Prevent Data Loss**
-                        setTimeout(() => {
-                            localStorage.removeItem("selectedFood");
-                            localStorage.removeItem("selectedHighlight");
-                        }, 5000); // Clears after 5 seconds
+                            // Wire favorite buttons
+                            const token = localStorage.getItem("token");
+                            if (token) {
+                                fetch(`${FAV_BASE_URL}/get-favorites`, { headers: { Authorization: `Bearer ${token}` } })
+                                    .then(r => r.json())
+                                    .then(data => {
+                                        const favs = (data.favorites || []).map(String);
+                                        document.querySelectorAll('.cafe-fav-btn').forEach(btn => {
+                                            if (favs.includes(String(btn.dataset.index))) {
+                                                btn.classList.add('is-active');
+                                                btn.querySelector('i').className = 'fa-solid fa-heart';
+                                            }
+                                        });
+                                    })
+                                    .catch(() => {});
+                            }
+
+                            document.querySelectorAll('.cafe-fav-btn').forEach(btn => {
+                                btn.addEventListener('click', function (e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    const token = localStorage.getItem("token");
+                                    if (!token) {
+                                        window.location.href = "login.html";
+                                        return;
+                                    }
+                                    const cafeIndex = this.dataset.index;
+                                    fetch(`${FAV_BASE_URL}/update-favorites`, {
+                                        method: "POST",
+                                        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+                                        body: JSON.stringify({ cafeIndex })
+                                    })
+                                    .then(r => r.json())
+                                    .then(data => {
+                                        const icon = this.querySelector('i');
+                                        if (data.status === "added") {
+                                            this.classList.add('is-active');
+                                            icon.className = 'fa-solid fa-heart';
+                                        } else {
+                                            this.classList.remove('is-active');
+                                            icon.className = 'fa-regular fa-heart';
+                                        }
+                                    })
+                                    .catch(error => console.error("Error:", error));
+                                });
+                            });
+                        }
                     })
-                    .catch(error => console.error("Error fetching JSON:", error));
+                    .catch(error => {
+                        console.error("Error fetching JSON:", error);
+                        loadingEl.classList.add("hidden");
+                        document.getElementById("cafe-list").innerHTML = `<div class="col-12"><div class="empty-state">Something went wrong loading cafes. Please refresh the page.</div></div>`;
+                    });
                 });
 
-                // **Search Cafes by Name**
                 function searchCafes() {
                     let input = document.getElementById('search-bar').value.toLowerCase();
                     let cards = document.getElementsByClassName('cafe-card');
+                    let visibleCount = 0;
 
                     for (let card of cards) {
                         let name = card.querySelector('.product-title a').textContent.toLowerCase();
-                        card.style.display = name.includes(input) ? "block" : "none";
+                        const show = name.includes(input);
+                        card.style.display = show ? "block" : "none";
+                        if (show) visibleCount++;
+                    }
+
+                    const countEl = document.getElementById("resultCount");
+                    if (countEl) {
+                        countEl.innerHTML = `Showing <strong>${visibleCount}</strong> cafe${visibleCount === 1 ? '' : 's'}`;
                     }
                 }
 
-                // **Store Selected Highlight in Local Storage and Redirect to Shop**
                 function filterCafes(highlight) {
                     localStorage.setItem("selectedHighlight", highlight);
                     window.location.href = "shop.html";
                 }
+
+                // ---------------------------------------------------------------
+                // Extend the database with live, free data from OpenStreetMap.
+                // No API key required: hits our own backend, which in turn
+                // queries OpenStreetMap's Overpass API.
+                // ---------------------------------------------------------------
+                const RECOMMENDER_BASE_URL = "https://wheretodine.onrender.com";
+                const loadOsmBtn = document.getElementById("loadOsmBtn");
+
+                if (loadOsmBtn) {
+                    loadOsmBtn.addEventListener("click", async function () {
+                        const originalLabel = loadOsmBtn.innerHTML;
+                        loadOsmBtn.disabled = true;
+                        loadOsmBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Loading live cafes...`;
+
+                        try {
+                            const response = await fetch(`${RECOMMENDER_BASE_URL}/api/osm-cafes?city=Ahmedabad, India&limit=24`);
+                            if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+                            const data = await response.json();
+                            const cafes = data.cafes || [];
+
+                            if (cafes.length === 0) {
+                                loadOsmBtn.innerHTML = `<i class="fa-solid fa-circle-info"></i> No additional cafes found right now`;
+                                return;
+                            }
+
+                            const container = document.getElementById("cafe-list");
+                            cafes.forEach(cafe => {
+                                let card = document.createElement("div");
+                                card.classList.add("col-xl-3", "col-lg-4", "col-sm-6", "cafe-card");
+                                card.innerHTML = `
+                                    <div class="th-product product-grid">
+                                        <div class="product-img transparent-img">
+                                            <img src="assets/img/product/menu_card_1.jpg" alt="${cafe.name}" class="cafe-image">
+                                            <span class="rating-badge" style="background:var(--ink);color:#fff;"><i class="fa-solid fa-earth-americas" style="color:#fff;"></i> Live</span>
+                                        </div>
+                                        <div class="product-content cafe-card-body">
+                                            <h3 class="product-title"><a href="${cafe.website || '#'}" target="_blank" rel="noopener">${cafe.name}</a></h3>
+                                            <span class="price">${cafe.cuisine ? cafe.cuisine : (cafe.amenity || "Cafe")}</span>
+                                            <p class="cafe-location"><i class="fa-solid fa-location-dot" style="color:var(--theme-color);"></i>${cafe.address || "Address not listed"}</p>
+                                            <p class="cafe-cost"><span>Source:</span> OpenStreetMap</p>
+                                        </div>
+                                    </div>`;
+                                container.appendChild(card);
+                            });
+
+                            document.querySelectorAll('.cafe-image').forEach(image => {
+                                image.style.width = '100%';
+                                image.style.height = '200px';
+                                image.style.objectFit = 'cover';
+                            });
+
+                            const countEl = document.getElementById("resultCount");
+                            const currentTotal = document.querySelectorAll('#cafe-list .cafe-card').length;
+                            countEl.innerHTML = `Showing <strong>${currentTotal}</strong> cafes`;
+
+                            loadOsmBtn.innerHTML = `<i class="fa-solid fa-check"></i> Added ${cafes.length} more cafes`;
+                            setTimeout(() => {
+                                loadOsmBtn.innerHTML = originalLabel;
+                                loadOsmBtn.disabled = false;
+                            }, 2500);
+                        } catch (error) {
+                            console.error("Error fetching OpenStreetMap cafes:", error);
+                            loadOsmBtn.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Couldn't load live data, try again`;
+                            setTimeout(() => {
+                                loadOsmBtn.innerHTML = originalLabel;
+                                loadOsmBtn.disabled = false;
+                            }, 3000);
+                        }
+                    });
+                }
             </script>
 
-            <footer class="footer-wrapper">
+            <footer class="footer-wrapper footer-layout1" data-bg-src="assets/img/bg/footer_bg_2.jpg">
                 <div class="copyright-wrap">
                     <div class="container">
-                        <p>© 2024 <a href="index.html">WhereToDine</a>. All Rights Reserved.</p>
+                        <div class="row gx-1 gy-2 align-items-center">
+                            <div class="col-md-7">
+                                <p class="copyright-text">Copyright <i class="fal fa-copyright"></i> 2025 <a href="index.html">WhereToDine</a>. All Rights Reserved.</p>
+                            </div>
+                            <div class="col-md-5 text-center text-md-end">
+                                <div class="footer-links">
+                                    <ul>
+                                        <li><a href="about.html">Terms & Condition</a></li>
+                                        <li><a href="about.html">Privacy & Policy</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </footer>
@@ -271,33 +403,20 @@
         </svg>
     </div>
 
-    <!--==============================
-    All Js File
-============================== -->
-    <!-- Jquery -->
+    <!-- JavaScript -->
     <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
-    <!-- Swiper Js -->
     <script src="assets/js/swiper-bundle.min.js"></script>
-    <!-- Bootstrap -->
     <script src="assets/js/bootstrap.min.js"></script>
-    <!-- Magnific Popup -->
     <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <!-- Counter Up -->
     <script src="assets/js/jquery.counterup.min.js"></script>
-    <!-- Date Time -->
     <script src="assets/js/jquery.datetimepicker.min.js"></script>
-    <!-- Isotope Filter -->
     <script src="assets/js/imagesloaded.pkgd.min.js"></script>
     <script src="assets/js/isotope.pkgd.min.js"></script>
-
-    <!-- Gsap Animation -->
     <script src="assets/js/gsap.min.js"></script>
     <script src="assets/js/ScrollTrigger.min.js"></script>
     <script src="assets/js/ScrollToPlugin.min.js"></script>
     <script src="assets/js/ScrollSmoother.min.js"></script>
     <script src="assets/js/SplitText.min.js"></script>
-
-    <!-- Main Js File -->
     <script src="assets/js/main.js"></script>
 </body>
 
