@@ -1,30 +1,95 @@
 /* ==========================================================================
    WhereToDine — App Pages Stylesheet
-   Modern UI for Login / Register / Profile / Recommender / Results
-   Built on top of the existing theme variables defined in style.css
-   (--theme-color, --title-color, --body-color, --smoke-color2, etc.)
+   Design language: "Order Ticket" — leans into the actual texture of an
+   Indian cafe bill/chit: dashed perforations, stamped circular marks,
+   mono-numeral prices and ratings, a pinned ticket-photo treatment.
+   Built on top of the existing theme variables defined in style.css.
    ========================================================================== */
 
 :root{
+  /* Ink / surfaces */
+  --ink: #241712;
+  --muted: #6B5B4D;
+  --paper: #F2E8D8;
+  --card-bg: #FFFCF6;
+  --charcoal: #1B1411;
+
+  /* Accents */
+  --saffron: #E2680C;
+  --masala: #8C3A1E;
+  --leaf: #4F6B43;
+  --leaf-soft: #E3EAD9;
+
+  /* Back-compat aliases used throughout this file */
   --gold: #C59D5F;
-  --gold-soft: #E8D9BE;
-  --ink: var(--title-color, #1F1F1F);
-  --muted: var(--body-color, #5C6574);
-  --cream: var(--smoke-color2, #F4EFE3);
-  --card-bg: #ffffff;
+  --gold-soft: #E8D4AE;
+  --cream: var(--paper);
+
   --card-radius: 18px;
-  --shadow-soft: 0 10px 30px rgba(31, 31, 31, 0.08);
-  --shadow-lift: 0 20px 45px rgba(31, 31, 31, 0.14);
-  --border-soft: 1px solid rgba(31, 31, 31, 0.08);
+  --shadow-soft: 0 10px 30px rgba(36, 23, 18, 0.10);
+  --shadow-lift: 0 20px 45px rgba(36, 23, 18, 0.16);
+  --border-soft: 1px solid rgba(36, 23, 18, 0.12);
+
+  /* Type */
+  --title-font: "Fraunces", "ZCOOL XiaoWei", serif;
+  --mono-font: "Space Mono", "Courier New", monospace;
+
+  /* Deepen the template's stock orange to the richer saffron on pages
+     that load this stylesheet (cascades into .th-btn, links, etc.) */
+  --theme-color: var(--saffron);
+  --title-color: var(--ink);
+  --body-color: var(--muted);
 }
 
 .hidden{ display: none !important; }
 
 /* ---------- Page backdrop ---------- */
 .app-page{
-  background: linear-gradient(180deg, var(--cream) 0%, #ffffff 380px);
+  background:
+    radial-gradient(rgba(36,23,18,0.05) 1px, transparent 1px) 0 0/14px 14px,
+    linear-gradient(180deg, var(--paper) 0%, #ffffff 380px);
   min-height: 70vh;
   padding-block: 56px;
+}
+
+/* ---------- Order-ticket signature components ---------- */
+.ticket-divider{
+  height: 1px;
+  background-image: repeating-linear-gradient(to right, rgba(36,23,18,.28) 0 8px, transparent 8px 16px);
+  margin: 0;
+}
+.ticket-stat-strip{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--mono-font);
+  font-size: 12.5px;
+  letter-spacing: .04em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin: 22px 0;
+}
+.ticket-stat-strip .dot{ color: var(--saffron); }
+
+.stamp-ring{
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid var(--charcoal);
+  outline: 1px dashed rgba(36,23,18,.4);
+  outline-offset: 4px;
+  box-shadow: var(--shadow-soft);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.stamp-ring img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* ---------- Shared section heading ---------- */
@@ -32,22 +97,29 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--body-font);
-  font-size: 13px;
+  font-family: var(--mono-font);
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: .06em;
+  letter-spacing: .08em;
   text-transform: uppercase;
-  color: var(--theme-color);
-  background: rgba(250,133,7,.1);
+  color: var(--masala);
+  background: transparent;
+  border: 1px dashed rgba(36,23,18,.45);
   padding: 6px 16px;
   border-radius: 999px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 .app-heading{
   font-family: var(--title-font);
+  font-weight: 600;
   color: var(--ink);
   font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.12;
   margin-bottom: 10px;
+}
+.app-heading em{
+  font-style: italic;
+  color: var(--saffron);
 }
 .app-subtext{
   color: var(--muted);
@@ -133,7 +205,7 @@
   outline: none;
   border-color: var(--theme-color);
   background: #fff;
-  box-shadow: 0 0 0 4px rgba(250,133,7,.12);
+  box-shadow: 0 0 0 4px rgba(226,104,12,.12);
 }
 .input-icon.has-toggle input{ padding-right: 44px; }
 .pw-toggle{
@@ -155,7 +227,7 @@
 .btn-modern{
   width: 100%;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   background: var(--theme-color);
   color: #fff;
   font-weight: 700;
@@ -165,17 +237,17 @@
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   cursor: pointer;
   transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
-  box-shadow: 0 12px 24px rgba(250,133,7,.28);
+  box-shadow: 0 12px 24px rgba(226,104,12,.28);
 }
-.btn-modern:hover{ background: #e07a06; transform: translateY(-1px); }
+.btn-modern:hover{ background: var(--masala); transform: translateY(-1px); }
 .btn-modern:active{ transform: translateY(0); }
 .btn-modern.outline{
   background: transparent; color: var(--ink); box-shadow: none;
-  border: 1.5px solid #E7E1D3;
+  border: 1.5px solid rgba(36,23,18,.18);
 }
-.btn-modern.outline:hover{ border-color: var(--theme-color); color: var(--theme-color); background: #FBF9F4; }
-.btn-modern.danger{ background: #de4848; box-shadow: 0 12px 24px rgba(222,72,72,.25); }
-.btn-modern.danger:hover{ background: #c43c3c; }
+.btn-modern.outline:hover{ border-color: var(--theme-color); color: var(--theme-color); background: rgba(226,104,12,.06); }
+.btn-modern.danger{ background: #B3402A; box-shadow: 0 12px 24px rgba(179,64,42,.25); }
+.btn-modern.danger:hover{ background: #8C3A1E; }
 
 .auth-switch{
   text-align: center; margin-top: 24px; font-size: 14.5px; color: var(--muted);
@@ -223,7 +295,7 @@
 .stat-card .stat-icon{
   width: 44px; height: 44px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(250,133,7,.12); color: var(--theme-color); font-size: 18px;
+  background: rgba(226,104,12,.12); color: var(--theme-color); font-size: 18px;
 }
 .stat-card .stat-num{ font-family: var(--title-font); font-size: 22px; color: var(--ink); line-height: 1.1; }
 .stat-card .stat-label{ font-size: 13px; color: var(--muted); }
@@ -283,7 +355,7 @@
   background: #FBF9F4; border: 1.5px solid #E7E1D3; border-radius: 12px;
   padding: 4px 4px 4px 16px;
 }
-.search-shell form:focus-within{ border-color: var(--theme-color); box-shadow: 0 0 0 4px rgba(250,133,7,.12); }
+.search-shell form:focus-within{ border-color: var(--theme-color); box-shadow: 0 0 0 4px rgba(226,104,12,.12); }
 .search-shell input{
   flex: 1; border: none; background: transparent; padding: 12px 6px; font-size: 15px; color: var(--ink); outline: none;
 }
@@ -291,7 +363,7 @@
   border: none; background: var(--theme-color); color: #fff; width: 42px; height: 42px;
   border-radius: 10px; flex-shrink: 0; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
 }
-.search-shell .search-go:hover{ background: #e07a06; }
+.search-shell .search-go:hover{ background: var(--masala); }
 .suggestions-panel{
   position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 40;
   background: #fff; border-radius: 12px; box-shadow: var(--shadow-lift);
@@ -300,7 +372,7 @@
 .suggestions-panel .suggestion-item{
   padding: 10px 14px; border-radius: 8px; font-size: 14.5px; color: var(--ink); cursor: pointer;
 }
-.suggestions-panel .suggestion-item:hover{ background: rgba(250,133,7,.1); color: var(--theme-color); }
+.suggestions-panel .suggestion-item:hover{ background: rgba(226,104,12,.08); color: var(--theme-color); }
 
 .chip-row{ display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
 .chip{
@@ -313,7 +385,7 @@
   border: none; background: rgba(0,0,0,.06); color: var(--ink); width: 20px; height: 20px;
   border-radius: 50%; font-size: 11px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
 }
-.chip button:hover{ background: #de4848; color: #fff; }
+.chip button:hover{ background: var(--masala); color: #fff; }
 
 .dish-input-row{ display: flex; gap: 12px; flex-wrap: wrap; }
 .dish-input-row .input-icon{ flex: 1; min-width: 220px; }
@@ -341,7 +413,7 @@
 .result-card .result-addr{ color: var(--muted); font-size: 13.5px; margin-bottom: 10px; display: flex; gap: 6px; align-items: flex-start; }
 .result-card .result-tags{ display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
 .result-card .result-tags span{
-  background: rgba(250,133,7,.1); color: var(--theme-color); font-size: 12px; font-weight: 700;
+  background: rgba(226,104,12,.08); color: var(--theme-color); font-size: 12px; font-weight: 700;
   padding: 4px 10px; border-radius: 999px;
 }
 .result-card .result-meta{
@@ -370,10 +442,10 @@
 .mobile-nav ul li a:hover{ color: var(--theme-color); }
 
 /* ==========================================================================
-   HOMEPAGE HERO
+   HOMEPAGE HERO — "Order Ticket" composition
    ========================================================================== */
 .modern-hero{
-  padding: 56px 0 30px;
+  padding: 50px 0 0;
   overflow: hidden;
 }
 .modern-hero .slider-area{ position: relative; }
@@ -381,28 +453,34 @@
   display: grid;
   grid-template-columns: 1.05fr 1fr;
   align-items: center;
-  gap: 40px;
-  min-height: 420px;
+  gap: 50px;
+  min-height: 440px;
+  padding-bottom: 20px;
 }
 @media (max-width: 900px){
-  .modern-hero-grid{ grid-template-columns: 1fr; text-align: center; min-height: auto; gap: 24px; }
+  .modern-hero-grid{ grid-template-columns: 1fr; text-align: center; min-height: auto; gap: 30px; }
   .modern-hero-media{ order: -1; }
 }
 .modern-hero-text{ max-width: 520px; }
 @media (max-width: 900px){ .modern-hero-text{ max-width: 100%; margin: 0 auto; } }
 .modern-hero-title{
   font-family: var(--title-font);
-  font-size: clamp(36px, 5vw, 58px);
-  line-height: 1.1;
+  font-weight: 600;
+  font-size: clamp(38px, 5.2vw, 60px);
+  line-height: 1.06;
+  letter-spacing: -.01em;
   color: var(--ink);
-  margin: 16px 0 14px;
+  margin: 16px 0 16px;
 }
+.modern-hero-title em{ font-style: italic; color: var(--saffron); }
 .modern-hero-copy{
   color: var(--muted);
   font-size: 16.5px;
-  line-height: 1.6;
-  margin-bottom: 26px;
+  line-height: 1.65;
+  margin-bottom: 28px;
+  max-width: 460px;
 }
+@media (max-width: 900px){ .modern-hero-copy{ margin-inline: auto; } }
 .modern-hero-actions{
   display: flex;
   gap: 14px;
@@ -411,34 +489,82 @@
 @media (max-width: 900px){ .modern-hero-actions{ justify-content: center; } }
 .modern-hero-actions .btn-modern{ width: auto; }
 
+/* The pinned ticket-photo */
 .modern-hero-media{
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.modern-hero-media img{
-  max-width: 100%;
-  height: auto;
-  max-height: 420px;
-  object-fit: contain;
+.ticket-photo{
   position: relative;
-  z-index: 2;
-  filter: drop-shadow(0 25px 35px rgba(31,31,31,0.18));
+  background: var(--card-bg);
+  border: 1.5px solid rgba(36,23,18,.14);
+  border-radius: 10px;
+  padding: 22px 22px 18px;
+  box-shadow: var(--shadow-lift);
+  transform: rotate(-2deg);
+  width: min(100%, 380px);
 }
-.modern-hero-shape{
+.ticket-photo:before, .ticket-photo:after{
+  content: "";
   position: absolute;
-  width: 360px;
-  height: 360px;
+  width: 22px; height: 22px;
+  background: var(--paper);
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, var(--gold-soft), var(--cream) 70%);
-  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: inset 0 0 0 1.5px rgba(36,23,18,.14);
 }
-@media (max-width: 900px){ .modern-hero-shape{ width: 240px; height: 240px; } }
+.ticket-photo:before{ left: -11px; }
+.ticket-photo:after{ right: -11px; }
+.ticket-photo img{
+  display: block;
+  width: 100%;
+  height: 280px;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 18px rgba(36,23,18,0.16));
+}
+.ticket-photo-tear{
+  border-top: 1px dashed rgba(36,23,18,.4);
+  margin-top: 16px;
+  padding-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono-font);
+  font-size: 13px;
+  color: var(--ink);
+}
+.ticket-photo-tear .tear-label{ color: var(--muted); text-transform: uppercase; font-size: 10.5px; letter-spacing: .06em; }
+.price-sticker{
+  position: absolute;
+  top: -18px;
+  right: -22px;
+  background: var(--saffron);
+  color: #fff;
+  font-family: var(--mono-font);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 14px;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.15;
+  transform: rotate(8deg);
+  box-shadow: 0 10px 20px rgba(226,104,12,.4);
+  text-align: center;
+}
+.price-sticker span{ font-size: 9px; opacity: .85; }
+@media (max-width: 900px){ .ticket-photo{ transform: rotate(-1deg); margin-inline: auto; } }
 
 .modern-hero .slider-arrow{
   position: absolute;
-  top: 50%;
+  top: 46%;
   transform: translateY(-50%);
   z-index: 5;
 }
@@ -449,17 +575,21 @@
 }
 
 /* ==========================================================================
-   HOMEPAGE CATEGORY / DISH SLIDER (previously unstyled .box-img/.box-title)
+   HOMEPAGE CATEGORY / DISH SLIDER — stamp-ring icons
+   (previously .box-img/.box-title had zero CSS at all)
    ========================================================================== */
 .box-img{
-  width: 110px;
-  height: 110px;
+  width: 108px;
+  height: 108px;
   margin: 0 auto 14px;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid #fff;
+  position: relative;
+  border: 2px solid var(--charcoal);
+  outline: 1px dashed rgba(36,23,18,.4);
+  outline-offset: 4px;
   box-shadow: var(--shadow-soft);
-  transition: transform .25s ease, box-shadow .25s ease;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 .box-img img{
   width: 100%;
@@ -471,18 +601,20 @@
 #catSlider2 .swiper-slide{
   text-align: center;
   cursor: pointer;
-  padding: 6px 6px 10px;
+  padding: 10px 6px 10px;
 }
 #catSlider1 .swiper-slide:hover .box-img,
 #catSlider2 .swiper-slide:hover .box-img{
   transform: translateY(-6px) scale(1.04);
   box-shadow: var(--shadow-lift);
-  border-color: var(--theme-color);
+  border-color: var(--saffron);
 }
 .box-title{
-  font-family: var(--body-font);
-  font-size: 14.5px;
+  font-family: var(--mono-font);
+  font-size: 12px;
   font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
   color: var(--ink);
   margin: 0;
 }
@@ -496,8 +628,41 @@
 .shop-hero{
   text-align: center;
   max-width: 640px;
-  margin: 0 auto 40px;
+  margin: 0 auto 32px;
 }
+
+/* Big prominent search — the actual basic the page was missing */
+.ticket-search{
+  position: relative;
+  max-width: 480px;
+  margin: 28px auto 0;
+}
+.ticket-search i{
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--saffron);
+  font-size: 16px;
+}
+.ticket-search input{
+  width: 100%;
+  padding: 16px 20px 16px 50px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(36,23,18,.18);
+  background: var(--card-bg);
+  font-size: 15.5px;
+  color: var(--ink);
+  box-shadow: var(--shadow-soft);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.ticket-search input::placeholder{ color: var(--muted); }
+.ticket-search input:focus{
+  outline: none;
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 4px rgba(226,104,12,.12);
+}
+
 .shop-toolbar{
   display: flex;
   align-items: center;
@@ -506,6 +671,34 @@
   gap: 12px;
   margin-bottom: 28px;
 }
+.sort-controls{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sort-label{
+  font-family: var(--mono-font);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+  margin-right: 4px;
+}
+.sort-btn{
+  border: 1.5px solid rgba(36,23,18,.16);
+  background: var(--card-bg);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.sort-btn:hover{ border-color: var(--saffron); color: var(--saffron); }
+.sort-btn.active{ background: var(--ink); border-color: var(--ink); color: #fff; }
+
 .shop-result-count{
   color: var(--muted);
   font-size: 14.5px;
@@ -537,7 +730,7 @@
   align-items: center;
   justify-content: center;
 }
-.active-filter-chip button:hover{ background: #de4848; color: #fff; }
+.active-filter-chip button:hover{ background: var(--masala); color: #fff; }
 
 .cafe-loading{
   display: flex;
@@ -555,7 +748,8 @@
   z-index: 3;
   background: #fff;
   color: var(--ink);
-  font-size: 12.5px;
+  font-family: var(--mono-font);
+  font-size: 12px;
   font-weight: 700;
   padding: 5px 10px;
   border-radius: 999px;
@@ -564,7 +758,7 @@
   gap: 4px;
   box-shadow: 0 4px 10px rgba(0,0,0,.12);
 }
-.rating-badge i{ color: #FFB539; font-size: 11px; }
+.rating-badge i{ color: var(--saffron); font-size: 11px; }
 
 .cafe-fav-btn{
   position: absolute;
@@ -584,7 +778,7 @@
   transition: transform .15s ease, color .15s ease;
 }
 .cafe-fav-btn:hover{ transform: scale(1.08); }
-.cafe-fav-btn.is-active{ color: #de4848; }
+.cafe-fav-btn.is-active{ color: var(--masala); }
 
 .cafe-card-body .cafe-location{
   color: var(--muted);
@@ -595,11 +789,12 @@
   gap: 6px;
 }
 .cafe-card-body .cafe-cost{
-  font-size: 13.5px;
+  font-family: var(--mono-font);
+  font-size: 13px;
   color: var(--ink);
   margin: 0;
 }
-.cafe-card-body .cafe-cost span{ color: var(--muted); }
+.cafe-card-body .cafe-cost span{ font-family: var(--body-font); color: var(--muted); }
 
 .osm-load-more-wrap{
   text-align: center;

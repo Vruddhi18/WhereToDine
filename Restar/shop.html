@@ -18,7 +18,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
@@ -84,10 +84,6 @@
                         </div>
                         <div class="col-auto">
                             <div class="header-button">
-                                <form class="header-search">
-                                    <input type="text" placeholder="Search cafe" id="search-bar" onkeyup="searchCafes()" style="background-color: white !important;">
-                                    <button type="submit"><i class="far fa-search"></i></button>
-                                </form>
                                 <button type="button" class="th-menu-toggle d-block d-lg-none"><i class="far fa-bars"></i></button>
                             </div>
                         </div>
@@ -104,12 +100,23 @@
 
                     <div class="shop-hero">
                         <span class="app-eyebrow"><i class="fa-solid fa-mug-saucer"></i> All cafes</span>
-                        <h1 class="app-heading">Browse Cafes &amp; Restaurants</h1>
-                        <p class="app-subtext">Explore every spot on WhereToDine, sorted by rating. Search by name or jump in from the homepage categories.</p>
+                        <h1 class="app-heading">Find your <em>table</em>.</h1>
+                        <p class="app-subtext">1,062 cafes and counting. Search by name, or sort by what matters to you.</p>
+
+                        <form class="ticket-search" onsubmit="return false;">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="search-bar" placeholder="Search by cafe name, e.g. Buttercupp" oninput="searchCafes()" autocomplete="off">
+                        </form>
                     </div>
 
                     <div class="shop-toolbar">
                         <p class="shop-result-count" id="resultCount"></p>
+                        <div class="sort-controls" role="group" aria-label="Sort cafes">
+                            <span class="sort-label">Sort</span>
+                            <button type="button" class="sort-btn active" data-sort="rating" onclick="setSort('rating', this)">Top rated</button>
+                            <button type="button" class="sort-btn" data-sort="cost-asc" onclick="setSort('cost-asc', this)">Budget friendly</button>
+                            <button type="button" class="sort-btn" data-sort="cost-desc" onclick="setSort('cost-desc', this)">Fine dining</button>
+                        </div>
                         <div id="activeFilterChip" class="active-filter-chip hidden"></div>
                     </div>
 
@@ -131,6 +138,124 @@
 
             <script>
                 const FAV_BASE_URL = "https://where-to-dine.vercel.app";
+                let allMatchedCafes = [];
+                let currentSort = "rating";
+
+                function sortCafes(cafes, sortType) {
+                    const sorted = [...cafes];
+                    if (sortType === "cost-asc") {
+                        sorted.sort((a, b) => (a.average_cost_for_two || Infinity) - (b.average_cost_for_two || Infinity));
+                    } else if (sortType === "cost-desc") {
+                        sorted.sort((a, b) => (b.average_cost_for_two || 0) - (a.average_cost_for_two || 0));
+                    } else {
+                        sorted.sort((a, b) => (b.aggregate_rating || 0) - (a.aggregate_rating || 0));
+                    }
+                    return sorted;
+                }
+
+                function setSort(sortType, btnEl) {
+                    currentSort = sortType;
+                    document.querySelectorAll(".sort-btn").forEach(b => b.classList.remove("active"));
+                    btnEl.classList.add("active");
+                    renderCafeCards(sortCafes(allMatchedCafes, currentSort));
+                    searchCafes();
+                }
+
+                function renderCafeCards(cafes) {
+                    const container = document.getElementById("cafe-list");
+                    const countEl = document.getElementById("resultCount");
+                    container.innerHTML = "";
+
+                    if (cafes.length === 0) {
+                        container.innerHTML = `<div class="col-12"><div class="empty-state"><i class="fa-solid fa-mug-saucer" style="font-size:22px;color:var(--theme-color);margin-bottom:8px;display:block;"></i>No cafes found. Try a different search or filter.</div></div>`;
+                        countEl.innerText = "";
+                        return;
+                    }
+
+                    countEl.innerHTML = `Showing <strong>${cafes.length}</strong> cafe${cafes.length === 1 ? '' : 's'}`;
+
+                    cafes.forEach(cafe => {
+                        let card = document.createElement("div");
+                        card.classList.add("col-xl-3", "col-lg-4", "col-sm-6", "cafe-card");
+
+                        const rating = cafe.aggregate_rating ? Number(cafe.aggregate_rating).toFixed(1) : null;
+
+                        card.innerHTML = `
+                            <div class="th-product product-grid">
+                                <div class="product-img transparent-img">
+                                    <img src="${cafe.Image_URLs}" alt="${cafe.name}" class="cafe-image">
+                                    ${rating ? `<span class="rating-badge"><i class="fa-solid fa-star"></i> ${rating}</span>` : ''}
+                                    <button type="button" class="cafe-fav-btn" data-index="${cafe.Index}" aria-label="Save to favorites">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="product-content cafe-card-body">
+                                    <h3 class="product-title"><a href="shop-details.html?index=${cafe.Index}">${cafe.name}</a></h3>
+                                    <span class="price">${cafe.cuisines || "Not Available"}</span>
+                                    <p class="cafe-location"><i class="fa-solid fa-location-dot" style="color:var(--theme-color);"></i>${cafe.locality || "Unknown"}</p>
+                                    <p class="cafe-cost"><span>Avg. cost for two:</span> ₹${cafe.average_cost_for_two || "N/A"}</p>
+                                </div>
+                            </div>`;
+
+                        container.appendChild(card);
+                    });
+
+                    document.querySelectorAll('.cafe-image').forEach(image => {
+                        image.style.width = '100%';
+                        image.style.height = '200px';
+                        image.style.objectFit = 'cover';
+                    });
+
+                    wireFavoriteButtons();
+                }
+
+                function wireFavoriteButtons() {
+                    const token = localStorage.getItem("token");
+                    if (token) {
+                        fetch(`${FAV_BASE_URL}/get-favorites`, { headers: { Authorization: `Bearer ${token}` } })
+                            .then(r => r.json())
+                            .then(data => {
+                                const favs = (data.favorites || []).map(String);
+                                document.querySelectorAll('.cafe-fav-btn').forEach(btn => {
+                                    if (favs.includes(String(btn.dataset.index))) {
+                                        btn.classList.add('is-active');
+                                        btn.querySelector('i').className = 'fa-solid fa-heart';
+                                    }
+                                });
+                            })
+                            .catch(() => {});
+                    }
+
+                    document.querySelectorAll('.cafe-fav-btn').forEach(btn => {
+                        btn.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const token = localStorage.getItem("token");
+                            if (!token) {
+                                window.location.href = "login.html";
+                                return;
+                            }
+                            const cafeIndex = this.dataset.index;
+                            fetch(`${FAV_BASE_URL}/update-favorites`, {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+                                body: JSON.stringify({ cafeIndex })
+                            })
+                            .then(r => r.json())
+                            .then(data => {
+                                const icon = this.querySelector('i');
+                                if (data.status === "added") {
+                                    this.classList.add('is-active');
+                                    icon.className = 'fa-solid fa-heart';
+                                } else {
+                                    this.classList.remove('is-active');
+                                    icon.className = 'fa-regular fa-heart';
+                                }
+                            })
+                            .catch(error => console.error("Error:", error));
+                        });
+                    });
+                }
 
                 document.addEventListener("DOMContentLoaded", function () {
                     // Read any filter requested from the homepage, then clear it
@@ -143,7 +268,6 @@
                     localStorage.removeItem("selectedHighlight");
 
                     const loadingEl = document.getElementById("cafe-loading");
-                    const countEl = document.getElementById("resultCount");
                     const filterChip = document.getElementById("activeFilterChip");
 
                     if (selectedFood || selectedHighlight) {
@@ -159,8 +283,6 @@
                         fetch('final_cleaned.json').then(response => response.json()),
                         fetch('cafe_with_image.json').then(response => response.json())
                     ]).then(([cafesWithMenu, cafesWithImages]) => {
-                        let container = document.getElementById("cafe-list");
-                        container.innerHTML = "";
                         let matchedCafes = [];
 
                         if (selectedFood) {
@@ -182,95 +304,9 @@
                             };
                         });
 
-                        matchedCafes.sort((a, b) => (b.aggregate_rating || 0) - (a.aggregate_rating || 0));
-
+                        allMatchedCafes = matchedCafes;
                         loadingEl.classList.add("hidden");
-
-                        if (matchedCafes.length === 0) {
-                            container.innerHTML = `<div class="col-12"><div class="empty-state"><i class="fa-solid fa-mug-saucer" style="font-size:22px;color:var(--theme-color);margin-bottom:8px;display:block;"></i>No cafes found. Try a different search or filter.</div></div>`;
-                            countEl.innerText = "";
-                        } else {
-                            countEl.innerHTML = `Showing <strong>${matchedCafes.length}</strong> cafe${matchedCafes.length === 1 ? '' : 's'}`;
-
-                            matchedCafes.forEach(cafe => {
-                                let card = document.createElement("div");
-                                card.classList.add("col-xl-3", "col-lg-4", "col-sm-6", "cafe-card");
-
-                                const rating = cafe.aggregate_rating ? Number(cafe.aggregate_rating).toFixed(1) : null;
-
-                                card.innerHTML = `
-                                    <div class="th-product product-grid">
-                                        <div class="product-img transparent-img">
-                                            <img src="${cafe.Image_URLs}" alt="${cafe.name}" class="cafe-image">
-                                            ${rating ? `<span class="rating-badge"><i class="fa-solid fa-star"></i> ${rating}</span>` : ''}
-                                            <button type="button" class="cafe-fav-btn" data-index="${cafe.Index}" aria-label="Save to favorites">
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                        </div>
-                                        <div class="product-content cafe-card-body">
-                                            <h3 class="product-title"><a href="shop-details.html?index=${cafe.Index}">${cafe.name}</a></h3>
-                                            <span class="price">${cafe.cuisines || "Not Available"}</span>
-                                            <p class="cafe-location"><i class="fa-solid fa-location-dot" style="color:var(--theme-color);"></i>${cafe.locality || "Unknown"}</p>
-                                            <p class="cafe-cost"><span>Avg. cost for two:</span> ₹${cafe.average_cost_for_two || "N/A"}</p>
-                                        </div>
-                                    </div>`;
-
-                                container.appendChild(card);
-                            });
-
-                            document.querySelectorAll('.cafe-image').forEach(image => {
-                                image.style.width = '100%';
-                                image.style.height = '200px';
-                                image.style.objectFit = 'cover';
-                            });
-
-                            // Wire favorite buttons
-                            const token = localStorage.getItem("token");
-                            if (token) {
-                                fetch(`${FAV_BASE_URL}/get-favorites`, { headers: { Authorization: `Bearer ${token}` } })
-                                    .then(r => r.json())
-                                    .then(data => {
-                                        const favs = (data.favorites || []).map(String);
-                                        document.querySelectorAll('.cafe-fav-btn').forEach(btn => {
-                                            if (favs.includes(String(btn.dataset.index))) {
-                                                btn.classList.add('is-active');
-                                                btn.querySelector('i').className = 'fa-solid fa-heart';
-                                            }
-                                        });
-                                    })
-                                    .catch(() => {});
-                            }
-
-                            document.querySelectorAll('.cafe-fav-btn').forEach(btn => {
-                                btn.addEventListener('click', function (e) {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    const token = localStorage.getItem("token");
-                                    if (!token) {
-                                        window.location.href = "login.html";
-                                        return;
-                                    }
-                                    const cafeIndex = this.dataset.index;
-                                    fetch(`${FAV_BASE_URL}/update-favorites`, {
-                                        method: "POST",
-                                        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-                                        body: JSON.stringify({ cafeIndex })
-                                    })
-                                    .then(r => r.json())
-                                    .then(data => {
-                                        const icon = this.querySelector('i');
-                                        if (data.status === "added") {
-                                            this.classList.add('is-active');
-                                            icon.className = 'fa-solid fa-heart';
-                                        } else {
-                                            this.classList.remove('is-active');
-                                            icon.className = 'fa-regular fa-heart';
-                                        }
-                                    })
-                                    .catch(error => console.error("Error:", error));
-                                });
-                            });
-                        }
+                        renderCafeCards(sortCafes(allMatchedCafes, currentSort));
                     })
                     .catch(error => {
                         console.error("Error fetching JSON:", error);
