@@ -575,6 +575,172 @@
 }
 
 /* ==========================================================================
+   HOMEPAGE HERO — "Floating order, deep kitchen" upgrade
+   The ticket-photo now hovers and slowly turns on its own (a breathing
+   drop-shadow sells the lift), while the whole scene reads in layers as
+   you scroll past it: ambient blobs drift fastest, the floating dish
+   drifts a little, the text barely moves — classic parallax depth.
+   Pure CSS keyframes for the idle motion + a small GSAP/ScrollTrigger
+   hook (already loaded by this page) for the scroll-driven layers.
+   ========================================================================== */
+.modern-hero{ position: relative; }
+
+/* Soft drifting paper-stain blobs behind everything — fastest scroll layer */
+.hero-ambient{
+  position: absolute;
+  inset: -10% -5% -5% -5%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-ambient .ambient-blob{
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: .35;
+  will-change: transform;
+}
+.hero-ambient .blob-saffron{
+  width: 420px; height: 420px;
+  top: -120px; right: 6%;
+  background: radial-gradient(circle at 30% 30%, var(--saffron), transparent 70%);
+  animation: blobDriftA 16s ease-in-out infinite;
+}
+.hero-ambient .blob-leaf{
+  width: 360px; height: 360px;
+  bottom: -140px; left: 2%;
+  background: radial-gradient(circle at 60% 40%, var(--leaf), transparent 70%);
+  animation: blobDriftB 19s ease-in-out infinite;
+}
+.hero-ambient .blob-masala{
+  width: 260px; height: 260px;
+  top: 35%; left: 38%;
+  background: radial-gradient(circle, var(--masala), transparent 72%);
+  opacity: .18;
+  animation: blobDriftA 22s ease-in-out infinite reverse;
+}
+@keyframes blobDriftA{
+  0%,100%{ transform: translate(0,0) scale(1); }
+  50%{ transform: translate(-26px, 30px) scale(1.08); }
+}
+@keyframes blobDriftB{
+  0%,100%{ transform: translate(0,0) scale(1); }
+  50%{ transform: translate(24px, -22px) scale(1.05); }
+}
+.modern-hero .container{ position: relative; z-index: 1; }
+
+/* Mid scroll-layer: the whole media column (set by JS via ScrollTrigger) */
+.hero-float-wrapper{ position: relative; will-change: transform; }
+
+/* Perspective stage that holds the floating ticket + its shadow stack */
+.hero-stage{
+  position: relative;
+  perspective: 1500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 340px;
+}
+
+/* Older tickets peeking out behind the top one — pure depth, no image */
+.ticket-shadow-card{
+  position: absolute;
+  width: min(100%, 380px);
+  height: 326px;
+  background: var(--card-bg);
+  border: 1.5px solid rgba(36,23,18,.12);
+  border-radius: 10px;
+  box-shadow: var(--shadow-soft);
+}
+.card-back-1{ transform: rotate(-9deg) translate3d(10px, 14px, -60px); opacity: .85; }
+.card-back-2{ transform: rotate(7deg) translate3d(-14px, 18px, -120px); opacity: .55; }
+
+/* The floating ticket-photo: idle hover/turn handled by GSAP (rotation,
+   rotationY, y) layered on top of this fixed -2deg base tilt */
+.ticket-photo{
+  transform-style: preserve-3d;
+  transform: rotate(-2deg);
+  will-change: transform;
+  overflow: hidden;
+}
+.ticket-photo img{
+  transform: translateZ(36px);
+}
+/* Periodic glassy glint — runs on its own, no hover required */
+.ticket-photo .shine{
+  position: absolute;
+  top: -40%; left: -60%;
+  width: 60%; height: 180%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,.55), transparent);
+  transform: translateX(-220%) rotate(8deg);
+  pointer-events: none;
+  z-index: 2;
+  animation: shineSweep 6s ease-in-out infinite 1.2s;
+}
+@keyframes shineSweep{
+  0%, 68%, 100%{ transform: translateX(-220%) rotate(8deg); }
+  84%{ transform: translateX(220%) rotate(8deg); }
+}
+
+/* Breathing contact shadow under the floating card — shrinks as it lifts */
+.float-shadow{
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  width: 230px;
+  height: 36px;
+  margin-left: -115px;
+  background: radial-gradient(ellipse at center, rgba(36,23,18,.30), transparent 72%);
+  filter: blur(5px);
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Stamped medallions drifting around the floating ticket */
+.hero-orbit{ position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.orbit-chip{
+  position: absolute;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #fff;
+  box-shadow: var(--shadow-soft);
+  border: 2px solid var(--card-bg);
+}
+.orbit-chip.chip-a{ top: 4%; left: 4%; background: var(--saffron); animation: chipFloat 6.5s ease-in-out infinite; }
+.orbit-chip.chip-b{ bottom: 10%; left: -2%; background: var(--leaf); animation: chipFloat 7.5s ease-in-out infinite 1.2s; }
+.orbit-chip.chip-c{ top: 12%; right: 0%; background: var(--masala); animation: chipFloat 8.5s ease-in-out infinite .5s; }
+@keyframes chipFloat{
+  0%,100%{ transform: translate(0,0) rotate(0deg); }
+  50%{ transform: translate(6px,-14px) rotate(10deg); }
+}
+
+/* Wobbling price sticker — feels pinned-and-swinging as the card floats */
+.price-sticker.spin-badge{
+  animation: badgeWobble 5s ease-in-out infinite;
+}
+@keyframes badgeWobble{
+  0%,100%{ transform: rotate(8deg) scale(1); }
+  50%{ transform: rotate(14deg) scale(1.06); }
+}
+
+@media (max-width: 900px){
+  .hero-stage{ min-height: auto; }
+  .card-back-1, .card-back-2, .orbit-chip{ display: none; }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-ambient .ambient-blob,
+  .orbit-chip,
+  .ticket-photo .shine,
+  .price-sticker.spin-badge{ animation: none !important; }
+  .ticket-photo{ transform: rotate(-2deg) !important; }
+}
+
+/* ==========================================================================
    HOMEPAGE CATEGORY / DISH SLIDER — stamp-ring icons
    (previously .box-img/.box-title had zero CSS at all)
    ========================================================================== */
